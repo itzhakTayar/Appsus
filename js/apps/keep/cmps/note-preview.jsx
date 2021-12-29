@@ -1,19 +1,29 @@
 import { DynamicCmp } from './DynamicCmp.jsx';
+import { AddNote } from './AddNote.jsx';
 
-{
-  DynamicCmp;
-}
+export class NotesPreview extends React.Component {
+  state = {
+    isShowNoteModal: false,
+    note: this.props.note,
+  };
 
-const { Link } = ReactRouterDOM;
+  onToggleNoteModal = () => {
+    this.setState({ isShowNoteModal: !this.state.isShowNoteModal });
+  };
 
-export function NotesPreview({ note }) {
-  return (
-    <Link to={`/note/${note.id}`} className="note-preview">
-      <article>
-        <div className="note-container">
-          <DynamicCmp note={note} />
-        </div>
-      </article>
-    </Link>
-  );
+  render() {
+    return (
+      <div>
+        <button onClick={this.onToggleNoteModal}>Add note</button>
+        {this.state.isShowNoteModal && (
+          <AddNote onToggleNoteModal={this.onToggleNoteModal} />
+        )}
+        <article>
+          <div className="note-container">
+            <DynamicCmp note={this.state.note} />
+          </div>
+        </article>
+      </div>
+    );
+  }
 }

@@ -1,5 +1,6 @@
 import { ImgPreview } from './note-img-preview.jsx';
-import { TodoPreview } from './TodoReview.jsx';
+import { TodoPreview } from './TodoPreview.jsx';
+
 import { TxtPreview } from './TxtPreview.jsx';
 import { VideoPreview } from './VideoReview.jsx';
 

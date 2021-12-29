@@ -1,10 +1,10 @@
 import { storageService } from '../../../services/storage.service.js';
-
+import { utilsService } from '../../../services/util.service.js';
 export const noteService = {
   query,
-  removeNote,
-  getNoteById,
-  addNote,
+  // removeNote,
+  // getNoteById,
+  createNote,
 };
 const STORAGE_KEY = 'noteDB';
 _createNotes();
@@ -42,8 +42,8 @@ function _createNotes() {
         info: {
           label: 'Get my stuff together',
           todos: [
-            { txt: 'Driving liscence', doneAt: null },
-            { txt: 'Coding power', doneAt: 187111111 },
+            { txt: 'Driving liscence', doneAt: null, id: 1 },
+            { txt: 'Coding power', doneAt: 187111111, id: 2 },
           ],
         },
       },
@@ -70,37 +70,17 @@ function query(filterBy = null) {
   const filteredNotes = _getFilteredNotes(notes, filterBy);
   return Promise.resolve(filteredNotes);
 }
-function removeNote(noteId) {
-  let notes = _loadnotesFromStorage();
-  notes = notes.filter((note) => note.id !== noteId);
-  _saveNotesToStorage(notes);
-  return Promise.resolve();
-}
-function getNoteById(noteId) {
-  const notes = _loadnotesFromStorage();
-  const note = notes.find((note) => note.id === noteId);
-  return Promise.resolve(note);
-}
-function addNote(noteToSave) {
-  let notes = _loadnotesFromStorage();
-  let newNote = _createNote(noteToSave);
-  notes = [newNote, ...notes];
-  _saveNotesToStorage(notes);
-  return Promise.resolve();
-}
-function _createNote(note) {
-  return {
-    id: 'n103',
-    type: 'note-todos',
-    info: {
-      label: 'Get my stuff together',
-      todos: [
-        { id: 1, txt: 'Driving liscence', doneAt: null },
-        { id: 2, txt: 'Coding' },
-      ],
-    },
-  };
-}
+// function removeNote(noteId) {
+//   let notes = _loadnotesFromStorage();
+//   notes = notes.filter((note) => note.id !== noteId);
+//   _saveNotesToStorage(notes);
+//   return Promise.resolve();
+// }
+// function getNoteById(noteId) {
+//   const notes = _loadnotesFromStorage();
+//   const note = notes.find((note) => note.id === noteId);
+//   return Promise.resolve(note);
+// }
 
 function _saveNotesToStorage(notes) {
   storageService.saveToStorage(STORAGE_KEY, notes);
@@ -109,3 +89,29 @@ function _saveNotesToStorage(notes) {
 function _loadNotesFromStorage() {
   return storageService.loadFromStorage(STORAGE_KEY);
 }
+
+function createNote(title, type, txt) {
+  let notes = _loadNotesFromStorage();
+  const note = {
+    id: utilsService.makeId(),
+    title,
+    txt,
+    type,
+  };
+  // getType(type, note);
+  notes.unshift(note);
+  _saveNotesToStorage();
+}
+// function getType(type, note) {
+//   switch (type) {
+//     case 'img':
+//       note[url] = '';
+//     case 'video':
+//       note[url] = '';
+//     case 'todo':
+//       note[todos] = [
+//         { txt: 'Driving liscence', doneAt: null, id: utilsService.makeId() },
+//         { txt: 'Coding power', doneAt: 187111111, id: utilsService.makeId() },
+//       ];
+//   }
+// }
