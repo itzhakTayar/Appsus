@@ -1,4 +1,4 @@
-import { NotesPreview } from './NotesPreview.jsx';
+import { NotesPreview } from './note-preview.jsx';
 
 export function NotesList({ notes }) {
   return (

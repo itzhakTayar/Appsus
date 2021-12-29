@@ -1,5 +1,4 @@
-// import { utilService } from './util.service.js';
-import { storageService } from './services/storage.service.js';
+import { storageService } from '../../../services/storage.service.js';
 
 export const noteService = {
   query,

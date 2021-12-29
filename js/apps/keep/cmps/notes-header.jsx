@@ -1,6 +1,6 @@
 const { NavLink, withRouter } = ReactRouterDOM;
 
-class _AppHeader extends React.Component {
+export class NotesHeader extends React.Component {
   render() {
     return (
       <header className="app-header">
@@ -22,5 +22,3 @@ class _AppHeader extends React.Component {
     );
   }
 }
-
-export const AppHeader = withRouter(_AppHeader);

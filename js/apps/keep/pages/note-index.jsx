@@ -1,5 +1,7 @@
-import { NotesList } from '../cmps/NotesList.jsx';
-import { noteService } from '../note.service.js';
+import { NotesList } from '../cmps/note-list.jsx';
+import { NotesHeader } from '../cmps/notes-header.jsx';
+import { noteService } from '../services/note.service.js';
+
 export class NoteApp extends React.Component {
   state = {
     notes: [],
@@ -24,6 +26,7 @@ export class NoteApp extends React.Component {
 
     return (
       <section className="note-app">
+        <NotesHeader />
         {/* <NoteFilter onSetFilter={this.onSetFilter} />
             <BookAdd loadNotes={this.loadNotes}/> */}
         <NotesList notes={notes} />

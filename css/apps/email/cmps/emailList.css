@@ -1,0 +1,29 @@
+.emails-list {
+  display: flex;
+  flex-direction: column;
+  max-width: 980px;
+  margin: auto;
+  margin-top: 5px;
+}
+
+.email-item {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 0px 0px 1px rgb(104, 68, 125);
+  align-items: center;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.email-content p {
+  margin: 0px;
+}
+
+.email-content {
+  display: flex;
+}
+
+.email-item .email-content .email-body {
+  color: gray;
+}
