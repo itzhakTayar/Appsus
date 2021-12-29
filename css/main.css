@@ -1,8 +1,12 @@
 @import './parts/base.css';
+@import './parts/helpers.css';
 
 /* Email */
+@import './apps/email/emailApp.css';
 @import './apps/email/cmps/emailHeader.css';
 @import './apps/email/cmps/emailList.css';
+@import './apps/email/cmps/emailFilters.css';
+@import './apps/email/cmps/addEmail.css';
 
 /* CMPS */
 @import './cmps/app-header.css';

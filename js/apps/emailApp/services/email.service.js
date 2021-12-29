@@ -2,8 +2,8 @@ import { storageService } from "../../../services/storage.service.js";
 import { utilsService } from "../../../services/util.service.js";
 
 export const emailService = {
-  getEmails: query,
   query,
+  addEmail
 };
 
 const loggedinUser = {
@@ -38,6 +38,11 @@ function _createEmail(num) {
 
 function query(search) {
   return gEmails;
+}
+
+function addEmail(email)
+{
+  console.log('Email',email);
 }
 
 function _saveEmailsToStorage() {

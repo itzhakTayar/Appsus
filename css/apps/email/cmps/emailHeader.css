@@ -1,13 +1,14 @@
 .email-header {
     height: 100px;
-
+    max-width: 1280px;
+    margin: auto;
 }
 
 .header-content {
   display: flex;
   justify-content: space-between;
-  margin: auto;
-  max-width: 980px;
+  /* margin: auto;
+  max-width: 980px; */
   height: 100%;
   align-items: center;
   border-bottom: 1px solid white;

@@ -1,0 +1,107 @@
+.email-add-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border: 1px solid black;
+  height: 300px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(87, 80, 80, 0.35);
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.6s;
+}
+
+.email-add-header {
+  display: flex;
+  background-color: grey;
+  align-items: center;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.email-add-header .close-modal-btn {
+  cursor: pointer;
+  background-color: inherit;
+  border: 0;
+}
+
+.email-add-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 7;
+  justify-content: space-between;
+  padding: 5px;
+}
+
+.email-add-content input {
+  border: 0;
+  width: 92%;
+}
+
+.email-add-content .msgInput input {
+  width: 80%;
+}
+
+.email-add-content input:focus {
+  outline: none;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-buttons .send-btn {
+  box-shadow: inset 0px 1px 0px 0px #97c4fe;
+  background: linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
+  background-color: #3d94f6;
+  border-radius: 6px;
+  border: 1px solid #337fed;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #1570cd;
+}
+.modal-buttons .send-btn:hover {
+  background: linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+  background-color: #1e62d0;
+}
+.modal-buttons .delete-btn {
+  box-shadow: inset 0px 1px 0px 0px #af2e2e;
+  background: linear-gradient(to bottom, #da0a15 5%, #c51414 100%);
+  background-color: #f63d4cbd;
+  border-radius: 6px;
+  border: 1px solid #ca3f1c;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 6px 24px;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px #ec4a0a;
+}
+
+.modal-buttons .delete-btn:hover {
+  background: linear-gradient(to bottom, #f80439 5%, #e2093f 100%);
+  background-color: #f50707;
+}
