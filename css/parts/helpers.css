@@ -1,0 +1,15 @@
+.flex {
+  display: flex;
+}
+
+.clean-list {
+  list-style-type: none;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+.clean-link {
+  text-decoration: none;
+  color: inherit;
+}
