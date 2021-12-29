@@ -20,7 +20,9 @@ export class EmailAdd extends React.Component {
   onSendEmail = (event) => {
     event.preventDefault();
     var { email } = this.state;
-    emailService.addEmail(email);
+    emailService.addEmail(email).then(() => {
+      this.props.closeModal();
+    });
   };
 
   render() {

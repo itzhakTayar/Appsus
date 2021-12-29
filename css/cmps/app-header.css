@@ -2,4 +2,45 @@
 .app-header{
     height: 100px;
     background-color: whitesmoke;
+    justify-content: space-between;
+}
+
+.page-header-content{
+    justify-content: space-between;
+    height: 100%;
+    max-width: 1280px;
+    margin: auto;
+}
+
+.app-header h1 {
+    align-self: center;
+    text-align: center;
+    font-size: 1.8rem;
+    font-family: fantasy;
+    margin-left: 5px;
+  }
+
+.main-nav{
+    align-self: center;
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+}
+
+.main-nav a{
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: rgb(8, 8, 17);
+}
+
+.main-nav .my-active {
+    color: darkgoldenrod;
+}  
+.header-link-item
+{
+    transition: 0.3s ease-in-out;
+}
+.header-link-item:hover
+{
+    transform: scale(1.1);
 }

@@ -7,8 +7,11 @@ import { EmailAdd } from "../cmps/EmailAdd.jsx";
 export class EmailIndex extends React.Component {
   state = {
     emails: [],
-    serach: "",
+    sortBy: {},
     isModalOpen: false,
+    filterBy: {
+      sent: false,
+    },
   };
 
   componentDidMount() {
@@ -16,17 +19,27 @@ export class EmailIndex extends React.Component {
   }
 
   loadEmails = () => {
-    var emails = emailService.query();
+    var emails = emailService.query(this.state.filterBy, this.state.sortBy);
     this.setState({ emails });
   };
 
   onSetSearch = (search) => {
-    this.setState({ search });
+    var { filterBy } = this.state;
+    filterBy.search = search;
+    this.setState({ filterBy }, this.loadEmails);
   };
 
   toggleCreateEmail = () => {
     var isModalOpen = !this.state.isModalOpen;
     this.setState({ isModalOpen });
+  };
+
+  onSetFilter = (filter, val) => {
+    var filterBy = {};
+    filterBy.sent = false;
+    if(this.state.filterBy.search) filterBy.search =this.state.filterBy.search;
+    filterBy[filter] = val;
+    this.setState({ filterBy }, this.loadEmails);
   };
 
   render() {
@@ -36,9 +49,14 @@ export class EmailIndex extends React.Component {
         <EmailHeader onSearch={this.onSetSearch} />
         <div className="email-app-main flex">
           <EmailList emails={this.state.emails} />
-          <EmailFilters onAddEmail={this.toggleCreateEmail} />
+          <EmailFilters
+            onAddEmail={this.toggleCreateEmail}
+            setFilter={this.onSetFilter}
+          />
         </div>
-        {this.state.isModalOpen && <EmailAdd closeModal ={this.toggleCreateEmail} />}
+        {this.state.isModalOpen && (
+          <EmailAdd closeModal={this.toggleCreateEmail} />
+        )}
       </section>
     );
   }

@@ -4,7 +4,7 @@ import { TxtPreview } from './TxtPreview.jsx';
 import { VideoPreview } from './VideoReview.jsx';
 
 export function DynamicCmp(props) {
-  console.log(props.note.type);
+  console.log(props.note);
   switch (props.note.type) {
     case 'txt':
       return <TxtPreview note={props.note} />;

@@ -3,12 +3,12 @@ import { utilsService } from "../../../services/util.service.js";
 
 export const emailService = {
   query,
-  addEmail
+  addEmail,
 };
 
 const loggedinUser = {
   email: "user@appsus.com",
-  fullname: "Mahatma Appsus",
+  fullname: "Noam Shir",
 };
 const DB = "emailDB";
 const names = ["Izhak", "Noam", "Coding Acadmy", "ebay", "Netflix"];
@@ -16,11 +16,17 @@ var gEmails = [];
 _createEmails();
 
 function _createEmails() {
-  if (gEmails.length) return;
-  for (var i = 0; i < 5; i++) {
-    var email = _createEmail(i);
-    gEmails.push(email);
+  var emails = _loadEmailsFromStorage();
+  if (!emails) {
+    gEmails = [];
+    for (var i = 0; i < 5; i++) {
+      var email = _createEmail(i);
+      gEmails.push(email);
+    }
+    _saveEmailsToStorage();
+    return;
   }
+  gEmails = emails;
 }
 
 function _createEmail(num) {
@@ -29,20 +35,56 @@ function _createEmail(num) {
     subject: "Miss you!",
     body: "Would love to catch up sometimes",
     isRead: false,
-    sentAt: 1551133930594,
-    to: "momo@momo.com",
-    shownName: names[num],
+    sentAt: Date.now(),
+    to: loggedinUser.email,
+    fromEmail: "poko@gmail.com",
+    fromName: names[num],
   };
   return email;
 }
 
-function query(search) {
-  return gEmails;
+function query(filterBy = null, sortBy = null) {
+  if (!filterBy) return gEmails;
+  var emails = getEmailsByFilter(filterBy);
+  if (filterBy.search) emails = filterBySearch(emails, filterBy.search);
+  return emails;
 }
 
-function addEmail(email)
-{
-  console.log('Email',email);
+function getEmailsByFilter(filterBy) {
+  if (filterBy.sent) {
+    var emails = gEmails.filter((email) => {
+      return email.fromEmail === loggedinUser.email;
+    });
+    return emails;
+  }
+  if (!filterBy.sent) {
+    var emails = gEmails.filter((email) => {
+      return email.to === loggedinUser.email;
+    });
+    return emails;
+  }
+}
+
+function filterBySearch(emails, searchKey) {
+  var filtered = emails.filter((email) => {
+    return email.fromName.toUpperCase().includes(searchKey.toUpperCase());
+  });
+  return filtered;
+}
+
+function addEmail(newEmail) {
+  var email = {};
+  email.id = utilsService.makeId();
+  email.subject = newEmail.titleInput;
+  email.body = newEmail.msgInput;
+  email.isRead = false;
+  email.sentAt = Date.now();
+  email.to = newEmail.toInput;
+  email.fromEmail = loggedinUser.email;
+  email.fromName = loggedinUser.fullname;
+  gEmails.push(email);
+  _saveEmailsToStorage();
+  return Promise.resolve();
 }
 
 function _saveEmailsToStorage() {
@@ -50,5 +92,6 @@ function _saveEmailsToStorage() {
 }
 
 function _loadEmailsFromStorage() {
-  storageService.loadFromStorage(DB);
+  var emails = storageService.loadFromStorage(DB);
+  return emails;
 }
