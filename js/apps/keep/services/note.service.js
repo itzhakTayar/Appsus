@@ -15,21 +15,21 @@ function _createNotes() {
   if (!notes || !notes.length) {
     notes = [
       {
-        txt: 'fcbjn',
         id: 'n101',
-        type: 'note-txt',
+        type: 'txt',
         isPinned: true,
         info: {
+          title: 'Bobi and Me',
           txt: 'Fullstack Me Baby!',
         },
       },
       {
         id: 'n102',
-        txt: 'cgvfdvf',
-        type: 'note-img',
+        type: 'img',
         info: {
-          url: 'http://some-img/me',
+          url: 'https://lh3.googleusercontent.com/proxy/Du390BhqfyB5oZmHQS0MM3G_dogfJ-lbQFjiU6QXXGHwatt6OEf1WMGcWfTiJTJJZ1OsAHDdApJHoyA9n8RxJUzxsC0xy199Gn4_Mkx8QkZ9',
           title: 'Bobi and Me',
+          txt: 'hi ',
         },
         style: {
           backgroundColor: '#00d',
@@ -37,14 +37,26 @@ function _createNotes() {
       },
       {
         id: 'n103',
-        txt: 'gjgfjfdjd',
-        type: 'note-todos',
+        txt: 'todo',
+        type: 'todo',
         info: {
           label: 'Get my stuff together',
           todos: [
             { txt: 'Driving liscence', doneAt: null },
             { txt: 'Coding power', doneAt: 187111111 },
           ],
+        },
+      },
+      {
+        id: 'n104',
+        type: 'video',
+        info: {
+          url: 'https://www.youtube.com/watch?v=https://www.youtube.com/watch?v=tgbNymZ7vqY',
+          title: 'Bobi and Me',
+          txt: 'hi ',
+        },
+        style: {
+          backgroundColor: '#00d',
         },
       },
     ];
@@ -82,7 +94,10 @@ function _createNote(note) {
     type: 'note-todos',
     info: {
       label: 'Get my stuff together',
-      todos: [{ txt: 'Driving liscence', doneAt: null }, { txt: 'Coding' }],
+      todos: [
+        { id: 1, txt: 'Driving liscence', doneAt: null },
+        { id: 2, txt: 'Coding' },
+      ],
     },
   };
 }

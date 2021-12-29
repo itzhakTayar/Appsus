@@ -1,10 +1,12 @@
-@import "./parts/base.css";
+@import './parts/base.css';
 
 /* Email */
-@import "./apps/email/cmps/emailHeader.css";
-@import "./apps/email/cmps/emailList.css";
+@import './apps/email/cmps/emailHeader.css';
+@import './apps/email/cmps/emailList.css';
 
 /* CMPS */
-@import "./cmps/app-header.css";
+@import './cmps/app-header.css';
 
-
+/* NOTES */
+@import './apps/notes/notes.preview.css';
+@import './apps/notes/note-img-preview.css';

@@ -1,3 +1,9 @@
+import { DynamicCmp } from './DynamicCmp.jsx';
+
+{
+  DynamicCmp;
+}
+
 const { Link } = ReactRouterDOM;
 
 export function NotesPreview({ note }) {
@@ -5,7 +11,7 @@ export function NotesPreview({ note }) {
     <Link to={`/note/${note.id}`} className="note-preview">
       <article>
         <div className="note-container">
-          <h2>{note.info.txt}</h2>
+          <DynamicCmp note={note} />
         </div>
       </article>
     </Link>
