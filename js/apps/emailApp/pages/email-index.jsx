@@ -7,7 +7,7 @@ import { EmailAdd } from "../cmps/EmailAdd.jsx";
 export class EmailIndex extends React.Component {
   state = {
     emails: [],
-    sortBy: {},
+    sortBy: null,
     isModalOpen: false,
     filterBy: {
       sent: false,
@@ -31,6 +31,11 @@ export class EmailIndex extends React.Component {
     var { filterBy } = this.state;
     filterBy.search = search;
     this.setState({ filterBy }, this.loadEmails);
+  };
+
+  onSetSort = (val) => {
+    var sortBy = val;
+    this.setState({ sortBy }, this.loadEmails);
   };
 
   onSetRead = (val) => {
@@ -80,7 +85,7 @@ export class EmailIndex extends React.Component {
   };
 
   setFilterByPath = (path) => {
-    var filtersNames = ["inbox", "sent", "trash", "spam"];
+    var filtersNames = ["inbox", "sent", "trash", "spam", "star", "draft"];
     var filterBy = "";
     var val = true;
     filtersNames.forEach((fName) => {
@@ -97,6 +102,12 @@ export class EmailIndex extends React.Component {
     this.onSetFilter(filterBy, val);
   };
 
+  onToggleStar = (email) => {
+    emailService.toggleStarState(email).then(() => {
+      this.loadEmails();
+    });
+  };
+
   render() {
     var unReadEmails = this.getAllInboxEmails();
     return (
@@ -105,18 +116,20 @@ export class EmailIndex extends React.Component {
         <EmailHeader
           onSearch={this.onSetSearch}
           onSetRead={this.onSetRead}
+          onSetSort={this.onSetSort}
         />
         <div className="email-app-main flex">
+          <EmailFilters
+            onAddEmail={this.toggleCreateEmail}
+            setFilter={this.onSetFilter}
+            unReadEmails={unReadEmails}
+          />
           <EmailList
             emails={this.state.emails}
             onChangeReadState={this.toggleReadState}
             onSendToTrash={this.sendToTrash}
             deleteEmail={this.onDeleteEmail}
-          />
-          <EmailFilters
-            onAddEmail={this.toggleCreateEmail}
-            setFilter={this.onSetFilter}
-            unReadEmails={unReadEmails}
+            toggleStar={this.onToggleStar}
           />
         </div>
         {this.state.isModalOpen && (

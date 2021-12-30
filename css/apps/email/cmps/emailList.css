@@ -21,6 +21,23 @@
   transform: scale(1.1);
 }
 
+.email-item .email-start {
+  align-items: center;
+  gap: 3px;
+}
+
+.off {
+  color: rgb(41, 38, 38);
+}
+
+.on {
+  color: gold;
+}
+
+.off:hover {
+  background-color: rgba(240, 185, 7, 0.706);
+}
+
 .email-content p {
   margin: 0px;
 }

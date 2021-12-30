@@ -8,6 +8,7 @@ export const emailService = {
   setEmailAsTrash,
   deleteEmail,
   getUnreadInboxCount,
+  toggleStarState,
 };
 
 const loggedinUser = {
@@ -17,6 +18,7 @@ const loggedinUser = {
 const DB = "emailDB";
 const names = ["Izhak", "Noam", "Coding Acadmy", "ebay", "Netflix"];
 var gEmails = [];
+var gDrafts = [];
 _createEmails();
 
 function _createEmails() {
@@ -44,6 +46,7 @@ function _createEmail(num) {
     fromEmail: "poko@gmail.com",
     fromName: names[num],
     deletedAt: null,
+    isStar: false,
   };
   return email;
 }
@@ -52,19 +55,47 @@ function query(filterBy = null, sortBy = null) {
   if (!filterBy) return gEmails;
   var emails = _getEmailsByFilter(filterBy);
   if (filterBy.search) emails = _filterBySearch(emails, filterBy.search);
+  if (sortBy) emails = sortEmails(emails, sortBy);
   return Promise.resolve(emails);
+}
+
+function sortEmails(emails, sortBy) {
+  if (sortBy === "Date") {
+    emails.sort((e1, e2) => {
+      return e1.sentAt > e2.sentAt;
+    });
+    return emails;
+  }
+  if (sortBy === "Title") {
+    emails.sort((e1, e2) => {
+      var str1 = e1.subject.toUpperCase();
+      var str2 = e2.subject.toUpperCase();
+      if (str1 < str2) {
+        return -1;
+      }
+      if (str1 > str2) {
+        return 1;
+      }
+      return 0;
+    });
+    return emails;
+  }
 }
 
 function _getEmailsByFilter(filterBy) {
   var emails = gEmails;
+  if (filterBy.draft) {
+    return emails.filter((email) => email.isDraft);
+  }
+  emails = emails.filter((email) => !email.isDraft);
   if (filterBy.isRead === "true") {
     emails = emails.filter((email) => email.isRead);
   } else if (filterBy.isRead === "false") {
     emails = emails.filter((email) => !email.isRead);
   }
   if (!filterBy.trash) emails = emails.filter((email) => !email.deletedAt);
-
-  if (filterBy.trash) emails = emails.filter((email) => email.deletedAt);
+  if (filterBy.star) return emails.filter((email) => email.isStar);
+  if (filterBy.trash) return emails.filter((email) => email.deletedAt);
   if (filterBy.sent) {
     return emails.filter((email) => email.fromEmail === loggedinUser.email);
   }
@@ -76,7 +107,9 @@ function _getEmailsByFilter(filterBy) {
 function getUnreadInboxCount() {
   var emails = gEmails.filter(
     (email) =>
-      email.to === loggedinUser.email && !email.isRead && !email.deletedAt
+      email.to === loggedinUser.email &&
+      !email.isRead &&
+      !email.deletedAt & !email.isDraft
   );
   return emails.length;
 }
@@ -88,9 +121,20 @@ function _filterBySearch(emails, searchKey) {
   return filtered;
 }
 
-function addEmail(newEmail) {
+function addEmail(newEmail, isDraft = false) {
   var email = {};
-  email.id = utilsService.makeId();
+  if (isEmailExsist(newEmail)) {
+    var oldEmail = isEmailExsist(newEmail);
+    oldEmail.subject = newEmail.titleInput;
+    oldEmail.body = newEmail.msgInput;
+    oldEmail.to = newEmail.toInput;
+    oldEmail.isDraft = isDraft;
+    console.log(oldEmail);
+    console.log(gEmails);
+    _saveEmailsToStorage();
+    return Promise.resolve();
+  }
+  email.id = newEmail.id;
   email.subject = newEmail.titleInput;
   email.body = newEmail.msgInput;
   email.isRead = false;
@@ -99,9 +143,18 @@ function addEmail(newEmail) {
   email.fromEmail = loggedinUser.email;
   email.fromName = loggedinUser.fullname;
   email.deletedAt = null;
+  email.isStar = false;
+  email.isDraft = isDraft;
   gEmails.unshift(email);
+
   _saveEmailsToStorage();
   return Promise.resolve();
+}
+
+function isEmailExsist(email) {
+  var idx = getEmailIdxById(email.id);
+  if (idx === -1) return null;
+  return gEmails[idx];
 }
 
 function deleteEmail(email) {
@@ -114,6 +167,12 @@ function deleteEmail(email) {
 function toggleIsRead(email, onlyToOpen = false) {
   email.isRead = !email.isRead;
   if (onlyToOpen) email.isRead = true;
+  _saveEmailsToStorage();
+  return Promise.resolve();
+}
+
+function toggleStarState(email) {
+  email.isStar = !email.isStar;
   _saveEmailsToStorage();
   return Promise.resolve();
 }
