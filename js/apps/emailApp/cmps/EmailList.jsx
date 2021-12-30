@@ -11,10 +11,11 @@ export class EmailList extends React.Component {
     this.props.onChangeReadState(email, isOnlyOpen);
   };
 
-  onDivClick = ({ target }, email) => {
+  onDivClick = ({ target }, email, starClass) => {
     if (
       target.classList.value !== "mark-btn" &&
-      target.classList.value !== "trash-btn"
+      target.classList.value !== "trash-btn" &&
+      target.classList.value !== starClass
     ) {
       this.toggleReadState(email, true);
       var id = this.state.click.id ? null : email.id;
@@ -29,6 +30,10 @@ export class EmailList extends React.Component {
     this.props.deleteEmail(email);
   };
 
+  onToggleStar = (email) => {
+    this.props.toggleStar(email);
+  };
+
   render() {
     var hoverId = this.state.hover.id ? this.state.hover.id : null;
     var clickId = this.state.click.id ? this.state.click.id : null;
@@ -40,6 +45,7 @@ export class EmailList extends React.Component {
           var { id } = email;
           var isHovered = false;
           var isClicked = false;
+          var starClassName = email.isStar ? "on" : "off";
           if (id === hoverId) {
             isHovered = true;
             var readIcon = email.isRead ? "📭" : "✉️";
@@ -53,6 +59,7 @@ export class EmailList extends React.Component {
               : email.body;
           var isTrash = email.deletedAt;
           var trashIcon = isTrash ? "❌" : "🗑";
+          var showStar = isHovered || email.isStar;
           return (
             <div className="div-email-item" key={email.id}>
               <div
@@ -63,10 +70,20 @@ export class EmailList extends React.Component {
                 }}
                 onMouseLeave={() => this.setState({ hover: {} })}
                 onClick={(ev) => {
-                  this.onDivClick(ev, email);
+                  this.onDivClick(ev, email, starClassName);
                 }}
               >
-                <h1>{email.fromName}</h1>
+                <div className="email-start flex">
+                  <h1 className="email-senderName">{email.fromName}</h1>
+                  {showStar && (
+                    <p
+                      onClick={() => this.onToggleStar(email)}
+                      className={starClassName}
+                    >
+                      &#9733;
+                    </p>
+                  )}
+                </div>
                 <div className="email-content">
                   <h1>{email.subject}</h1>
                   <p className="email-body">-{body}</p>

@@ -1,26 +1,42 @@
+import { utilsService } from "../../../services/util.service.js";
 import { emailService } from "../services/email.service.js";
-
 export class EmailAdd extends React.Component {
   state = {
     email: {
       toInput: "",
       titleInput: "",
       msgInput: "",
+      id: utilsService.makeId(),
     },
   };
+  gSaveInterval = null;
+
+  componentDidMount() {}
 
   handleChange = ({ target }) => {
     var field = target.name;
     var val = target.value;
+    if (!this.gSaveInterval)
+      this.gSaveInterval = setInterval(() => {
+        this.saveDraft();
+      }, 5000);
     this.setState((prevState) => ({
       email: { ...prevState.email, [field]: val },
     }));
+  };
+
+  saveDraft = () => {
+    var draft = this.state.email;
+    emailService.addEmail(draft,true).then(() => {
+      console.log("draft saved");
+    });
   };
 
   onSendEmail = (event) => {
     event.preventDefault();
     var { email } = this.state;
     emailService.addEmail(email).then(() => {
+      clearInterval(this.gSaveInterval);
       this.props.renderEmails();
       this.props.closeModal();
     });
@@ -35,6 +51,7 @@ export class EmailAdd extends React.Component {
             className="close-modal-btn"
             onClick={() => {
               this.props.closeModal();
+              clearInterval(this.gSaveInterval);
             }}
           >
             ❌

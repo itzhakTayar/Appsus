@@ -1,7 +1,7 @@
 const { NavLink } = ReactRouterDOM;
 
 export function EmailFilters(props) {
-  var {unReadEmails} =props
+  var { unReadEmails } = props;
   return (
     <section className="email-filters">
       <ul className="clean-list">
@@ -23,7 +23,10 @@ export function EmailFilters(props) {
             props.setFilter("sent", false);
           }}
         >
-         inbox{unReadEmails>0&&<p className="unread-diplay">{"("+unReadEmails+")"}</p>}
+          inbox
+          {unReadEmails > 0 && (
+            <p className="unread-diplay">{"(" + unReadEmails + ")"}</p>
+          )}
         </NavLink>
         <NavLink
           to="/email/sent"
@@ -34,7 +37,7 @@ export function EmailFilters(props) {
           }}
         >
           sent
-        </NavLink>{" "}
+        </NavLink>
         <NavLink
           to="/email/trash"
           className="email-filter-item clean-link"
@@ -46,6 +49,26 @@ export function EmailFilters(props) {
           trash
         </NavLink>
         <NavLink
+          to="/email/star"
+          className="email-filter-item clean-link"
+          activeClassName="my-active-filter"
+          onClick={() => {
+            props.setFilter("star", true);
+          }}
+        >
+          ⭐️
+        </NavLink>
+        <NavLink
+          to="/email/draft"
+          className="email-filter-item clean-link"
+          activeClassName="my-active-filter"
+          onClick={() => {
+            props.setFilter("draft", true);
+          }}
+        >
+          Draft
+        </NavLink>
+        <NavLink
           to="/email/spam"
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
@@ -54,7 +77,7 @@ export function EmailFilters(props) {
           }}
         >
           spam
-        </NavLink>{" "}
+        </NavLink>
       </ul>
     </section>
   );

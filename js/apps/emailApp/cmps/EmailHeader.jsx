@@ -1,4 +1,4 @@
-export function EmailHeader({ onSearch, onSetRead }) {
+export function EmailHeader({ onSearch, onSetRead, onSetSort }) {
   return (
     <header className="email-header">
       <div className="header-content">
@@ -9,7 +9,7 @@ export function EmailHeader({ onSearch, onSetRead }) {
             name="sortBy"
             id="sortSelect"
             onChange={(ev) => {
-              onSetRead(ev.target.value);
+              onSetSort(ev.target.value);
             }}
           >
             <option value="Date">Date</option>
