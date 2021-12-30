@@ -2,7 +2,6 @@ import { DynamicCmp } from './DynamicCmp.jsx';
 
 export class NotesPreview extends React.Component {
   state = {
-    isShowNoteModal: false,
     note: this.props.note,
   };
 
