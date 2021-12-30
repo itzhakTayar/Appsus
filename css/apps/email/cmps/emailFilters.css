@@ -25,6 +25,7 @@
   flex-grow: 1;
   color: white;
   box-shadow: 3px 2px 3px 3px lightblue;
+  cursor: pointer;
 }
 
 .email-filter-item:hover {
@@ -34,4 +35,10 @@
 .my-active-filter {
   background-color: rgba(207, 44, 207, 0.815);
   color: gold;
+}
+
+.email-filter-item .unread-diplay
+{
+  margin: 2px;
+  color: rgb(43, 127, 195);
 }

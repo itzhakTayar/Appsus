@@ -24,7 +24,7 @@ export function AppHeader() {
           <NavLink
             activeClassName="my-active"
             className="header-link-item"
-            to="/email"
+            to="/email/inbox"
           >
             Email
           </NavLink>

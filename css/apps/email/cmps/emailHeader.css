@@ -1,7 +1,7 @@
 .email-header {
-    height: 100px;
-    max-width: 1280px;
-    margin: auto;
+  height: 100px;
+  max-width: 1280px;
+  margin: auto;
 }
 
 .header-content {
@@ -14,11 +14,33 @@
   border-bottom: 1px solid white;
 }
 
-
-.header-content input{
-  width: 50%;
-  height: 60px;
+.header-content input {
   border: 0px;
   border-radius: 5px;
-  box-shadow: 0px 0px 0px 3px rgb(104, 68, 125);
+  box-shadow: 0px 0px 0px 3px rgb(245, 241, 5);
+  flex-grow: 4;
+  background-color: inherit;
+}
+
+.email-head-filters {
+  width: 50%;
+  height: 70px;
+  display: flex;
+}
+
+.email-head-filters #isReadSelect {
+  margin: 0px;
+  padding: 0px;
+  flex-grow: 1;
+  text-align: center;
+  border: 0px;
+  box-shadow: 0px 0px 0px 3px rgb(4, 233, 210);
+  margin-left: 3px;
+  color: rgb(9, 8, 8);
+  font-weight: 700;
+  font-size: 20px;
+  height: 100%;
+  cursor: pointer;
+  outline: none;
+  background-color: inherit;
 }

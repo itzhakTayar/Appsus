@@ -1,24 +1,23 @@
 .emails-list {
   display: flex;
   flex-direction: column;
-  flex-grow: 3;
+  /* flex-grow: 3; */
+  width: 80%;
 }
 
-.emails-list
-
-.email-item {
+.emails-list .email-item {
   background-color: white;
   display: flex;
   justify-content: space-between;
   border: 1px solid plum;
   align-items: center;
-  padding: 3px;
+  padding: 5px;
   cursor: pointer;
-  /* height: 50px; */
+  height: 50px;
   transition: 0.3s ease-in-out;
 }
 
-.email-item:hover{
+.email-item:hover {
   transform: scale(1.1);
 }
 
@@ -32,4 +31,18 @@
 
 .email-item .email-content .email-body {
   color: gray;
+}
+
+.hover-btns {
+  height: 100%;
+}
+
+.email-item .hover-btns button {
+  background-color: inherit;
+  color: black;
+  border: 0;
+  height: 100%;
+  margin: 0px;
+  font-size: 18px;
+  cursor: pointer;
 }

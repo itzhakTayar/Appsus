@@ -1,17 +1,10 @@
 const { NavLink } = ReactRouterDOM;
 
 export function EmailFilters(props) {
+  var {unReadEmails} =props
   return (
     <section className="email-filters">
       <ul className="clean-list">
-        {/* <li
-          className="email-filter-item active"
-          onClick={() => {
-            props.onAddEmail();
-          }}
-        >
-          Create
-        </li> */}
         <NavLink
           to="/email/create"
           activeClassName="my-active-filter"
@@ -30,7 +23,7 @@ export function EmailFilters(props) {
             props.setFilter("sent", false);
           }}
         >
-          inbox
+         inbox{unReadEmails>0&&<p className="unread-diplay">{"("+unReadEmails+")"}</p>}
         </NavLink>
         <NavLink
           to="/email/sent"
@@ -47,7 +40,7 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            props.setFilter("recycleBin", true);
+            props.setFilter("trash", true);
           }}
         >
           trash

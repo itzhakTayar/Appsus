@@ -15,12 +15,16 @@ export class EmailIndex extends React.Component {
   };
 
   componentDidMount() {
+    this.setFilterByPath(this.props.location.pathname);
     this.loadEmails();
   }
 
   loadEmails = () => {
-    var emails = emailService.query(this.state.filterBy, this.state.sortBy);
-    this.setState({ emails });
+    emailService
+      .query(this.state.filterBy, this.state.sortBy)
+      .then((emails) => {
+        this.setState({ emails });
+      });
   };
 
   onSetSearch = (search) => {
@@ -29,33 +33,97 @@ export class EmailIndex extends React.Component {
     this.setState({ filterBy }, this.loadEmails);
   };
 
+  onSetRead = (val) => {
+    var { filterBy } = this.state;
+    filterBy.isRead = val != "All" ? val : null;
+    this.setState({ filterBy }, this.loadEmails);
+  };
+
   toggleCreateEmail = () => {
     var isModalOpen = !this.state.isModalOpen;
     this.setState({ isModalOpen });
   };
 
+  toggleReadState = (email, isOnlyToOpen = false) => {
+    emailService.toggleIsRead(email, isOnlyToOpen).then(this.loadEmails());
+  };
+
   onSetFilter = (filter, val) => {
     var filterBy = {};
     filterBy.sent = false;
-    if(this.state.filterBy.search) filterBy.search =this.state.filterBy.search;
+    if (this.state.filterBy.search)
+      filterBy.search = this.state.filterBy.search;
+    if (this.state.filterBy.isRead)
+      filterBy.isRead = this.state.filterBy.isRead;
     filterBy[filter] = val;
     this.setState({ filterBy }, this.loadEmails);
   };
 
+  sendToTrash = (email) => {
+    emailService.setEmailAsTrash(email).then(() => this.loadEmails());
+  };
+
+  onDeleteEmail = (email) => {
+    emailService.deleteEmail(email).then(() => {
+      this.loadEmails();
+    });
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    var filterUrl = this.props.location.pathname;
+    if (prevProps.location.pathname != filterUrl)
+      this.setFilterByPath(filterUrl);
+  }
+
+  getAllInboxEmails = () => {
+    return emailService.getUnreadInboxCount();
+  };
+
+  setFilterByPath = (path) => {
+    var filtersNames = ["inbox", "sent", "trash", "spam"];
+    var filterBy = "";
+    var val = true;
+    filtersNames.forEach((fName) => {
+      if (path.includes(fName)) {
+        if (fName === "inbox") {
+          filterBy = "sent";
+          val = false;
+          return;
+        }
+        filterBy = fName;
+        return;
+      }
+    });
+    this.onSetFilter(filterBy, val);
+  };
+
   render() {
+    var unReadEmails = this.getAllInboxEmails();
     return (
       <section className="email-app">
         {this.state.isModalOpen && <div className="screen open"></div>}
-        <EmailHeader onSearch={this.onSetSearch} />
+        <EmailHeader
+          onSearch={this.onSetSearch}
+          onSetRead={this.onSetRead}
+        />
         <div className="email-app-main flex">
-          <EmailList emails={this.state.emails} />
+          <EmailList
+            emails={this.state.emails}
+            onChangeReadState={this.toggleReadState}
+            onSendToTrash={this.sendToTrash}
+            deleteEmail={this.onDeleteEmail}
+          />
           <EmailFilters
             onAddEmail={this.toggleCreateEmail}
             setFilter={this.onSetFilter}
+            unReadEmails={unReadEmails}
           />
         </div>
         {this.state.isModalOpen && (
-          <EmailAdd closeModal={this.toggleCreateEmail} />
+          <EmailAdd
+            closeModal={this.toggleCreateEmail}
+            renderEmails={this.loadEmails}
+          />
         )}
       </section>
     );
