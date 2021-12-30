@@ -4,6 +4,10 @@ import { utilsService } from "../../../services/util.service.js";
 export const emailService = {
   query,
   addEmail,
+  toggleIsRead,
+  setEmailAsTrash,
+  deleteEmail,
+  getUnreadInboxCount,
 };
 
 const loggedinUser = {
@@ -39,33 +43,45 @@ function _createEmail(num) {
     to: loggedinUser.email,
     fromEmail: "poko@gmail.com",
     fromName: names[num],
+    deletedAt: null,
   };
   return email;
 }
 
 function query(filterBy = null, sortBy = null) {
   if (!filterBy) return gEmails;
-  var emails = getEmailsByFilter(filterBy);
-  if (filterBy.search) emails = filterBySearch(emails, filterBy.search);
-  return emails;
+  var emails = _getEmailsByFilter(filterBy);
+  if (filterBy.search) emails = _filterBySearch(emails, filterBy.search);
+  return Promise.resolve(emails);
 }
 
-function getEmailsByFilter(filterBy) {
+function _getEmailsByFilter(filterBy) {
+  var emails = gEmails;
+  if (filterBy.isRead === "true") {
+    emails = emails.filter((email) => email.isRead);
+  } else if (filterBy.isRead === "false") {
+    emails = emails.filter((email) => !email.isRead);
+  }
+  if (!filterBy.trash) emails = emails.filter((email) => !email.deletedAt);
+
+  if (filterBy.trash) emails = emails.filter((email) => email.deletedAt);
   if (filterBy.sent) {
-    var emails = gEmails.filter((email) => {
-      return email.fromEmail === loggedinUser.email;
-    });
-    return emails;
+    return emails.filter((email) => email.fromEmail === loggedinUser.email);
   }
   if (!filterBy.sent) {
-    var emails = gEmails.filter((email) => {
-      return email.to === loggedinUser.email;
-    });
-    return emails;
+    return emails.filter((email) => email.to === loggedinUser.email);
   }
 }
 
-function filterBySearch(emails, searchKey) {
+function getUnreadInboxCount() {
+  var emails = gEmails.filter(
+    (email) =>
+      email.to === loggedinUser.email && !email.isRead && !email.deletedAt
+  );
+  return emails.length;
+}
+
+function _filterBySearch(emails, searchKey) {
   var filtered = emails.filter((email) => {
     return email.fromName.toUpperCase().includes(searchKey.toUpperCase());
   });
@@ -82,9 +98,37 @@ function addEmail(newEmail) {
   email.to = newEmail.toInput;
   email.fromEmail = loggedinUser.email;
   email.fromName = loggedinUser.fullname;
-  gEmails.push(email);
+  email.deletedAt = null;
+  gEmails.unshift(email);
   _saveEmailsToStorage();
   return Promise.resolve();
+}
+
+function deleteEmail(email) {
+  var idx = getEmailIdxById(email.id);
+  gEmails.splice(idx, 1);
+  _saveEmailsToStorage();
+  return Promise.resolve();
+}
+
+function toggleIsRead(email, onlyToOpen = false) {
+  email.isRead = !email.isRead;
+  if (onlyToOpen) email.isRead = true;
+  _saveEmailsToStorage();
+  return Promise.resolve();
+}
+
+function setEmailAsTrash(email) {
+  email.deletedAt = Date.now();
+  _saveEmailsToStorage();
+  return Promise.resolve();
+}
+
+function getEmailIdxById(id) {
+  var idx = gEmails.findIndex((email) => {
+    return email.id === id;
+  });
+  return idx;
 }
 
 function _saveEmailsToStorage() {
