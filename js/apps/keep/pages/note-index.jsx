@@ -29,7 +29,7 @@ export class NoteApp extends React.Component {
         <NotesHeader />
         {/* <NoteFilter onSetFilter={this.onSetFilter} />
             <BookAdd loadNotes={this.loadNotes}/> */}
-        <NotesList notes={notes} />
+        <NotesList notes={notes} onAdd={this.loadNotes} />
       </section>
     );
   }

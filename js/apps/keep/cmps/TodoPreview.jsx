@@ -1,11 +1,11 @@
-export function TodoPreview({ note }) {
-  console.log(TodoPreview);
-  const todos = note.info.todos;
-  console.log(todos, 'todos');
+export function TodoPreview(props) {
+  // console.log(todos, 'todosvvv');
+  // console.log(props, 'props');
+
+  var { todos } = props;
   return (
     <ul>
       {todos.map((todo) => {
-        console.log(todo);
         return (
           <li key={todo.id}>
             {todo.txt}

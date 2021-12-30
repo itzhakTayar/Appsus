@@ -7,10 +7,9 @@ export const noteService = {
   createNote,
 };
 const STORAGE_KEY = 'noteDB';
+var gNotes = [];
 _createNotes();
-
 function _createNotes() {
-  console.log('create..');
   let notes = _loadNotesFromStorage();
   if (!notes || !notes.length) {
     notes = [
@@ -21,6 +20,7 @@ function _createNotes() {
         info: {
           title: 'Bobi and Me',
           txt: 'Fullstack Me Baby!',
+          url: '',
         },
       },
       {
@@ -40,7 +40,8 @@ function _createNotes() {
         txt: 'todo',
         type: 'todo',
         info: {
-          label: 'Get my stuff together',
+          title: 'Get my stuff together',
+          url: '',
           todos: [
             { txt: 'Driving liscence', doneAt: null, id: 1 },
             { txt: 'Coding power', doneAt: 187111111, id: 2 },
@@ -60,14 +61,18 @@ function _createNotes() {
         },
       },
     ];
-    _saveNotesToStorage(notes);
+    gNotes = notes;
+    _saveNotesToStorage();
+    return;
   }
+  gNotes = notes;
+  // console.log(gNotes);
 }
 
 function query(filterBy = null) {
-  const notes = _loadNotesFromStorage();
-  if (!filterBy) return Promise.resolve(notes);
-  const filteredNotes = _getFilteredNotes(notes, filterBy);
+  // console.log(gNotes);
+  if (!filterBy) return Promise.resolve(gNotes);
+  const filteredNotes = _getFilteredNotes(gNotes, filterBy);
   return Promise.resolve(filteredNotes);
 }
 // function removeNote(noteId) {
@@ -82,36 +87,53 @@ function query(filterBy = null) {
 //   return Promise.resolve(note);
 // }
 
-function _saveNotesToStorage(notes) {
-  storageService.saveToStorage(STORAGE_KEY, notes);
+function _saveNotesToStorage() {
+  storageService.saveToStorage(STORAGE_KEY, gNotes);
 }
 
 function _loadNotesFromStorage() {
   return storageService.loadFromStorage(STORAGE_KEY);
 }
 
-function createNote(title, type, txt) {
-  let notes = _loadNotesFromStorage();
+function createNote(reciveNote) {
+  console.log(reciveNote);
+  const { title, type, txt, url, todos } = reciveNote;
+  console.log(todos);
   const note = {
     id: utilsService.makeId(),
-    title,
-    txt,
     type,
+    info: {
+      title,
+      txt,
+    },
   };
+  if (url) {
+    note.info.url = url;
+  }
+  if (todos) {
+    note.info.todos = todos;
+  }
+
   // getType(type, note);
-  notes.unshift(note);
+
+  gNotes.unshift(note);
+
   _saveNotesToStorage();
+
+  return Promise.resolve();
 }
-// function getType(type, note) {
-//   switch (type) {
-//     case 'img':
-//       note[url] = '';
-//     case 'video':
-//       note[url] = '';
-//     case 'todo':
-//       note[todos] = [
-//         { txt: 'Driving liscence', doneAt: null, id: utilsService.makeId() },
-//         { txt: 'Coding power', doneAt: 187111111, id: utilsService.makeId() },
-//       ];
-//   }
-// }
+function getType(type, note) {
+  switch (type) {
+    case 'img':
+      note.info.url = '';
+      break;
+    case 'video':
+      note.info.url = '';
+      break;
+    case 'todo':
+      note.info.todos = [
+        { txt: 'Driving liscence', doneAt: null, id: utilsService.makeId() },
+        { txt: 'Coding power', doneAt: 187111111, id: utilsService.makeId() },
+      ];
+  }
+}

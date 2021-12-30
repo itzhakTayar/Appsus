@@ -1,4 +1,5 @@
 import { noteService } from '../services/note.service.js';
+import { DynamicAdd } from './DynamicAdd.jsx';
 
 export class AddNote extends React.Component {
   state = {
@@ -18,27 +19,31 @@ export class AddNote extends React.Component {
 
   onSaveNote = (ev) => {
     ev.preventDefault();
-    const { note } = this.state;
-    const { title } = note;
-    const { type } = note;
-    const { txt } = note;
-    noteService.createNote(title, type, txt);
-    this.props.onToggleNoteModal();
-    // setState();
+    console.log(this.state.note);
+    noteService.createNote(this.state.note).then(() => {
+      this.props.onToggleNoteModal();
+      this.props.onAdd();
+    });
   };
-
-  handleChange = ({ target }) => {
-    const field = target.name;
-    const value = target.value;
-    console.log(field);
-    console.log(value);
+  addDynamicAdd = (field, value) => {
+    // console.log(field, value);
     this.setState((prevState) => ({
       note: { ...prevState.note, [field]: value },
     }));
   };
+  handleChange = ({ target }) => {
+    const field = target.name;
+    const value = target.value;
 
+    this.setState((prevState) => ({
+      note: { ...prevState.note, [field]: value },
+    }));
+  };
+  click = () => {
+    console.log('add');
+  };
   render() {
-    const { title, type, txt } = this.state.note;
+    const { title, type, txt, url } = this.state.note;
 
     return (
       <section className="note-add">
@@ -64,12 +69,15 @@ export class AddNote extends React.Component {
             />
             <select name="type" onChange={this.handleChange} value={type}>
               <option value="txt">text</option>
-              <option value="img">
-                imge<option></option>
-              </option>
+              <option value="img">imge</option>
               <option value="video">video</option>
               <option value="todo">todo</option>
             </select>
+            <DynamicAdd
+              changeValue={this.addDynamicAdd}
+              url={url}
+              note={this.state.note}
+            />
             <textarea
               name="txt"
               cols="30"
@@ -77,7 +85,7 @@ export class AddNote extends React.Component {
               value={txt}
               onChange={this.handleChange}
             ></textarea>
-            <button>Add Note</button>
+            <button onClick={this.click}>Add Note</button>
           </form>
         </div>
       </section>

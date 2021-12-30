@@ -1,7 +1,6 @@
 const { Link } = ReactRouterDOM;
 
 export function TxtPreview({ note }) {
-  console.log("note", note);
   return (
     // <Link to={`/note/${note.id}`} className="note-preview">
     <article>

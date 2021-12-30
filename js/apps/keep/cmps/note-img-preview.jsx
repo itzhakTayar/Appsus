@@ -1,7 +1,6 @@
 const { Link } = ReactRouterDOM;
 
 export function ImgPreview({ note }) {
-  console.log(note.info.txt);
   return (
     // <Link to={`/note/${note.id}`} className="note-preview">
     <article>
