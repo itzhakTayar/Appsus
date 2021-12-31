@@ -1,7 +1,7 @@
-import { NotesList } from "../cmps/note-list.jsx";
-import { NotesHeader } from "../cmps/notes-header.jsx";
-import { noteService } from "../services/note.service.js";
-import { AddNote } from "../cmps/AddNote.jsx";
+import { NotesList } from '../cmps/note-list.jsx';
+import { NotesHeader } from '../cmps/notes-header.jsx';
+import { noteService } from '../services/note.service.js';
+import { AddNote } from '../cmps/AddNote.jsx';
 
 export class NoteApp extends React.Component {
   state = {
@@ -32,9 +32,9 @@ export class NoteApp extends React.Component {
     const { notes } = this.state;
     return (
       <section className="note-app">
-        <NotesHeader />
+        <NotesHeader setFilter={this.onSetFilter} />
         <button onClick={this.onToggleNoteModal}>Add note</button>
-        <NotesList notes={notes}  onAdd={this.loadNotes} />
+        <NotesList notes={notes} onAdd={this.loadNotes} />
         {this.state.isShowNoteModal && (
           <AddNote
             onAdd={this.loadNotes}

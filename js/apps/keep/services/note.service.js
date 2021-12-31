@@ -142,7 +142,7 @@ function createNote(reciveNote) {
     },
     isPinned: false,
     style: {
-      backgroundColor: '#00d',
+      backgroundColor: 'red',
     },
   };
   if (url) {
@@ -159,21 +159,6 @@ function createNote(reciveNote) {
   _saveNotesToStorage();
 
   return Promise.resolve();
-}
-function getType(type, note) {
-  switch (type) {
-    case 'img':
-      note.info.url = '';
-      break;
-    case 'video':
-      note.info.url = '';
-      break;
-    case 'todo':
-      note.info.todos = [
-        { txt: 'Driving liscence', doneAt: null, id: utilsService.makeId() },
-        { txt: 'Coding power', doneAt: 187111111, id: utilsService.makeId() },
-      ];
-  }
 }
 
 function changeBgc(noteId, color) {

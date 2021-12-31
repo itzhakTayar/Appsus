@@ -29,7 +29,7 @@ export class NoteFilter extends React.Component {
 
   render() {
     const {
-      filterBy: { title, type },
+      filterBy: { title },
     } = this.state;
 
     return (
@@ -43,15 +43,12 @@ export class NoteFilter extends React.Component {
           onChange={this.handleChange}
         />
         <label htmlFor="by-type">type:</label>
-        <input
-          type="text"
-          id="by-type"
-          name="type"
-          value={type}
-          onChange={this.handleChange}
-        />
-
-        <button>Filter</button>
+        <select id="by-type" name="type" onChange={this.handleChange}>
+          <option value="img">image</option>
+          <option value="todo">todo</option>
+          <option value="txt">text</option>
+          <option value="video">video</option>
+        </select>
       </form>
     );
   }
