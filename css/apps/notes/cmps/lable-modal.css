@@ -1,0 +1,20 @@
+.lable-modadl {
+  width: 300px;
+  border: 1px solid black;
+}
+.critical {
+  width: 90%;
+  background-color: red;
+}
+.spam {
+  width: 90%;
+  background-color: orange;
+}
+.work {
+  width: 90%;
+  background-color: green;
+}
+.friend {
+  width: 90%;
+  background-color: blue;
+}

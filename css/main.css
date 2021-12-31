@@ -1,23 +1,24 @@
-@import "./parts/base.css";
-@import "./parts/helpers.css";
+@import './parts/base.css';
+@import './parts/helpers.css';
 
 /* Email */
-@import "./apps/email/emailApp.css";
-@import "./apps/email/cmps/emailHeader.css";
-@import "./apps/email/cmps/emailList.css";
-@import "./apps/email/cmps/emailFilters.css";
-@import "./apps/email/cmps/addEmail.css";
-@import "./apps/email/cmps/emailPreview.css";
-@import "./apps/email/emailDetails.css";
+@import './apps/email/emailApp.css';
+@import './apps/email/cmps/emailHeader.css';
+@import './apps/email/cmps/emailList.css';
+@import './apps/email/cmps/emailFilters.css';
+@import './apps/email/cmps/addEmail.css';
+@import './apps/email/cmps/emailPreview.css';
+@import './apps/email/emailDetails.css';
 
 /* CMPS */
-@import "./cmps/app-header.css";
-@import "./cmps/user-msg.css";
+@import './cmps/app-header.css';
+@import './cmps/user-msg.css';
 
 /* NOTES */
-@import "./apps/notes/cmps/note-add.css";
-@import "./apps/notes/cmps/note-img-preview.css";
-@import "./apps/notes/cmps/notes.preview.css";
-@import "./apps/notes/cmps/note-list.css";
-@import "./apps/notes/noteApp.css";
-@import "./apps/notes/cmps/note-edit.css";
+@import './apps/notes/cmps/note-add.css';
+@import './apps/notes/cmps/note-img-preview.css';
+@import './apps/notes/cmps/notes.preview.css';
+@import './apps/notes/cmps/note-list.css';
+@import './apps/notes/noteApp.css';
+@import './apps/notes/cmps/note-edit.css';
+@import './apps/notes/cmps/lable-modal.css';

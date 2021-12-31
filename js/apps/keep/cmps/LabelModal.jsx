@@ -1,22 +1,53 @@
-export function LableModal() {
-  state = {
-    isShowLableModal: false,
-  };
-  const setLable = (lable) => {
+export class LableModal extends React.Component {
+  state = {};
+
+  setLable = (lable) => {
     console.log(lable);
   };
 
-  onToggleLableModal = () => {
-    this.setState({ isShowLableModal: !this.state.isShowLableModal });
-  };
-
-  return (
-    <div className="lable-modadl">
-      <div onClick={setLable('critical')}>critical</div>
-      <div onClick={setLable('spam')}>spam</div>
-      <div onClick={setLable('work')}>work</div>
-      <div onClick={setLable('friend')}>friend</div>
-      <button>x</button>
-    </div>
-  );
+  render() {
+    return (
+      <div className="lable-modadl">
+        <div
+          className="critical"
+          onClick={() => {
+            this.setLable('critical');
+          }}
+        >
+          critical
+        </div>
+        <div
+          className="spam"
+          onClick={() => {
+            this.setLable('spam');
+          }}
+        >
+          spam
+        </div>
+        <div
+          className="work"
+          onClick={() => {
+            this.setLable('work');
+          }}
+        >
+          work
+        </div>
+        <div
+          className="friend"
+          onClick={() => {
+            this.setLable('friend');
+          }}
+        >
+          friend
+        </div>
+        <button
+          onClick={() => {
+            this.props.onToggleLableModal();
+          }}
+        >
+          x
+        </button>
+      </div>
+    );
+  }
 }

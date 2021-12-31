@@ -31,7 +31,7 @@ function _createNotes() {
         id: 'n102',
         type: 'img',
         info: {
-          url: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fhips.hearstapps.com%2Fhmg-prod.s3.amazonaws.com%2Fimages%2Fgolden-retriever-royalty-free-image-506756303-1560962726.jpg%3Fcrop%3D0.672xw%3A1.00xh%3B0.166xw%2C0%26resize%3D640%3A*&imgrefurl=https%3A%2F%2Fwww.goodhousekeeping.com%2Flife%2Fpets%2Fadvice%2Fg1921%2Flarge-dog-breeds%2F&tbnid=btQ8-aZ4x2YyMM&vet=12ahUKEwi4nYeDxY71AhVJnRoKHfaWAm8QMygCegUIARCvAQ..i&docid=FofFudZ0yWjNIM&w=640&h=635&itg=1&q=dog&ved=2ahUKEwi4nYeDxY71AhVJnRoKHfaWAm8QMygCegUIARCvAQ',
+          url: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2019-honda-civic-sedan-1558453497.jpg?crop=1xw:0.9997727789138833xh;center,top&resize=480:*',
           title: 'React Is The Best!',
           txt: 'React JS',
         },
@@ -39,6 +39,7 @@ function _createNotes() {
           backgroundColor: '#00d',
         },
         isPinned: false,
+        lable: [],
       },
       {
         id: 'n103',
@@ -56,6 +57,7 @@ function _createNotes() {
           backgroundColor: 'green',
         },
         isPinned: false,
+        lable: [],
       },
       {
         id: 'n104',
@@ -69,6 +71,7 @@ function _createNotes() {
           backgroundColor: '#00d',
         },
         isPinned: false,
+        lable: [],
       },
     ];
     gNotes = notes;
@@ -140,6 +143,7 @@ function createNote(reciveNote) {
       txt,
     },
     isPinned: false,
+    lable: [],
     style: {
       backgroundColor: 'red',
     },
