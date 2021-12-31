@@ -1,5 +1,5 @@
-import { noteService } from '../services/note.service.js';
-import { ChangeColor } from './NoteColor.jsx';
+import { noteService } from "../services/note.service.js";
+import { ChangeColor } from "./NoteColor.jsx";
 
 export class EditNote extends React.Component {
   state = {
@@ -10,9 +10,8 @@ export class EditNote extends React.Component {
     var { note } = this.props;
     this.setState({ note });
   }
-  onRemoveNote = (noteId) => {
+  onRemoveNote = () => {
     noteId = this.state.note.id;
-
     noteService.removeNote(noteId).then(this.props.renderNote());
   };
   onDuplicateNote = (noteId) => {
@@ -32,12 +31,11 @@ export class EditNote extends React.Component {
     this.setState({ isColorMenuOn: !this.state.isColorMenuOn });
   };
   onSetPin() {
-    console.log('pin seted..');
+    console.log("pin seted..");
   }
   render() {
     var { note } = this.state;
     if (!note) return <React.Fragment></React.Fragment>;
-    console.log(note);
     return (
       <div className="note-edit">
         <button onClick={this.onRemoveNote}>delete</button>
@@ -45,7 +43,7 @@ export class EditNote extends React.Component {
           className="color-btn"
           title="Change color"
           onClick={() => this.onToggleColorMenu(note.id)}
-        ></button>
+        >🎨</button>
         {this.state.isColorMenuOn && (
           <ChangeColor noteId={note.id} onChangeBgc={this.onChangeBgc} />
         )}
@@ -57,12 +55,7 @@ export class EditNote extends React.Component {
           📌
         </button>
         <button
-          onClick={() => {
-            this.onDuplicateNote(note.id);
-          }}
-        >
-          duplicate
-        </button>
+          onClick={() => {this.onDuplicateNote(note.id);}}>duplicate </button>
         <button>send</button>
       </div>
     );

@@ -1,55 +1,22 @@
-@import './parts/base.css';
-@import './parts/helpers.css';
+@import "./parts/base.css";
+@import "./parts/helpers.css";
 
 /* Email */
-@import './apps/email/emailApp.css';
-@import './apps/email/cmps/emailHeader.css';
-@import './apps/email/cmps/emailList.css';
-@import './apps/email/cmps/emailFilters.css';
-@import './apps/email/cmps/addEmail.css';
-@import './apps/email/cmps/emailDetails.css';
+@import "./apps/email/emailApp.css";
+@import "./apps/email/cmps/emailHeader.css";
+@import "./apps/email/cmps/emailList.css";
+@import "./apps/email/cmps/emailFilters.css";
+@import "./apps/email/cmps/addEmail.css";
+@import "./apps/email/cmps/emailPreview.css";
+@import "./apps/email/emailDetails.css";
 
 /* CMPS */
-@import './cmps/app-header.css';
+@import "./cmps/app-header.css";
 
 /* NOTES */
-@import './apps/notes/notes.preview.css';
-@import './apps/notes/note-img-preview.css';
-@import './apps/notes/note-add.css';
-.note-item {
-  /* background-color: blue; */
-  border: black solid 2px;
-  width: 300px;
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  margin: 20px;
-}
-.note-content {
-  height: 80%;
-  background-color: darkgreen;
-}
-.note-edit {
-  background-color: darkorange;
-  height: 20%;
-}
-.note-edit .color-btn {
-  width: 50px;
-  height: 50px;
-  background-color: white;
-  cursor: pointer;
-}
-.color-input {
-  display: flex;
-  width: 200px;
-  height: 100px;
-  border: black 1px solid;
-  gap: 2px;
-}
-.color-value {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid black;
-  cursor: pointer;
-}
+@import "./apps/notes/cmps/note-add.css";
+@import "./apps/notes/cmps/note-img-preview.css";
+@import "./apps/notes/cmps/notes.preview.css";
+@import "./apps/notes/cmps/note-list.css";
+@import "./apps/notes/noteApp.css";
+@import "./apps/notes/cmps/note-edit.css";

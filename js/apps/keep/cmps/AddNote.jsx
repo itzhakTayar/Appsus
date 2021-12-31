@@ -1,13 +1,12 @@
-import { noteService } from '../services/note.service.js';
-import { DynamicAdd } from './DynamicAdd.jsx';
+import { noteService } from "../services/note.service.js";
+import { DynamicAdd } from "./DynamicAdd.jsx";
 
 export class AddNote extends React.Component {
   state = {
     note: {
-      title: '',
-      type: 'txt',
-
-      txt: '',
+      title: "",
+      type: "txt",
+      txt: "",
     },
   };
 
@@ -19,14 +18,12 @@ export class AddNote extends React.Component {
 
   onSaveNote = (ev) => {
     ev.preventDefault();
-    console.log(this.state.note);
     noteService.createNote(this.state.note).then(() => {
       this.props.onToggleNoteModal();
       this.props.onAdd();
     });
   };
   addDynamicAdd = (field, value) => {
-    // console.log(field, value);
     this.setState((prevState) => ({
       note: { ...prevState.note, [field]: value },
     }));
@@ -38,9 +35,6 @@ export class AddNote extends React.Component {
     this.setState((prevState) => ({
       note: { ...prevState.note, [field]: value },
     }));
-  };
-  click = () => {
-    console.log('add');
   };
   render() {
     const { title, type, txt, url } = this.state.note;
