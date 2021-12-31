@@ -38,8 +38,9 @@ export class EditNote extends React.Component {
   render() {
     var { note } = this.state;
     if (!note) return <React.Fragment></React.Fragment>;
+    var classNameEdit = this.props.isShown ? "shown" : "closed";
     return (
-      <div className="note-edit">
+      <div className={`note-edit ${classNameEdit} `}>
         <button onClick={this.onRemoveNote}>delete</button>
         <button
           className="color-btn"

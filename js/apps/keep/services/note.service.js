@@ -31,7 +31,7 @@ function _createNotes() {
         id: 'n102',
         type: 'img',
         info: {
-          url: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fhips.hearstapps.com%2Fhmg-prod.s3.amazonaws.com%2Fimages%2Fgolden-retriever-royalty-free-image-506756303-1560962726.jpg%3Fcrop%3D0.672xw%3A1.00xh%3B0.166xw%2C0%26resize%3D640%3A*&imgrefurl=https%3A%2F%2Fwww.goodhousekeeping.com%2Flife%2Fpets%2Fadvice%2Fg1921%2Flarge-dog-breeds%2F&tbnid=btQ8-aZ4x2YyMM&vet=12ahUKEwi4nYeDxY71AhVJnRoKHfaWAm8QMygCegUIARCvAQ..i&docid=FofFudZ0yWjNIM&w=640&h=635&itg=1&q=dog&ved=2ahUKEwi4nYeDxY71AhVJnRoKHfaWAm8QMygCegUIARCvAQ',
+          url:"https://d585tldpucybw.cloudfront.net/sfimages/default-source/blogs/templates/social/reactt-light_1200x628.png?sfvrsn=43eb5f2a_2",
           title: 'React Is The Best!',
           txt: 'React JS',
         },

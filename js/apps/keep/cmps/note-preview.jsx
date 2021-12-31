@@ -20,9 +20,11 @@ export class NotesPreview extends React.Component {
         <div className="note-content">
           <DynamicCmp note={this.state.note} />
         </div>
-        {isHover && (
-          <EditNote note={this.props.note} renderNote={this.props.renderNote} />
-        )}
+        <EditNote
+          isShown={isHover}
+          note={this.props.note}
+          renderNote={this.props.renderNote}
+        />
       </div>
     );
   }
