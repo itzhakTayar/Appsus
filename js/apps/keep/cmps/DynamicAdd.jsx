@@ -8,7 +8,6 @@ export class DynamicAdd extends React.Component {
     todosTxt: '',
   };
   handleChange = ({ target }) => {
-    // console.log(this.state);
     const field = target.name;
     const value = target.value;
 
@@ -27,8 +26,6 @@ export class DynamicAdd extends React.Component {
     this.setState({ todos });
   };
   render() {
-    console.log('rendering..');
-    console.log(this.state);
     let isUrl = false;
     let isTodo = false;
 

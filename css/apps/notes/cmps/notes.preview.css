@@ -1,0 +1,17 @@
+.note-preview {
+  text-decoration: none;
+}
+.note-item {
+  max-height: 200px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  background-color: lightcoral;
+}
+
+.note-content {
+  height: 80%;
+}
+.note-edit {
+  height: 20%;
+}

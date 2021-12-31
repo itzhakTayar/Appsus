@@ -1,6 +1,7 @@
 
 
 .email-details {
+  /* background-color: hotpink; */
   flex-grow: 4;
   max-width: 1280px;
   margin: auto;
