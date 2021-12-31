@@ -15,7 +15,7 @@ export function DynamicCmp(props) {
       return <VideoPreview note={props.note} />;
     case 'todo':
       // console.log('note check undefind', props.note);
-      return <TodoPreview todos={props.note.info.todos} />;
+      return <TodoPreview note={props.note} todos={props.note.info.todos} />;
     default:
       return <React.Fragment></React.Fragment>;
   }

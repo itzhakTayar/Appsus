@@ -3,6 +3,7 @@ import { EmailHeader } from "../cmps/EmailHeader.jsx";
 import { EmailFilters } from "../cmps/EmailFilters.jsx";
 import { EmailList } from "../cmps/EmailList.jsx";
 import { EmailAdd } from "../cmps/EmailAdd.jsx";
+import { eventBusService } from "../../../services/event-bus.service.js";
 
 export class EmailIndex extends React.Component {
   state = {
@@ -59,6 +60,10 @@ export class EmailIndex extends React.Component {
 
   sendDraft = (draft) => {
     emailService.addEmail(draft).then(() => {
+      eventBusService.emit("user-msg", {
+        txt: "Email-Sent!",
+        type: "success",
+      });
       this.loadEmails();
     });
   };
@@ -75,11 +80,21 @@ export class EmailIndex extends React.Component {
   };
 
   sendToTrash = (email) => {
-    emailService.setEmailAsTrash(email).then(() => this.loadEmails());
+    emailService.setEmailAsTrash(email).then(() => {
+      eventBusService.emit("user-msg", {
+        txt: "Sent To Trash!",
+        type: "success",
+      });
+      this.loadEmails();
+    });
   };
 
   onDeleteEmail = (email) => {
     emailService.deleteEmail(email).then(() => {
+      eventBusService.emit("user-msg", {
+        txt: "Email-Deleted!",
+        type: "warning",
+      });
       this.loadEmails();
     });
   };
@@ -151,6 +166,7 @@ export class EmailIndex extends React.Component {
             deleteEmail={this.onDeleteEmail}
             toggleStar={this.onToggleStar}
             openCreateModal={this.toggleCreateEmail}
+            sendDraft={this.sendDraft}
           />
         </div>
         {this.state.isModalOpen && (

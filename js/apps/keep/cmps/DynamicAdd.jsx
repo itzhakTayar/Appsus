@@ -64,7 +64,6 @@ export class DynamicAdd extends React.Component {
             >
               add
             </button>
-            {/* {todos && <h1>helo</h1>} */}
             {todos && <TodoPreview todos={todos} />}
           </div>
         )}
@@ -72,12 +71,5 @@ export class DynamicAdd extends React.Component {
     );
   }
 
-  //   case 'img':
-  //     return <ImgPreview note={props.note} />;
-  //   case 'video':
-  //     return <VideoPreview note={props.note} />;
-  //   case 'todo':
-  //     return <TodoPreview note={props.note} />;
-  //   default:
-  //     return <React.Fragment></React.Fragment>;
+  
 }

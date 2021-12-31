@@ -1,21 +1,22 @@
 export function LableModal() {
   state = {
-    isShowNoteModal: false,
+    isShowLableModal: false,
   };
-  const setLable = () => {
-    console.log('click');
+  const setLable = (lable) => {
+    console.log(lable);
   };
 
   onToggleLableModal = () => {
-    this.setState({ isShowNoteModal: !this.state.isShowNoteModal });
+    this.setState({ isShowLableModal: !this.state.isShowLableModal });
   };
 
   return (
     <div className="lable-modadl">
-      <button onClick={setLable()}>critical</button>
-      <button>spam</button>
-      <button>work</button>
-      <button>friend</button>
+      <div onClick={setLable('critical')}>critical</div>
+      <div onClick={setLable('spam')}>spam</div>
+      <div onClick={setLable('work')}>work</div>
+      <div onClick={setLable('friend')}>friend</div>
+      <button>x</button>
     </div>
   );
 }

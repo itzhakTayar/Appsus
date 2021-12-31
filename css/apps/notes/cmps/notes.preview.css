@@ -3,14 +3,10 @@
 }
 .note-item {
   max-height: 200px;
-  border: 1px solid black;
+  box-shadow: 2px 1px 2px 2px grey;
   display: flex;
   flex-direction: column;
-}
-
-.note-content {
-  height: 80%;
-}
-.note-edit {
-  height: 20%;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 5px;
 }

@@ -20,9 +20,8 @@ function _createNotes() {
         type: 'txt',
         isPinned: false,
         info: {
-          title: 'Bobi and Me',
+          title: 'Coding Academy',
           txt: 'Fullstack Me Baby!',
-          url: '',
         },
         style: {
           backgroundColor: 'green',
@@ -32,9 +31,9 @@ function _createNotes() {
         id: 'n102',
         type: 'img',
         info: {
-          url: 'https://lh3.googleusercontent.com/proxy/Du390BhqfyB5oZmHQS0MM3G_dogfJ-lbQFjiU6QXXGHwatt6OEf1WMGcWfTiJTJJZ1OsAHDdApJHoyA9n8RxJUzxsC0xy199Gn4_Mkx8QkZ9',
-          title: 'Bobi and Me',
-          txt: 'hi ',
+          url: 'https://www.google.com/imgres?imgurl=https%3A%2F%2Fhips.hearstapps.com%2Fhmg-prod.s3.amazonaws.com%2Fimages%2Fgolden-retriever-royalty-free-image-506756303-1560962726.jpg%3Fcrop%3D0.672xw%3A1.00xh%3B0.166xw%2C0%26resize%3D640%3A*&imgrefurl=https%3A%2F%2Fwww.goodhousekeeping.com%2Flife%2Fpets%2Fadvice%2Fg1921%2Flarge-dog-breeds%2F&tbnid=btQ8-aZ4x2YyMM&vet=12ahUKEwi4nYeDxY71AhVJnRoKHfaWAm8QMygCegUIARCvAQ..i&docid=FofFudZ0yWjNIM&w=640&h=635&itg=1&q=dog&ved=2ahUKEwi4nYeDxY71AhVJnRoKHfaWAm8QMygCegUIARCvAQ',
+          title: 'React Is The Best!',
+          txt: 'React JS',
         },
         style: {
           backgroundColor: '#00d',
@@ -62,9 +61,9 @@ function _createNotes() {
         id: 'n104',
         type: 'video',
         info: {
-          url: 'https://www.youtube.com/watch?v=https://www.youtube.com/watch?v=tgbNymZ7vqY',
-          title: 'Bobi and Me',
-          txt: 'hi ',
+          url: 'https://www.youtube.com/watch?v=tgbNymZ7vqY',
+          title: 'Best Video Ever',
+          txt: 'Muppets!',
         },
         style: {
           backgroundColor: '#00d',
