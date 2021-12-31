@@ -1,5 +1,6 @@
 import { utilsService } from "../../../services/util.service.js";
 import { emailService } from "../services/email.service.js";
+import { eventBusService } from "../../../services/event-bus.service.js";
 export class EmailAdd extends React.Component {
   state = {
     email: {
@@ -38,7 +39,9 @@ export class EmailAdd extends React.Component {
 
   saveDraft = () => {
     var draft = this.state.email;
-    emailService.addEmail(draft, true).then(() => {this.props.renderEmails();});
+    emailService.addEmail(draft, true).then(() => {
+      this.props.renderEmails();
+    });
   };
 
   onSendEmail = (event) => {
@@ -46,6 +49,10 @@ export class EmailAdd extends React.Component {
     var { email } = this.state;
     emailService.addEmail(email).then(() => {
       clearInterval(this.gSaveInterval);
+      eventBusService.emit("user-msg", {
+        txt: "Email-Added!",
+        type: "success",
+      });
       this.props.renderEmails();
       this.props.closeModal();
     });
@@ -54,6 +61,10 @@ export class EmailAdd extends React.Component {
   onDeleteDraft = () => {
     clearInterval(this.gSaveInterval);
     emailService.deleteEmail(this.state.email).then(() => {
+      eventBusService.emit("user-msg", {
+        txt: "Draft-Deleted!",
+        type: "warning",
+      });
       this.props.renderEmails();
       this.props.closeModal();
     });

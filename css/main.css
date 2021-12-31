@@ -12,6 +12,7 @@
 
 /* CMPS */
 @import "./cmps/app-header.css";
+@import "./cmps/user-msg.css";
 
 /* NOTES */
 @import "./apps/notes/cmps/note-add.css";

@@ -1,18 +1,20 @@
+import { eventBusService } from "../../../services/event-bus.service.js";
 import { noteService } from "../services/note.service.js";
 import { ChangeColor } from "./NoteColor.jsx";
-
 export class EditNote extends React.Component {
   state = {
     isColorMenuOn: false,
-    note: null,
+    note: this.props.note,
   };
-  componentDidMount() {
-    var { note } = this.props;
-    this.setState({ note });
-  }
   onRemoveNote = () => {
-    noteId = this.state.note.id;
-    noteService.removeNote(noteId).then(this.props.renderNote());
+    var noteId = this.state.note.id;
+    noteService.removeNote(noteId).then(() => {
+      eventBusService.emit("user-msg", {
+        txt: "Note Deleted!",
+        type: "warning",
+      });
+      this.props.renderNote();
+    });
   };
   onDuplicateNote = (noteId) => {
     noteService.duplicateNote(noteId).then(this.props.renderNote());
@@ -43,7 +45,9 @@ export class EditNote extends React.Component {
           className="color-btn"
           title="Change color"
           onClick={() => this.onToggleColorMenu(note.id)}
-        >🎨</button>
+        >
+          🎨
+        </button>
         {this.state.isColorMenuOn && (
           <ChangeColor noteId={note.id} onChangeBgc={this.onChangeBgc} />
         )}
@@ -55,7 +59,12 @@ export class EditNote extends React.Component {
           📌
         </button>
         <button
-          onClick={() => {this.onDuplicateNote(note.id);}}>duplicate </button>
+          onClick={() => {
+            this.onDuplicateNote(note.id);
+          }}
+        >
+          duplicate{" "}
+        </button>
         <button>send</button>
       </div>
     );

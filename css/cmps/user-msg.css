@@ -1,0 +1,36 @@
+.user-msg {
+    position: fixed;
+    height: 100px;
+    width: 400px;
+    right: 5%;
+    top: 5%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .success {
+    background-image: linear-gradient(135deg, #81fbb8 10%, #28c76f 100%);
+    color: ivory;
+    border: 2px solid ivory;
+  }
+  
+  .warning {
+    background-image: linear-gradient(135deg, #feb692 10%, #ea5455 100%);
+    color: rgb(14, 12, 12);
+    font-weight: 700;
+    border: 2px solid rgb(14, 12, 12);
+  }
+  
+  .user-msg h1 {
+    align-self: center;
+  }
+  
+  .user-msg .close-msg-btn {
+    background-color: inherit;
+    border: 0;
+    align-self: flex-end;
+    cursor: pointer;
+  }
+  

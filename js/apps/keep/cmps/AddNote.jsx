@@ -1,6 +1,6 @@
+import { eventBusService } from "../../../services/event-bus.service.js";
 import { noteService } from "../services/note.service.js";
 import { DynamicAdd } from "./DynamicAdd.jsx";
-
 export class AddNote extends React.Component {
   state = {
     note: {
@@ -19,6 +19,10 @@ export class AddNote extends React.Component {
   onSaveNote = (ev) => {
     ev.preventDefault();
     noteService.createNote(this.state.note).then(() => {
+      eventBusService.emit("user-msg", {
+        txt: "Note Added!",
+        type: "success",
+      });
       this.props.onToggleNoteModal();
       this.props.onAdd();
     });
@@ -63,7 +67,7 @@ export class AddNote extends React.Component {
             />
             <select name="type" onChange={this.handleChange} value={type}>
               <option value="txt">text</option>
-              <option value="img">imge</option>
+              <option value="img">image</option>
               <option value="video">video</option>
               <option value="todo">todo</option>
             </select>
