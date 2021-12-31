@@ -1,6 +1,6 @@
 import { utilsService } from "../../../services/util.service.js";
 import { emailService } from "../services/email.service.js";
-import { EmailDetails } from "./EmailDetails.jsx";
+import { EmailPreview } from "./EmailPreview.jsx";
 
 export class EmailList extends React.Component {
   state = {
@@ -21,7 +21,7 @@ export class EmailList extends React.Component {
       target.classList.value != "send-draft-btn"
     ) {
       this.toggleReadState(email, true);
-      var id = this.state.click.id ? null : email.id;
+      var id = (this.state.click.id===email.id) ? null : email.id;
       this.setState({ click: { id } });
     }
   };
@@ -143,7 +143,7 @@ export class EmailList extends React.Component {
                   </div>
                 )}
               </div>
-              {isClicked && <EmailDetails email={email} />}
+              {isClicked && <EmailPreview email={email} />}
             </div>
           );
         })}

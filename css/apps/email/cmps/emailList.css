@@ -1,7 +1,6 @@
 .emails-list {
   display: flex;
   flex-direction: column;
-  /* flex-grow: 3; */
   width: 80%;
 }
 
@@ -9,7 +8,7 @@
   background-color: white;
   display: flex;
   justify-content: space-between;
-  border: 1px solid plum;
+  border: 1px solid grey;
   align-items: center;
   padding: 5px;
   cursor: pointer;

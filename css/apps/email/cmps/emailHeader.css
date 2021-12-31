@@ -17,7 +17,7 @@
 .header-content input {
   border: 0px;
   border-radius: 5px;
-  box-shadow: 0px 0px 0px 2px rgb(4, 233, 210);
+  box-shadow: 1px 1px 1px 1px lightblue;
   flex-grow: 4;
   background-color: inherit;
   outline: none;
@@ -35,7 +35,7 @@
   flex-grow: 1;
   text-align: center;
   border: 0px;
-  box-shadow: 0px 0px 0px 2px rgb(4, 233, 210);
+  box-shadow: 1px 1px 1px 1px lightblue;
   margin-left: 3px;
   color: rgb(9, 8, 8);
   font-weight: 700;
@@ -44,4 +44,5 @@
   cursor: pointer;
   outline: none;
   background-color: inherit;
+  border-radius: 5px;
 }
