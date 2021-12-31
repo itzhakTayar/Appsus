@@ -142,6 +142,7 @@ export class EmailIndex extends React.Component {
             onAddEmail={this.toggleCreateEmail}
             setFilter={this.onSetFilter}
             unReadEmails={unReadEmails}
+            isFullDispay={false}
           />
           <EmailList
             emails={this.state.emails}
@@ -150,7 +151,6 @@ export class EmailIndex extends React.Component {
             deleteEmail={this.onDeleteEmail}
             toggleStar={this.onToggleStar}
             openCreateModal={this.toggleCreateEmail}
-            sendDraft={this.sendDraft}
           />
         </div>
         {this.state.isModalOpen && (

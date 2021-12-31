@@ -5,7 +5,7 @@
 }
 
 .emails-list .email-item {
-  background-color: white;
+  background-color: rgb(253, 249, 249);
   display: flex;
   justify-content: space-between;
   border: 1px solid grey;

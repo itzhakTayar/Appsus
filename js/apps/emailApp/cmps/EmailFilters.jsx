@@ -2,6 +2,7 @@ const { NavLink } = ReactRouterDOM;
 
 export function EmailFilters(props) {
   var { unReadEmails } = props;
+  var { isFullDispay } = props;
   return (
     <section className="email-filters">
       <ul className="clean-list">
@@ -10,7 +11,9 @@ export function EmailFilters(props) {
           activeClassName="my-active-filter"
           className="email-filter-item active clean-link"
           onClick={() => {
-            props.onAddEmail();
+            if (!isFullDispay) props.onAddEmail();
+            else {
+            }
           }}
         >
           Create
@@ -20,7 +23,10 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            props.setFilter("sent", false);
+            if (!isFullDispay) props.setFilter("sent", false);
+            else {
+              props.navigateToEmail("inbox");
+            }
           }}
         >
           inbox
@@ -33,7 +39,10 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            props.setFilter("sent", true);
+            if (!isFullDispay) props.setFilter("sent", true);
+            else {
+              props.navigateToEmail("sent");
+            }
           }}
         >
           sent
@@ -43,7 +52,10 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            props.setFilter("trash", true);
+            if (!isFullDispay) props.setFilter("trash", true);
+            else {
+              props.navigateToEmail("trash");
+            }
           }}
         >
           trash
@@ -53,7 +65,10 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            props.setFilter("star", true);
+            if (!isFullDispay) props.setFilter("star", true);
+            else {
+              props.navigateToEmail("star");
+            }
           }}
         >
           ⭐️
@@ -63,7 +78,10 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            props.setFilter("draft", true);
+            if (!isFullDispay) props.setFilter("draft", true);
+            else {
+              props.navigateToEmail("draft");
+            }
           }}
         >
           Draft
@@ -73,7 +91,10 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            props.setFilter("spam", true);
+            if (!isFullDispay) props.setFilter("spam", true);
+            else {
+              props.navigateToEmail("draft");
+            }
           }}
         >
           spam

@@ -9,6 +9,7 @@ export const emailService = {
   deleteEmail,
   getUnreadInboxCount,
   toggleStarState,
+  getEmailById,
 };
 
 const loggedinUser = {
@@ -125,7 +126,9 @@ function addEmail(newEmail, isDraft = false) {
   var email = {};
   if (isEmailExsist(newEmail)) {
     var oldEmail = isEmailExsist(newEmail);
-    oldEmail.subject = newEmail.titleInput ? newEmail.titleInput : newEmail.subject;
+    oldEmail.subject = newEmail.titleInput
+      ? newEmail.titleInput
+      : newEmail.subject;
     oldEmail.body = newEmail.msgInput ? newEmail.msgInput : newEmail.body;
     oldEmail.to = newEmail.toInput ? newEmail.toInput : newEmail.to;
     oldEmail.isDraft = isDraft;
@@ -186,6 +189,11 @@ function getEmailIdxById(id) {
     return email.id === id;
   });
   return idx;
+}
+
+function getEmailById(id) {
+  var idx = getEmailIdxById(id);
+  return gEmails[idx];
 }
 
 function _saveEmailsToStorage() {

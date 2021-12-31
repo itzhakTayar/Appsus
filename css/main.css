@@ -8,6 +8,7 @@
 @import "./apps/email/cmps/emailFilters.css";
 @import "./apps/email/cmps/addEmail.css";
 @import "./apps/email/cmps/emailPreview.css";
+@import "./apps/email/emailDetails.css";
 
 /* CMPS */
 @import "./cmps/app-header.css";

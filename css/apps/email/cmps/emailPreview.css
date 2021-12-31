@@ -4,21 +4,19 @@
   background-color: rgb(223, 223, 233);
 }
 
-.email-preview .preview-header
-{
+.email-preview .preview-header {
   justify-content: space-between;
-} 
+}
 .email-preview .sender-info {
   margin: 0px;
   align-items: center;
 }
-.preview-header-btns button
-{
+.email-preview .preview-header-btns {
   background-color: inherit;
   border: 0;
   font-size: 1.4rem;
   cursor: pointer;
-} 
+}
 .email-preview h1 {
   font-size: 1.5rem;
   font-family: sans-serif;
