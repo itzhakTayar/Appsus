@@ -44,13 +44,23 @@ export class EmailIndex extends React.Component {
     this.setState({ filterBy }, this.loadEmails);
   };
 
-  toggleCreateEmail = () => {
+  toggleCreateEmail = (draft = null) => {
     var isModalOpen = !this.state.isModalOpen;
-    this.setState({ isModalOpen });
+    var str = isModalOpen ? "/create" : "";
+    if (draft) {
+      str += `?title=${draft.subject}&body=${draft.body}&to=${draft.to}&id=${draft.id}`;
+    }
+    this.props.history.push(`/email${str}`);
   };
 
   toggleReadState = (email, isOnlyToOpen = false) => {
     emailService.toggleIsRead(email, isOnlyToOpen).then(this.loadEmails());
+  };
+
+  sendDraft = (draft) => {
+    emailService.addEmail(draft).then(() => {
+      this.loadEmails();
+    });
   };
 
   onSetFilter = (filter, val) => {
@@ -76,8 +86,16 @@ export class EmailIndex extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     var filterUrl = this.props.location.pathname;
-    if (prevProps.location.pathname != filterUrl)
+    if (prevProps.location.pathname != filterUrl) {
+      if (filterUrl.includes("create")) {
+        this.setState({ isModalOpen: true });
+        return;
+      } else if (prevProps.location.pathname.includes("create")) {
+        this.setState({ isModalOpen: false });
+        return;
+      }
       this.setFilterByPath(filterUrl);
+    }
   }
 
   getAllInboxEmails = () => {
@@ -110,6 +128,7 @@ export class EmailIndex extends React.Component {
 
   render() {
     var unReadEmails = this.getAllInboxEmails();
+    var searchUrl = this.props.location.search;
     return (
       <section className="email-app">
         {this.state.isModalOpen && <div className="screen open"></div>}
@@ -130,12 +149,15 @@ export class EmailIndex extends React.Component {
             onSendToTrash={this.sendToTrash}
             deleteEmail={this.onDeleteEmail}
             toggleStar={this.onToggleStar}
+            openCreateModal={this.toggleCreateEmail}
+            sendDraft={this.sendDraft}
           />
         </div>
         {this.state.isModalOpen && (
           <EmailAdd
             closeModal={this.toggleCreateEmail}
             renderEmails={this.loadEmails}
+            searchUrl={searchUrl}
           />
         )}
       </section>

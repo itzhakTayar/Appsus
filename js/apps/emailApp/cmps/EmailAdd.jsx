@@ -11,7 +11,18 @@ export class EmailAdd extends React.Component {
   };
   gSaveInterval = null;
 
-  componentDidMount() {}
+  componentDidMount() {
+    var { searchUrl } = this.props;
+    if (searchUrl) {
+      const searchParams = new URLSearchParams(searchUrl);
+      var email = {};
+      email.titleInput = searchParams.get("title");
+      email.toInput = searchParams.get("to");
+      email.msgInput = searchParams.get("body");
+      email.id = searchParams.get("id");
+      this.setState({ email });
+    }
+  }
 
   handleChange = ({ target }) => {
     var field = target.name;
@@ -27,9 +38,7 @@ export class EmailAdd extends React.Component {
 
   saveDraft = () => {
     var draft = this.state.email;
-    emailService.addEmail(draft,true).then(() => {
-      console.log("draft saved");
-    });
+    emailService.addEmail(draft, true).then(() => {this.props.renderEmails();});
   };
 
   onSendEmail = (event) => {
@@ -37,6 +46,14 @@ export class EmailAdd extends React.Component {
     var { email } = this.state;
     emailService.addEmail(email).then(() => {
       clearInterval(this.gSaveInterval);
+      this.props.renderEmails();
+      this.props.closeModal();
+    });
+  };
+
+  onDeleteDraft = () => {
+    clearInterval(this.gSaveInterval);
+    emailService.deleteEmail(this.state.email).then(() => {
       this.props.renderEmails();
       this.props.closeModal();
     });
@@ -69,6 +86,7 @@ export class EmailAdd extends React.Component {
                 type="text"
                 className="toInput"
                 name="toInput"
+                value={this.state.email.toInput}
                 onChange={this.handleChange}
               />
             </label>
@@ -79,6 +97,7 @@ export class EmailAdd extends React.Component {
                 type="text"
                 className="titleInput"
                 name="titleInput"
+                value={this.state.email.titleInput}
                 onChange={this.handleChange}
               />
             </label>
@@ -89,6 +108,7 @@ export class EmailAdd extends React.Component {
                 type="text"
                 className="msgInput"
                 name="msgInput"
+                value={this.state.email.msgInput}
                 onChange={this.handleChange}
               />
             </label>
@@ -97,7 +117,13 @@ export class EmailAdd extends React.Component {
             <button type="submit" className="send-btn">
               Send
             </button>
-            <button className="delete-btn">Delete</button>
+            <button
+              type="button"
+              onClick={this.onDeleteDraft}
+              className="delete-btn"
+            >
+              Delete
+            </button>
           </div>
         </form>
       </section>

@@ -1,4 +1,5 @@
 import { utilsService } from "../../../services/util.service.js";
+import { emailService } from "../services/email.service.js";
 import { EmailDetails } from "./EmailDetails.jsx";
 
 export class EmailList extends React.Component {
@@ -15,7 +16,9 @@ export class EmailList extends React.Component {
     if (
       target.classList.value !== "mark-btn" &&
       target.classList.value !== "trash-btn" &&
-      target.classList.value !== starClass
+      target.classList.value !== starClass &&
+      target.classList.value != "edit-btn" &&
+      target.classList.value != "send-draft-btn"
     ) {
       this.toggleReadState(email, true);
       var id = this.state.click.id ? null : email.id;
@@ -32,6 +35,14 @@ export class EmailList extends React.Component {
 
   onToggleStar = (email) => {
     this.props.toggleStar(email);
+  };
+
+  onDraftEditClick = (draft) => {
+    this.props.openCreateModal(draft);
+  };
+
+  onSendDraft=(draft)=>{
+   this.props.sendDraft(draft);
   };
 
   render() {
@@ -60,6 +71,7 @@ export class EmailList extends React.Component {
           var isTrash = email.deletedAt;
           var trashIcon = isTrash ? "❌" : "🗑";
           var showStar = isHovered || email.isStar;
+          var isDraft = email.isDraft;
           return (
             <div className="div-email-item" key={email.id}>
               <div
@@ -89,7 +101,7 @@ export class EmailList extends React.Component {
                   <p className="email-body">-{body}</p>
                 </div>
                 {!isHovered && <p>{sentAtTime}</p>}
-                {isHovered && (
+                {isHovered && !isDraft && (
                   <div className="hover-btns">
                     <button
                       className="mark-btn"
@@ -107,6 +119,26 @@ export class EmailList extends React.Component {
                       }}
                     >
                       {trashIcon}
+                    </button>
+                  </div>
+                )}
+                {isHovered && isDraft && (
+                  <div className="hover-draft-btns">
+                    <button
+                      className="edit-btn"
+                      onClick={() => {
+                        this.onDraftEditClick(email);
+                      }}
+                    >
+                      🖊
+                    </button>
+                    <button
+                      className="send-draft-btn"
+                      onClick={() => {
+                        this.onSendDraft(email)
+                      }}
+                    >
+                      ⌲
                     </button>
                   </div>
                 )}

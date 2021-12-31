@@ -125,12 +125,10 @@ function addEmail(newEmail, isDraft = false) {
   var email = {};
   if (isEmailExsist(newEmail)) {
     var oldEmail = isEmailExsist(newEmail);
-    oldEmail.subject = newEmail.titleInput;
-    oldEmail.body = newEmail.msgInput;
-    oldEmail.to = newEmail.toInput;
+    oldEmail.subject = newEmail.titleInput ? newEmail.titleInput : newEmail.subject;
+    oldEmail.body = newEmail.msgInput ? newEmail.msgInput : newEmail.body;
+    oldEmail.to = newEmail.toInput ? newEmail.toInput : newEmail.to;
     oldEmail.isDraft = isDraft;
-    console.log(oldEmail);
-    console.log(gEmails);
     _saveEmailsToStorage();
     return Promise.resolve();
   }
