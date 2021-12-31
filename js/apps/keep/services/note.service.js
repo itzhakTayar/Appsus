@@ -2,9 +2,11 @@ import { storageService } from '../../../services/storage.service.js';
 import { utilsService } from '../../../services/util.service.js';
 export const noteService = {
   query,
-  // removeNote,
-  // getNoteById,
+  removeNote,
+  changeBgc,
   createNote,
+  togglePin,
+  duplicateNote,
 };
 const STORAGE_KEY = 'noteDB';
 var gNotes = [];
@@ -16,11 +18,14 @@ function _createNotes() {
       {
         id: 'n101',
         type: 'txt',
-        isPinned: true,
+        isPinned: false,
         info: {
           title: 'Bobi and Me',
           txt: 'Fullstack Me Baby!',
           url: '',
+        },
+        style: {
+          backgroundColor: 'green',
         },
       },
       {
@@ -34,6 +39,7 @@ function _createNotes() {
         style: {
           backgroundColor: '#00d',
         },
+        isPinned: false,
       },
       {
         id: 'n103',
@@ -47,6 +53,10 @@ function _createNotes() {
             { txt: 'Coding power', doneAt: 187111111, id: 2 },
           ],
         },
+        style: {
+          backgroundColor: 'green',
+        },
+        isPinned: false,
       },
       {
         id: 'n104',
@@ -59,6 +69,7 @@ function _createNotes() {
         style: {
           backgroundColor: '#00d',
         },
+        isPinned: false,
       },
     ];
     gNotes = notes;
@@ -75,12 +86,13 @@ function query(filterBy = null) {
   const filteredNotes = _getFilteredNotes(gNotes, filterBy);
   return Promise.resolve(filteredNotes);
 }
-// function removeNote(noteId) {
-//   let notes = _loadnotesFromStorage();
-//   notes = notes.filter((note) => note.id !== noteId);
-//   _saveNotesToStorage(notes);
-//   return Promise.resolve();
-// }
+function removeNote(noteId) {
+  let notes = gNotes;
+  notes = notes.filter((note) => note.id !== noteId);
+  gNotes = notes;
+  _saveNotesToStorage();
+  return Promise.resolve();
+}
 // function getNoteById(noteId) {
 //   const notes = _loadnotesFromStorage();
 //   const note = notes.find((note) => note.id === noteId);
@@ -105,6 +117,10 @@ function createNote(reciveNote) {
     info: {
       title,
       txt,
+    },
+    isPinned: false,
+    style: {
+      backgroundColor: '#00d',
     },
   };
   if (url) {
@@ -136,4 +152,44 @@ function getType(type, note) {
         { txt: 'Coding power', doneAt: 187111111, id: utilsService.makeId() },
       ];
   }
+}
+
+function changeBgc(noteId, color) {
+  const notes = gNotes;
+  const note = notes.find((note) => note.id === noteId);
+  note.style.backgroundColor = color;
+  _saveNotesToStorage();
+  return Promise.resolve(note);
+}
+
+function togglePin(noteId) {
+  let notes = gNotes;
+  const note = notes.find((note) => note.id === noteId);
+
+  const noteIdx = notes.findIndex((note) => note.id === noteId);
+  const noteToMove = notes.splice(noteIdx, 1);
+  if (!note.isPinned) {
+    note.isPinned = true;
+    notes.unshift(note);
+  } else {
+    note.isPinned = false;
+    notes.push(note);
+  }
+
+  gNotes = notes;
+
+  // if (!note.isPinned) notes = [noteToMove, ...notes];
+  // else notes = [...notes, noteToMove];
+  // noteToMove.isPinned = !noteToMove.isPinned;
+  _saveNotesToStorage();
+  return Promise.resolve(noteToMove);
+}
+function duplicateNote(noteId) {
+  let notes = gNotes;
+  const noteIdx = notes.findIndex((note) => noteId === note.id);
+  const note = JSON.parse(JSON.stringify(notes[noteIdx]));
+  note.id = utilsService.makeId();
+  notes.splice(noteIdx, 0, note);
+  _saveNotesToStorage();
+  return Promise.resolve();
 }

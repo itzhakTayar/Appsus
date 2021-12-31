@@ -1,4 +1,5 @@
-import { DynamicCmp } from "./DynamicCmp.jsx";
+import { DynamicCmp } from './DynamicCmp.jsx';
+import { EditNote } from './EditNote.jsx';
 
 export class NotesPreview extends React.Component {
   state = {
@@ -7,8 +8,6 @@ export class NotesPreview extends React.Component {
   };
 
   render() {
-    var { id } = this.state.note;
-    console.log(this.state.hover);
     var isHover = this.state.hover;
     return (
       <div
@@ -18,8 +17,17 @@ export class NotesPreview extends React.Component {
         }}
         onMouseLeave={() => this.setState({ hover: false })}
       >
-        <DynamicCmp note={this.state.note} />
-        {isHover && <h1>Hello Hover</h1>}
+        <div className="note-content">
+          <DynamicCmp note={this.state.note} />
+        </div>
+        <div className="note-edit">
+          {isHover && (
+            <EditNote
+              note={this.props.note}
+              renderNote={this.props.renderNote}
+            />
+          )}
+        </div>
       </div>
     );
   }

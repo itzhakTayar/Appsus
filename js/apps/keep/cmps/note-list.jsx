@@ -22,7 +22,11 @@ export class NotesList extends React.Component {
           />
         )}
         {notes.map((note) => (
-          <NotesPreview key={note.id} note={note} />
+          <NotesPreview
+            key={note.id}
+            note={note}
+            renderNote={this.props.onAdd}
+          />
         ))}
       </section>
     );
