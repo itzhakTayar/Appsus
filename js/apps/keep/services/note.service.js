@@ -80,11 +80,33 @@ function _createNotes() {
   // console.log(gNotes);
 }
 
+// function query(filterBy = null) {
+//   // console.log(gNotes);
+//   if (!filterBy) return Promise.resolve(gNotes);
+//   const filteredNotes = _getFilteredNotes(gNotes, filterBy);
+//   return Promise.resolve(filteredNotes);
+// }
 function query(filterBy = null) {
-  // console.log(gNotes);
-  if (!filterBy) return Promise.resolve(gNotes);
-  const filteredNotes = _getFilteredNotes(gNotes, filterBy);
+  const notes = gNotes;
+  if (!filterBy) return Promise.resolve(notes);
+  const filteredNotes = _getFilteredNotes(notes, filterBy);
+  console.log(filteredNotes);
   return Promise.resolve(filteredNotes);
+}
+
+function _getFilteredNotes(notes, filterBy) {
+  console.log(filterBy, 'filterby');
+
+  let { title, type } = filterBy;
+  console.log(title);
+
+  return notes.filter((note) => {
+    // console.log(note, 'kkk');
+    return (
+      note.info.title.toUpperCase().includes(title.toUpperCase()) &&
+      note.type.toUpperCase().includes(type.toUpperCase())
+    );
+  });
 }
 function removeNote(noteId) {
   let notes = gNotes;

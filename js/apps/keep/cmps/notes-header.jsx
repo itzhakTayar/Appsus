@@ -1,24 +1,36 @@
-const { NavLink, withRouter } = ReactRouterDOM;
+import { noteService } from '../services/note.service.js';
+import { NoteFilter } from './note-filter.jsx';
+import { NotesList } from './note-list.jsx';
 
 export class NotesHeader extends React.Component {
+  state = {
+    notes: [],
+    filterBy: null,
+  };
+
+  componentDidMount() {
+    this.loadNotes();
+  }
+
+  loadNotes = () => {
+    const { filterBy } = this.state;
+    noteService.query(filterBy).then((notes) => {
+      this.setState({ notes });
+    });
+  };
+
+  onSetFilter = (filterBy) => {
+    this.setState({ filterBy }, this.loadNotes);
+  };
+
   render() {
+    const { notes } = this.state;
+
     return (
-      <header className="app-header">
-        <div className="header-container">
-          <h1 className="logo" onClick={() => this.props.history.push('/')}>
-            my notes
-          </h1>
-          <nav className="app-nav">
-            <NavLink activeClassName="my-active" exact to="/">
-              Home
-            </NavLink>{' '}
-            |
-            <NavLink activeClassName="my-active" to="/notes">
-              notes
-            </NavLink>
-          </nav>
-        </div>
-      </header>
+      <section className="notes-header">
+        <NoteFilter onSetFilter={this.onSetFilter} />
+        {/* <NotesList notes={notes} /> */}
+      </section>
     );
   }
 }
