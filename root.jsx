@@ -15,7 +15,7 @@ export function App() {
         <AppHeader />
         <main>
           <Switch>
-            <Route component={EmailDetails} path="/email/:emailAt/:emailId" />
+            {/* <Route component={EmailDetails} path="/email/:emailAt/:emailId" /> */}
             <Route component={EmailIndex} path="/email" />
             <Route component={NoteApp} path="/notes" />
             <Route component={Home} path="/" />
