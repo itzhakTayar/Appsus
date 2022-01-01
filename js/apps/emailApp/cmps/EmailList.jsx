@@ -16,11 +16,15 @@ export class EmailList extends React.Component {
     if (
       target.classList.value !== "mark-btn" &&
       target.classList.value !== "trash-btn" &&
+      target.classList.value !== "fas fa-envelope" &&
       target.classList.value !== starClass &&
-      target.classList.value != "edit-btn" &&
-      target.classList.value != "send-draft-btn"
+      target.classList.value !== "edit-btn" &&
+      target.classList.value !== "send-draft-btn"
     ) {
-      this.toggleReadState(email, true);
+      console.log(target.classList.value);
+      if (target.classList.value !== "fas fa-envelope-open")
+        this.toggleReadState(email, true);
+      else this.toggleReadState(email, false);
       var id = this.state.click.id === email.id ? null : email.id;
       this.setState({ click: { id } });
     }
@@ -59,9 +63,10 @@ export class EmailList extends React.Component {
           var starClassName = email.isStar ? "on" : "off";
           if (id === hoverId) {
             isHovered = true;
+            console.log(email.isRead);
             var readIconClass = email.isRead
               ? "fas fa-envelope-open"
-              : "<fas fa-envelope";
+              : "fas fa-envelope";
           }
           if (id === clickId) {
             isClicked = true;
@@ -124,9 +129,7 @@ export class EmailList extends React.Component {
                         if (!isTrash) this.onRecycleBin(email);
                         if (isTrash) this.onDeleteEmail(email);
                       }}
-                    >
-                      {/* {trashIcon} */}
-                    </button>
+                    ></button>
                   </div>
                 )}
                 {isHovered && isDraft && (
