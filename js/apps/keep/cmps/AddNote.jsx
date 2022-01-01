@@ -44,6 +44,15 @@ export class AddNote extends React.Component {
   onSaveNote = (ev) => {
     ev.preventDefault();
     var { note } = this.state;
+    let isBlank = this.preventBlankNote(note);
+
+    if (isBlank) {
+      eventBusService.emit('user-msg', {
+        txt: 'cant add blank note',
+        type: 'warning',
+      });
+      return;
+    }
     noteService.createNote(note).then(() => {
       eventBusService.emit('user-msg', {
         txt: 'Note Added!',
@@ -52,6 +61,19 @@ export class AddNote extends React.Component {
       this.props.onToggleNoteModal();
       this.props.onAdd();
     });
+  };
+  preventBlankNote = (note) => {
+    console.log(note.todo);
+    let isBlank = false;
+    if (
+      (note.type === 'img' && !note.url) ||
+      (note.type === 'video' && !note.url) ||
+      (note.type === 'todo' && !note.todos) ||
+      (note.type === 'txt' && !note.txt)
+    ) {
+      isBlank = true;
+      return isBlank;
+    }
   };
   onToggleLableModal = () => {
     this.setState({ isShowLableModal: !this.state.isShowLableModal });

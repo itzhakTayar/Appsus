@@ -1,6 +1,6 @@
 export function VideoPreview({ note }) {
   const embedUrl = (url) => {
-    return url.replace("https://www.youtube.com/watch?v=", "");
+    return url.replace('https://www.youtube.com/watch?v=', '');
   };
 
   return (

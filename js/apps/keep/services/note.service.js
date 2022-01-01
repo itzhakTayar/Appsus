@@ -19,7 +19,7 @@ function _createNotes() {
   if (!notes || !notes.length) {
     notes = [
       {
-        id: 'n101',
+        id: utilsService.makeId(),
         type: 'txt',
         isPinned: false,
         info: {
@@ -31,13 +31,14 @@ function _createNotes() {
         },
         lable: [],
       },
+
       {
-        id: 'n102',
+        id: utilsService.makeId(),
         type: 'img',
         info: {
-          url: 'https://d585tldpucybw.cloudfront.net/sfimages/default-source/blogs/templates/social/reactt-light_1200x628.png?sfvrsn=43eb5f2a_2',
-          title: 'React Is The Best!',
-          txt: 'React JS',
+          url: 'https://www.thecoderpedia.com/wp-content/uploads/2020/06/Programming-Memes-Programmer-while-sleeping.jpg?x34900',
+          title: 'those nigths',
+          txt: '',
         },
         style: {
           backgroundColor: '#FFAEBC',
@@ -46,7 +47,64 @@ function _createNotes() {
         lable: [],
       },
       {
-        id: 'n103',
+        id: utilsService.makeId(),
+        type: 'img',
+        info: {
+          url: 'https://i.pinimg.com/736x/ac/b7/f9/acb7f99ba0ef473e03ee81e91a6281ee.jpg',
+          title: 'small moments of happiness',
+          txt: '',
+        },
+        style: {
+          backgroundColor: '#FFAEBC',
+        },
+        isPinned: false,
+        lable: [],
+      },
+
+      {
+        id: utilsService.makeId(),
+        type: 'img',
+        info: {
+          url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6XzV0RV7_v0XMjgbXsvJB8s6jIb0EpFVHxA&usqp=CAU',
+          title: 'momy is Proud ',
+          txt: '',
+        },
+        style: {
+          backgroundColor: '#FFAEBC',
+        },
+        isPinned: false,
+        lable: [],
+      },
+      {
+        id: utilsService.makeId(),
+        type: 'img',
+        info: {
+          url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD9_mzPUcJcCzB3jCGNL81VRHICgiVcwcHwg&usqp=CAU',
+          title: 'debugging is fun',
+          txt: '',
+        },
+        style: {
+          backgroundColor: '#FFAEBC',
+        },
+        isPinned: false,
+        lable: [],
+      },
+      {
+        id: utilsService.makeId(),
+        type: 'img',
+        info: {
+          url: 'https://www.meme-arsenal.com/memes/1f88761f5857a6af5c1fc987050b00b7.jpg',
+          title: 'Misses those days',
+          txt: '',
+        },
+        style: {
+          backgroundColor: '#FFAEBC',
+        },
+        isPinned: false,
+        lable: [],
+      },
+      {
+        id: utilsService.makeId(),
         type: 'todo',
         info: {
           title: 'Get my stuff together',
@@ -72,11 +130,39 @@ function _createNotes() {
         lable: [],
       },
       {
-        id: 'n104',
+        id: utilsService.makeId(),
         type: 'video',
         info: {
           url: 'https://www.youtube.com/watch?v=tgbNymZ7vqY',
           title: 'Best Video Ever',
+          txt: 'Muppets!',
+        },
+        style: {
+          backgroundColor: '#FFAEBC',
+        },
+        isPinned: false,
+        lable: [],
+      },
+      {
+        id: utilsService.makeId(),
+        type: 'video',
+        info: {
+          url: 'https://www.youtube.com/watch?v=fYvCicex2lU',
+          title: 'Awesome moment',
+          txt: 'Muppets!',
+        },
+        style: {
+          backgroundColor: '#FFAEBC',
+        },
+        isPinned: false,
+        lable: [],
+      },
+      {
+        id: utilsService.makeId(),
+        type: 'video',
+        info: {
+          url: 'https://www.youtube.com/watch?v=PA7SmSR1dLo',
+          title: 'the job inerview of yaron',
           txt: 'Muppets!',
         },
         style: {

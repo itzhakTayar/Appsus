@@ -9,8 +9,8 @@ export class NotesList extends React.Component {
       <section className="notes-list">
         {notes.map((note) => (
           <NotesPreview
-            key={note.id}
             note={note}
+            key={note.id}
             renderNote={this.props.onAdd}
             onToggleNoteModal={this.props.onToggleNoteModal}
           />

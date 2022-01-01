@@ -5,7 +5,6 @@ import { TxtPreview } from './TxtPreview.jsx';
 import { VideoPreview } from './VideoPreview.jsx';
 
 export function DynamicCmp(props) {
-  
   switch (props.note.type) {
     case 'txt':
       return <TxtPreview note={props.note} />;
@@ -15,7 +14,13 @@ export function DynamicCmp(props) {
       return <VideoPreview note={props.note} />;
     case 'todo':
       // console.log('note check undefind', props.note);
-      return <TodoPreview note={props.note} todos={props.note.info.todos} renderNote={props.renderNote}/>;
+      return (
+        <TodoPreview
+          note={props.note}
+          todos={props.note.info.todos}
+          renderNote={props.renderNote}
+        />
+      );
     default:
       return <React.Fragment></React.Fragment>;
   }
