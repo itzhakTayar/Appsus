@@ -73,7 +73,7 @@ export class NoteApp extends React.Component {
     var { noteToEdit } = this.state;
     var { emailToNote } = this.state;
     return (
-      <section className="note-app">
+      <section className="note-app main-layout">
         <NotesHeader setFilter={this.onSetFilter} />
         <NotesList
           notes={notes}

@@ -2,7 +2,7 @@ export function EmailHeader({ onSearch, onSetRead, onSetSort }) {
   return (
     <header className="email-header">
       <div className="header-content">
-        <h1>Text</h1>
+        <h1>Email Header</h1>
 
         <div className="email-head-filters">
           <select
@@ -40,7 +40,7 @@ export function EmailHeader({ onSearch, onSetRead, onSetSort }) {
           </select>
         </div>
 
-        <h1>Logo</h1>
+        <h1 className="fas fa-envelope"></h1>
       </div>
     </header>
   );

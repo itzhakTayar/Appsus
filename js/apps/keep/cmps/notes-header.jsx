@@ -4,7 +4,7 @@ export class NotesHeader extends React.Component {
   state = {};
   render() {
     return (
-      <section className="notes-header main-layout">
+      <section className="notes-header header-layout flex">
         <NoteFilter onSetFilter={this.props.setFilter} />
         <NavLink
           to="/notes/create"

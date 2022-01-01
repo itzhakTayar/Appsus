@@ -1,4 +1,6 @@
-
+.note-filter{
+  height: 50%;
+}
 
 .note-filter input {
     border: 0px;
