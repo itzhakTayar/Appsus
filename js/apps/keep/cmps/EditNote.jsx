@@ -3,6 +3,8 @@ import { noteService } from "../services/note.service.js";
 import { AddNote } from "./AddNote.jsx";
 import { ChangeColor } from "./NoteColor.jsx";
 
+const { NavLink } = ReactRouterDOM;
+
 export class EditNote extends React.Component {
   state = {
     isColorMenuOn: false,
@@ -37,6 +39,7 @@ export class EditNote extends React.Component {
   onEditNote = () => {
     this.props.openAdd(this.state.note);
   };
+
   render() {
     var { note } = this.state;
     if (!note) return <React.Fragment></React.Fragment>;
@@ -75,7 +78,12 @@ export class EditNote extends React.Component {
         >
           edit
         </button>
-        <button>send</button>;
+        <NavLink
+          className="clean-link"
+          to={`/email/create?title=${note.info.title}&body=${note.info.txt}`}
+        >
+          ⏍
+        </NavLink>
       </div>
     );
   }

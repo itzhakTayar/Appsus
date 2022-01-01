@@ -1,5 +1,5 @@
-import { storageService } from '../../../services/storage.service.js';
-import { utilsService } from '../../../services/util.service.js';
+import { storageService } from "../../../services/storage.service.js";
+import { utilsService } from "../../../services/util.service.js";
 export const noteService = {
   query,
   removeNote,
@@ -11,7 +11,7 @@ export const noteService = {
   setNoteTodos,
   sortTodos,
 };
-const STORAGE_KEY = 'noteDB';
+const STORAGE_KEY = "noteDB";
 var gNotes = [];
 _createNotes();
 function _createNotes() {
@@ -20,42 +20,42 @@ function _createNotes() {
     notes = [
       {
         id: utilsService.makeId(),
-        type: 'txt',
+        type: "txt",
         isPinned: false,
         info: {
-          title: 'Coding Academy',
-          txt: 'Fullstack Me Baby!',
+          title: "Coding Academy",
+          txt: "Fullstack Me Baby!",
         },
         style: {
-          backgroundColor: '#B4F8C8',
+          backgroundColor: "#B4F8C8",
         },
         labels: [],
       },
 
       {
         id: utilsService.makeId(),
-        type: 'img',
+        type: "img",
         info: {
-          url: 'https://www.thecoderpedia.com/wp-content/uploads/2020/06/Programming-Memes-Programmer-while-sleeping.jpg?x34900',
-          title: 'those nigths',
-          txt: '',
+          url: "https://www.thecoderpedia.com/wp-content/uploads/2020/06/Programming-Memes-Programmer-while-sleeping.jpg?x34900",
+          title: "those nigths",
+          txt: "",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
         labels: [],
       },
       {
         id: utilsService.makeId(),
-        type: 'img',
+        type: "img",
         info: {
-          url: 'https://i.pinimg.com/736x/ac/b7/f9/acb7f99ba0ef473e03ee81e91a6281ee.jpg',
-          title: 'small moments of happiness',
-          txt: '',
+          url: "https://i.pinimg.com/736x/ac/b7/f9/acb7f99ba0ef473e03ee81e91a6281ee.jpg",
+          title: "small moments of happiness",
+          txt: "",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
         labels: [],
@@ -63,110 +63,110 @@ function _createNotes() {
 
       {
         id: utilsService.makeId(),
-        type: 'img',
+        type: "img",
         info: {
-          url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6XzV0RV7_v0XMjgbXsvJB8s6jIb0EpFVHxA&usqp=CAU',
-          title: 'momy is Proud ',
-          txt: '',
+          url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6XzV0RV7_v0XMjgbXsvJB8s6jIb0EpFVHxA&usqp=CAU",
+          title: "momy is Proud ",
+          txt: "",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
         labels: [],
       },
       {
         id: utilsService.makeId(),
-        type: 'img',
+        type: "img",
         info: {
-          url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD9_mzPUcJcCzB3jCGNL81VRHICgiVcwcHwg&usqp=CAU',
-          title: 'debugging is fun',
-          txt: '',
+          url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD9_mzPUcJcCzB3jCGNL81VRHICgiVcwcHwg&usqp=CAU",
+          title: "debugging is fun",
+          txt: "",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
         labels: [],
       },
       {
         id: utilsService.makeId(),
-        type: 'img',
+        type: "img",
         info: {
-          url: 'https://www.meme-arsenal.com/memes/1f88761f5857a6af5c1fc987050b00b7.jpg',
-          title: 'Misses those days',
-          txt: '',
+          url: "https://www.meme-arsenal.com/memes/1f88761f5857a6af5c1fc987050b00b7.jpg",
+          title: "Misses those days",
+          txt: "",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
         labels: [],
       },
       {
         id: utilsService.makeId(),
-        type: 'todo',
+        type: "todo",
         info: {
-          title: 'Get my stuff together',
-          txt: '',
-          url: '',
+          title: "Get my stuff together",
+          txt: "",
+          url: "",
           todos: [
             {
-              txt: 'Driving liscence',
+              txt: "Driving liscence",
               doneAt: null,
               id: utilsService.makeId(),
             },
             {
-              txt: 'Coding power',
+              txt: "Coding power",
               doneAt: 187111111,
               id: utilsService.makeId(),
             },
           ],
         },
         style: {
-          backgroundColor: '#B4F8C8',
+          backgroundColor: "#B4F8C8",
         },
         isPinned: false,
         labels: [],
       },
       {
         id: utilsService.makeId(),
-        type: 'video',
+        type: "video",
         info: {
-          url: 'https://www.youtube.com/watch?v=tgbNymZ7vqY',
-          title: 'Best Video Ever',
-          txt: 'Muppets!',
+          url: "https://www.youtube.com/watch?v=tgbNymZ7vqY",
+          title: "Best Video Ever",
+          txt: "Muppets!",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
         labels: [],
       },
       {
         id: utilsService.makeId(),
-        type: 'video',
+        type: "video",
         info: {
-          url: 'https://www.youtube.com/watch?v=fYvCicex2lU',
-          title: 'Awesome moment',
-          txt: 'Muppets!',
+          url: "https://www.youtube.com/watch?v=fYvCicex2lU",
+          title: "Awesome moment",
+          txt: "Great Time!",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
         labels: [],
       },
       {
         id: utilsService.makeId(),
-        type: 'video',
+        type: "video",
         info: {
-          url: 'https://www.youtube.com/watch?v=PA7SmSR1dLo',
-          title: 'the job inerview of yaron',
-          txt: 'Muppets!',
+          url: "https://www.youtube.com/watch?v=PA7SmSR1dLo",
+          title: "The job inerview",
+          txt: "Let Work!",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
         labels: [],
@@ -224,8 +224,8 @@ function createNote(reciveNote) {
   console.log(reciveNote);
   const { title, type, txt, todos } = reciveNote;
   var { url } = reciveNote;
-  if (reciveNote.info.url) {
-    url = reciveNote.info.url;
+  if (reciveNote.info) {
+    if (reciveNote.info.url) url = reciveNote.info.url;
   }
   const note = {
     id: utilsService.makeId(),
@@ -238,7 +238,7 @@ function createNote(reciveNote) {
   };
   if (!oldNote) {
     (note.style = {
-      backgroundColor: '#FFAEBC',
+      backgroundColor: "#FFAEBC",
     }),
       (note.isPinned = false);
   }

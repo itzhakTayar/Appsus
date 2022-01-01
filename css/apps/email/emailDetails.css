@@ -1,5 +1,4 @@
 .email-details {
-  /* background-color: hotpink; */
   flex-grow: 4;
   max-width: 1280px;
   margin: auto;
@@ -7,11 +6,6 @@
   display: flex;
   flex-direction: column;
   border-radius: 2px;
-}
-
-.email-details-divs{
-  /* width: 95%;
-  margin: auto; */
 }
 
 .email-details-header {
@@ -27,8 +21,8 @@
   justify-content: space-between;
 }
 
-.email-details-btns{
-justify-content: space-between;
+.email-details-btns {
+  justify-content: space-between;
 }
 
 .email-details-preview {

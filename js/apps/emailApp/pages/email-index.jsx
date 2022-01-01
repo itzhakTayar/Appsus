@@ -111,6 +111,10 @@ export class EmailIndex extends React.Component {
       }
       this.setFilterByPath(filterUrl);
     }
+    if (filterUrl.includes("create")) {
+      var { isModalOpen } = this.state;
+      if (!isModalOpen) this.setState({ isModalOpen: true });
+    }
   }
 
   getAllInboxEmails = () => {

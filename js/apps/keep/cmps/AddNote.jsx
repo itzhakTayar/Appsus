@@ -1,15 +1,15 @@
-import { eventBusService } from '../../../services/event-bus.service.js';
-import { noteService } from '../services/note.service.js';
-import { DynamicAdd } from './DynamicAdd.jsx';
-import { LableModal } from './LabelModal.jsx';
+import { eventBusService } from "../../../services/event-bus.service.js";
+import { noteService } from "../services/note.service.js";
+import { DynamicAdd } from "./DynamicAdd.jsx";
+import { LableModal } from "./LabelModal.jsx";
 
 export class AddNote extends React.Component {
   state = {
     note: {
-      title: '',
-      type: 'txt',
+      title: "",
+      type: "txt",
       labels: [],
-      txt: '',
+      txt: "",
       info: null,
     },
     isShowLableModal: false,
@@ -19,6 +19,7 @@ export class AddNote extends React.Component {
 
   componentDidMount() {
     var { noteToEdit } = this.props;
+    var { emailToNote } = this.props;
     if (noteToEdit) {
       var newNote = {};
       newNote.title = noteToEdit.info.title;
@@ -28,6 +29,8 @@ export class AddNote extends React.Component {
       newNote.id = noteToEdit.id;
       newNote.info = noteToEdit.info;
       this.setState({ note: newNote });
+    } else if (emailToNote) {
+      this.setState({ note: emailToNote });
     }
     this.inputRef.current.focus();
   }
@@ -51,9 +54,9 @@ export class AddNote extends React.Component {
     //   return;
     // }
     noteService.createNote(note).then(() => {
-      eventBusService.emit('user-msg', {
-        txt: 'Note Added!',
-        type: 'success',
+      eventBusService.emit("user-msg", {
+        txt: "Note Added!",
+        type: "success",
       });
       this.props.closeNoteModal();
       this.props.onAdd();
@@ -63,10 +66,10 @@ export class AddNote extends React.Component {
     console.log(note.todo);
     let isBlank = false;
     if (
-      (note.type === 'img' && !note.url) ||
-      (note.type === 'video' && !note.url) ||
-      (note.type === 'todo' && !note.todos) ||
-      (note.type === 'txt' && !note.txt)
+      (note.type === "img" && !note.url) ||
+      (note.type === "video" && !note.url) ||
+      (note.type === "todo" && !note.todos) ||
+      (note.type === "txt" && !note.txt)
     ) {
       isBlank = true;
       return isBlank;

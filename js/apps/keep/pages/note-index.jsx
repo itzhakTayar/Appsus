@@ -11,12 +11,22 @@ export class NoteApp extends React.Component {
     filterBy: null,
     isShowNoteModal: false,
     noteToEdit: null,
+    emailToNote: null,
   };
 
   componentDidMount() {
     this.loadNotes();
-    if (this.props.location.pathname.includes("create/?")) {
+    if (this.props.location.search.includes("?title")) {
       this.setState({ isShowNoteModal: true });
+      const searchParams = new URLSearchParams(this.props.location.search);
+      var note = {
+        title: searchParams.get("title"),
+        type: "txt",
+        labels: [],
+        txt: searchParams.get("txt"),
+        info: null,
+      };
+      this.setState({ emailToNote: note });
       return;
     }
   }
@@ -42,7 +52,6 @@ export class NoteApp extends React.Component {
         return;
       }
     }
-   
   }
 
   toggleNoteModalWithParms = (noteToEdit = null) => {
@@ -52,6 +61,9 @@ export class NoteApp extends React.Component {
       noteToEdit = null;
       this.setState({ noteToEdit });
     }
+    if (this.state.emailToNote && !isModalOpen) {
+      this.setState({ emailToNote: null });
+    }
     var str = isModalOpen ? "/create" : "";
     this.props.history.push(`/notes${str}`);
   };
@@ -59,6 +71,7 @@ export class NoteApp extends React.Component {
   render() {
     const { notes } = this.state;
     var { noteToEdit } = this.state;
+    var { emailToNote } = this.state;
     return (
       <section className="note-app">
         <NotesHeader setFilter={this.onSetFilter} />
@@ -81,6 +94,7 @@ export class NoteApp extends React.Component {
             onAdd={this.loadNotes}
             closeNoteModal={this.toggleNoteModalWithParms}
             noteToEdit={noteToEdit}
+            emailToNote={emailToNote}
           />
         )}
       </section>

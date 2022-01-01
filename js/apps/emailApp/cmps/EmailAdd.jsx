@@ -19,8 +19,10 @@ export class EmailAdd extends React.Component {
       var email = {};
       email.titleInput = searchParams.get("title");
       email.toInput = searchParams.get("to");
+      if (!email.toInput) email.toInput = "";
       email.msgInput = searchParams.get("body");
       email.id = searchParams.get("id");
+      if (!email.id) email.id = utilsService.makeId();
       this.setState({ email });
     }
   }

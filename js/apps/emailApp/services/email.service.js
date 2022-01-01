@@ -10,6 +10,7 @@ export const emailService = {
   getUnreadInboxCount,
   toggleStarState,
   getEmailById,
+  checkIfSent,
 };
 
 const loggedinUser = {
@@ -115,6 +116,11 @@ function getUnreadInboxCount() {
   return emails.length;
 }
 
+function checkIfSent(email) {
+  if (email.fromEmail === loggedinUser.email) return true;
+  return false;
+}
+
 function _filterBySearch(emails, searchKey) {
   var filtered = emails.filter((email) => {
     return email.fromName.toUpperCase().includes(searchKey.toUpperCase());
@@ -146,6 +152,7 @@ function addEmail(newEmail, isDraft = false) {
   email.deletedAt = null;
   email.isStar = false;
   email.isDraft = isDraft;
+  email.labels = newEmail.labels ? newEmail.labels : [];
   gEmails.unshift(email);
 
   _saveEmailsToStorage();
