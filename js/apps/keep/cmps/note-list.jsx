@@ -12,7 +12,7 @@ export class NotesList extends React.Component {
             key={note.id}
             note={note}
             renderNote={this.props.onAdd}
-            onToggleNoteModal={this.props.onToggleNoteModal}
+            openAdd={this.props.openAdd}
           />
         ))}
       </section>

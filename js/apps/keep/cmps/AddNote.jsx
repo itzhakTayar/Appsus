@@ -1,15 +1,15 @@
-import { eventBusService } from '../../../services/event-bus.service.js';
-import { noteService } from '../services/note.service.js';
-import { DynamicAdd } from './DynamicAdd.jsx';
-import { LableModal } from './LabelModal.jsx';
+import { eventBusService } from "../../../services/event-bus.service.js";
+import { noteService } from "../services/note.service.js";
+import { DynamicAdd } from "./DynamicAdd.jsx";
+import { LableModal } from "./LabelModal.jsx";
 
 export class AddNote extends React.Component {
   state = {
     note: {
-      title: '',
-      type: 'txt',
+      title: "",
+      type: "txt",
       labels: [],
-      txt: '',
+      txt: "",
       info: null,
     },
     isShowLableModal: false,
@@ -18,21 +18,17 @@ export class AddNote extends React.Component {
   inputRef = React.createRef();
 
   componentDidMount() {
-    var note = this.props.note;
-
-    if (note) {
-      var newNote = {
-        title: note.info.title,
-        type: note.type,
-        labels: note.lable,
-        txt: note.info.txt,
-        id: note.id,
-        info: note.info,
-      };
-
+    var { noteToEdit } = this.props;
+    if (noteToEdit) {
+      var newNote = {};
+      newNote.title = noteToEdit.info.title;
+      newNote.type = noteToEdit.type;
+      newNote.labels = noteToEdit.labels;
+      newNote.txt = noteToEdit.info.txt;
+      newNote.id = noteToEdit.id;
+      newNote.info = noteToEdit.info;
       this.setState({ note: newNote });
     }
-
     this.inputRef.current.focus();
   }
   setLables = (lable) => {
@@ -45,11 +41,11 @@ export class AddNote extends React.Component {
     ev.preventDefault();
     var { note } = this.state;
     noteService.createNote(note).then(() => {
-      eventBusService.emit('user-msg', {
-        txt: 'Note Added!',
-        type: 'success',
+      eventBusService.emit("user-msg", {
+        txt: "Note Added!",
+        type: "success",
       });
-      this.props.onToggleNoteModal();
+      this.props.closeNoteModal();
       this.props.onAdd();
     });
   };
@@ -70,7 +66,6 @@ export class AddNote extends React.Component {
   };
   render() {
     const { title, type, txt, url } = this.state.note;
-    console.log(this.state.note);
     return (
       <section className="note-add">
         <div className="note-modal">
@@ -91,7 +86,7 @@ export class AddNote extends React.Component {
           <button
             className="btn-toggle-modal"
             onClick={() => {
-              this.props.onToggleNoteModal();
+              this.props.closeNoteModal();
             }}
           >
             ×

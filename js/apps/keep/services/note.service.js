@@ -1,5 +1,5 @@
-import { storageService } from '../../../services/storage.service.js';
-import { utilsService } from '../../../services/util.service.js';
+import { storageService } from "../../../services/storage.service.js";
+import { utilsService } from "../../../services/util.service.js";
 export const noteService = {
   query,
   removeNote,
@@ -11,7 +11,7 @@ export const noteService = {
   setNoteTodos,
   sortTodos,
 };
-const STORAGE_KEY = 'noteDB';
+const STORAGE_KEY = "noteDB";
 var gNotes = [];
 _createNotes();
 function _createNotes() {
@@ -19,71 +19,71 @@ function _createNotes() {
   if (!notes || !notes.length) {
     notes = [
       {
-        id: 'n101',
-        type: 'txt',
+        id: "n101",
+        type: "txt",
         isPinned: false,
         info: {
-          title: 'Coding Academy',
-          txt: 'Fullstack Me Baby!',
+          title: "Coding Academy",
+          txt: "Fullstack Me Baby!",
         },
         style: {
-          backgroundColor: '#B4F8C8',
+          backgroundColor: "#B4F8C8",
         },
-        lable: [],
+        labels: [],
       },
       {
-        id: 'n102',
-        type: 'img',
+        id: "n102",
+        type: "img",
         info: {
-          url: 'https://d585tldpucybw.cloudfront.net/sfimages/default-source/blogs/templates/social/reactt-light_1200x628.png?sfvrsn=43eb5f2a_2',
-          title: 'React Is The Best!',
-          txt: 'React JS',
+          url: "https://d585tldpucybw.cloudfront.net/sfimages/default-source/blogs/templates/social/reactt-light_1200x628.png?sfvrsn=43eb5f2a_2",
+          title: "React Is The Best!",
+          txt: "React JS",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
       {
-        id: 'n103',
-        type: 'todo',
+        id: "n103",
+        type: "todo",
         info: {
-          title: 'Get my stuff together',
-          txt: '',
-          url: '',
+          title: "Get my stuff together",
+          txt: "",
+          url: "",
           todos: [
             {
-              txt: 'Driving liscence',
+              txt: "Driving liscence",
               doneAt: null,
               id: utilsService.makeId(),
             },
             {
-              txt: 'Coding power',
+              txt: "Coding power",
               doneAt: 187111111,
               id: utilsService.makeId(),
             },
           ],
         },
         style: {
-          backgroundColor: '#B4F8C8',
+          backgroundColor: "#B4F8C8",
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
       {
-        id: 'n104',
-        type: 'video',
+        id: "n104",
+        type: "video",
         info: {
-          url: 'https://www.youtube.com/watch?v=tgbNymZ7vqY',
-          title: 'Best Video Ever',
-          txt: 'Muppets!',
+          url: "https://www.youtube.com/watch?v=tgbNymZ7vqY",
+          title: "Best Video Ever",
+          txt: "Muppets!",
         },
         style: {
-          backgroundColor: '#FFAEBC',
+          backgroundColor: "#FFAEBC",
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
     ];
     gNotes = notes;
@@ -117,11 +117,10 @@ function removeNote(noteId) {
   _saveNotesToStorage();
   return Promise.resolve();
 }
-// function getNoteById(noteId) {
-//   const notes = _loadnotesFromStorage();
-//   const note = notes.find((note) => note.id === noteId);
-//   return Promise.resolve(note);
-// }
+function _getNoteById(noteId) {
+  const note = gNotes.find((note) => note.id === noteId);
+  return note;
+}
 
 function setNoteTodos(currTodo) {
   currTodo.doneAt = new Date();
@@ -129,8 +128,19 @@ function setNoteTodos(currTodo) {
   return Promise.resolve();
 }
 
+function _getNoteIdx(id) {
+  var idx = gNotes.findIndex((note) => note.id === id);
+  return idx;
+}
+
 function createNote(reciveNote) {
-  const { title, type, txt, url, todos } = reciveNote;
+  var oldNote = _getNoteById(reciveNote.id);
+  console.log(reciveNote);
+  const { title, type, txt, todos } = reciveNote;
+  var { url } = reciveNote;
+  if (reciveNote.info.url) {
+    url = reciveNote.info.url;
+  }
   const note = {
     id: utilsService.makeId(),
     type,
@@ -138,19 +148,29 @@ function createNote(reciveNote) {
       title,
       txt,
     },
-    isPinned: false,
-    lable: reciveNote.labels,
-    style: {
-      backgroundColor: 'white',
-    },
+    labels: reciveNote.labels,
   };
+  if (!oldNote) {
+    (note.style = {
+      backgroundColor: "#FFAEBC",
+    }),
+      (note.isPinned = false);
+  }
   if (url) {
     note.info.url = url;
   }
   if (todos) {
     note.info.todos = todos;
   }
-  gNotes.unshift(note);
+  if (oldNote) {
+    oldNote.info = note.info;
+    oldNote.type = note.type;
+    oldNote.labels = note.labels;
+    var idx = _getNoteIdx(oldNote.id);
+    gNotes[idx] = oldNote;
+  } else {
+    gNotes.unshift(note);
+  }
   _saveNotesToStorage();
   return Promise.resolve();
 }
