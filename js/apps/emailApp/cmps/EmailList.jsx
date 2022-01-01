@@ -59,7 +59,9 @@ export class EmailList extends React.Component {
           var starClassName = email.isStar ? "on" : "off";
           if (id === hoverId) {
             isHovered = true;
-            var readIcon = email.isRead ? "📭" : "✉️";
+            var readIconClass = email.isRead
+              ? "fas fa-envelope-open"
+              : "<fas fa-envelope";
           }
           if (id === clickId) {
             isClicked = true;
@@ -69,7 +71,7 @@ export class EmailList extends React.Component {
               ? email.body.substr(0, 50) + "..."
               : email.body;
           var isTrash = email.deletedAt;
-          var trashIcon = isTrash ? "❌" : "🗑";
+          var trashIcon = isTrash ? "fas fa-times" : "fas fa-trash-alt";
           var showStar = isHovered || email.isStar;
           var isDraft = email.isDraft;
           var emailColor = email.isRead ? "grey" : "white";
@@ -109,23 +111,21 @@ export class EmailList extends React.Component {
                 </div>
                 {!isHovered && <p>{sentAtTime}</p>}
                 {isHovered && !isDraft && (
-                  <div className="hover-btns">
+                  <div className="hover-btns ">
                     <button
-                      className="mark-btn"
+                      className={`mark-btn ${readIconClass}`}
                       onClick={() => {
                         this.toggleReadState(email);
                       }}
-                    >
-                      {readIcon}
-                    </button>
+                    ></button>
                     <button
-                      className="trash-btn"
+                      className={`trash-btn ${trashIcon}`}
                       onClick={() => {
                         if (!isTrash) this.onRecycleBin(email);
                         if (isTrash) this.onDeleteEmail(email);
                       }}
                     >
-                      {trashIcon}
+                      {/* {trashIcon} */}
                     </button>
                   </div>
                 )}
