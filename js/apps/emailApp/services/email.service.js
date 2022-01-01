@@ -1,5 +1,5 @@
-import { storageService } from "../../../services/storage.service.js";
-import { utilsService } from "../../../services/util.service.js";
+import { storageService } from '../../../services/storage.service.js';
+import { utilsService } from '../../../services/util.service.js';
 
 export const emailService = {
   query,
@@ -13,11 +13,11 @@ export const emailService = {
 };
 
 const loggedinUser = {
-  email: "user@appsus.com",
-  fullname: "Noam Shir",
+  email: 'user@appsus.com',
+  fullname: 'Noam Shir',
 };
-const DB = "emailDB";
-const names = ["Izhak", "Noam", "Coding Acadmy", "ebay", "Netflix"];
+const DB = 'emailDB';
+const names = ['Izhak', 'Noam', 'Coding Acadmy', 'ebay', 'Netflix'];
 var gEmails = [];
 var gDrafts = [];
 _createEmails();
@@ -25,7 +25,68 @@ _createEmails();
 function _createEmails() {
   var emails = _loadEmailsFromStorage();
   if (!emails) {
-    gEmails = [];
+    gEmails = [
+      {
+        id: utilsService.makeId(),
+        subject: 'Linkedin job alert',
+        body: "5 new jobs for 'full-stuck developer'",
+        isRead: false,
+        sentAt: "2 day's ago",
+        to: loggedinUser.email,
+        fromEmail: 'jobalerts-noreply@linkedin.com',
+        fromName: 'Linkedin',
+        deletedAt: null,
+        isStar: false,
+      },
+      {
+        id: utilsService.makeId(),
+        subject: "We've added a movie that might interest you",
+        body: 'www.netflix.com/title/80198',
+        isRead: false,
+        sentAt: "3 week's ago",
+        to: loggedinUser.email,
+        fromEmail: 'info@mailer.netflix.com',
+        fromName: 'Netflix',
+        deletedAt: null,
+        isStar: false,
+      },
+      {
+        id: utilsService.makeId(),
+        subject: 'Other users are buying these items',
+        body: 'Get to know the products that everyone uses',
+        isRead: false,
+        sentAt: 'just now',
+        to: loggedinUser.email,
+        fromEmail: 'transaction@notice.aliexpress.com',
+        fromName: 'Aliexpress',
+        deletedAt: null,
+        isStar: false,
+      },
+      {
+        id: utilsService.makeId(),
+        subject: '',
+        body: 'Get to know the products that everyone uses',
+        isRead: false,
+        sentAt: 'just now',
+        to: loggedinUser.email,
+        fromEmail: 'transaction@notice.aliexpress.com',
+        fromName: 'Aliexpress',
+        deletedAt: null,
+        isStar: false,
+      },
+      {
+        id: utilsService.makeId(),
+        subject: '',
+        body: 'We are not happy with your code',
+        isRead: false,
+        sentAt: 'just now',
+        to: loggedinUser.email,
+        fromEmail: 'transaction@notice.aliexpress.com',
+        fromName: 'Aliexpress',
+        deletedAt: null,
+        isStar: false,
+      },
+    ];
     for (var i = 0; i < 5; i++) {
       var email = _createEmail(i);
       gEmails.push(email);
@@ -39,12 +100,12 @@ function _createEmails() {
 function _createEmail(num) {
   const email = {
     id: utilsService.makeId(),
-    subject: "Miss you!",
-    body: "Would love to catch up sometimes",
+    subject: 'Miss you!',
+    body: 'Would love to catch up sometimes',
     isRead: false,
     sentAt: Date.now(),
     to: loggedinUser.email,
-    fromEmail: "poko@gmail.com",
+    fromEmail: 'poko@gmail.com',
     fromName: names[num],
     deletedAt: null,
     isStar: false,
@@ -61,13 +122,13 @@ function query(filterBy = null, sortBy = null) {
 }
 
 function sortEmails(emails, sortBy) {
-  if (sortBy === "Date") {
+  if (sortBy === 'Date') {
     emails.sort((e1, e2) => {
       return e1.sentAt > e2.sentAt;
     });
     return emails;
   }
-  if (sortBy === "Title") {
+  if (sortBy === 'Title') {
     emails.sort((e1, e2) => {
       var str1 = e1.subject.toUpperCase();
       var str2 = e2.subject.toUpperCase();
@@ -89,9 +150,9 @@ function _getEmailsByFilter(filterBy) {
     return emails.filter((email) => email.isDraft);
   }
   emails = emails.filter((email) => !email.isDraft);
-  if (filterBy.isRead === "true") {
+  if (filterBy.isRead === 'true') {
     emails = emails.filter((email) => email.isRead);
-  } else if (filterBy.isRead === "false") {
+  } else if (filterBy.isRead === 'false') {
     emails = emails.filter((email) => !email.isRead);
   }
   if (!filterBy.trash) emails = emails.filter((email) => !email.deletedAt);

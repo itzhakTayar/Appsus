@@ -1,7 +1,7 @@
-import { eventBusService } from "../../../services/event-bus.service.js";
-import { noteService } from "../services/note.service.js";
-import { AddNote } from "./AddNote.jsx";
-import { ChangeColor } from "./NoteColor.jsx";
+import { eventBusService } from '../../../services/event-bus.service.js';
+import { noteService } from '../services/note.service.js';
+import { AddNote } from './AddNote.jsx';
+import { ChangeColor } from './NoteColor.jsx';
 
 export class EditNote extends React.Component {
   state = {
@@ -11,9 +11,9 @@ export class EditNote extends React.Component {
   onRemoveNote = () => {
     var noteId = this.state.note.id;
     noteService.removeNote(noteId).then(() => {
-      eventBusService.emit("user-msg", {
-        txt: "Note Deleted!",
-        type: "warning",
+      eventBusService.emit('user-msg', {
+        txt: 'Note Deleted!',
+        type: 'warning',
       });
       this.props.renderNote();
     });
@@ -40,42 +40,40 @@ export class EditNote extends React.Component {
   render() {
     var { note } = this.state;
     if (!note) return <React.Fragment></React.Fragment>;
-    var classNameEdit = this.props.isShown ? "shown" : "closed";
+    var classNameEdit = this.props.isShown ? 'shown' : 'closed';
     return (
       <div className={`note-edit ${classNameEdit} `}>
-        <button onClick={this.onRemoveNote}>delete</button>
         <button
-          className="color-btn"
+          className="fas fa-trash-alt"
+          onClick={this.onRemoveNote}
+        ></button>
+        <button
+          className="color-btn fas fa-palette"
           title="Change color"
           onClick={() => this.onToggleColorMenu(note.id)}
-        >
-          🎨
-        </button>
+        ></button>
         {this.state.isColorMenuOn && (
           <ChangeColor noteId={note.id} onChangeBgc={this.onChangeBgc} />
         )}
         <button
+          className="btn fas fa-thumbtack"
           onClick={() => {
             this.onTogglePin(note.id);
           }}
-        >
-          📌
-        </button>
+        ></button>
         <button
+          className="fas fa-copy"
           onClick={() => {
             this.onDuplicateNote(note.id);
           }}
-        >
-          duplicate{" "}
-        </button>
+        ></button>
         <button
+          className="fas fa-edit"
           onClick={() => {
             this.onEditNote();
           }}
-        >
-          edit
-        </button>
-        <button>send</button>;
+        ></button>
+        <button className="fas fa-envelope"></button>
       </div>
     );
   }
