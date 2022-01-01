@@ -2,7 +2,7 @@ import { ImgPreview } from './note-img-preview.jsx';
 import { TodoPreview } from './TodoPreview.jsx';
 
 import { TxtPreview } from './TxtPreview.jsx';
-import { VideoPreview } from './VideoReview.jsx';
+import { VideoPreview } from './VideoPreview.jsx';
 
 export function DynamicCmp(props) {
   // console.log('note');

@@ -1,31 +1,56 @@
-import { eventBusService } from "../../../services/event-bus.service.js";
-import { noteService } from "../services/note.service.js";
-import { DynamicAdd } from "./DynamicAdd.jsx";
+import { eventBusService } from '../../../services/event-bus.service.js';
+import { noteService } from '../services/note.service.js';
+import { DynamicAdd } from './DynamicAdd.jsx';
+import { LableModal } from './LabelModal.jsx';
+
 export class AddNote extends React.Component {
   state = {
     note: {
-      title: "",
-      type: "txt",
-      txt: "",
+      title: '',
+      type: 'txt',
+      labels: [],
+      txt: '',
     },
+    isShowLableModal: false,
   };
 
   inputRef = React.createRef();
 
   componentDidMount() {
+    var note = this.props.note;
+    if (note) {
+      console.log(note);
+      var newNote = {
+        title: note.info.title,
+        type: note.type,
+        labels: note.labels,
+        txt: note.info.txt,
+      };
+      console.log(newNote);
+      this.setState({ note: newNote });
+    }
+
     this.inputRef.current.focus();
   }
-
+  setLables = (lable) => {
+    var { labels } = this.state.note;
+    labels.push(lable);
+    console.log(labels);
+    this.setState({ labels });
+  };
   onSaveNote = (ev) => {
     ev.preventDefault();
     noteService.createNote(this.state.note).then(() => {
-      eventBusService.emit("user-msg", {
-        txt: "Note Added!",
-        type: "success",
+      eventBusService.emit('user-msg', {
+        txt: 'Note Added!',
+        type: 'success',
       });
       this.props.onToggleNoteModal();
       this.props.onAdd();
     });
+  };
+  onToggleLableModal = () => {
+    this.setState({ isShowLableModal: !this.state.isShowLableModal });
   };
   addDynamicAdd = (field, value) => {
     this.setState((prevState) => ({
@@ -42,14 +67,29 @@ export class AddNote extends React.Component {
   };
   render() {
     const { title, type, txt, url } = this.state.note;
-
+    console.log(this.state.note);
     return (
       <section className="note-add">
         <div className="note-modal">
           <h1>Add Note</h1>
           <button
+            onClick={() => {
+              this.onToggleLableModal();
+            }}
+          >
+            add lable
+          </button>
+          {this.state.isShowLableModal && (
+            <LableModal
+              onToggleLableModal={this.onToggleLableModal}
+              setLable={this.setLables}
+            />
+          )}
+          <button
             className="btn-toggle-modal"
-            onClick={() => this.props.onToggleNoteModal()}
+            onClick={() => {
+              this.props.onToggleNoteModal();
+            }}
           >
             ×
           </button>

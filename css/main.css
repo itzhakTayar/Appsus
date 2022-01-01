@@ -22,3 +22,6 @@
 @import './apps/notes/noteApp.css';
 @import './apps/notes/cmps/note-edit.css';
 @import './apps/notes/cmps/lable-modal.css';
+
+@import './apps/notes/cmps/todo-item.css';
+@import './apps/notes/cmps/note-video-preview.css';

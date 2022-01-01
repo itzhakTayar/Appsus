@@ -1,0 +1,9 @@
+.todo-item{
+    justify-content: space-between;
+}
+
+.mark-todo{
+  background-color: inherit;
+  border: 0px;
+  cursor: pointer;
+}

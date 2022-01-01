@@ -2,11 +2,11 @@
   text-decoration: none;
 }
 .note-item {
-  max-height: 200px;
-  box-shadow: 2px 1px 2px 2px grey;
+  box-shadow: 2px 2px 2px 2px grey;
   display: flex;
   flex-direction: column;
   background-color: rgb(255, 255, 255);
   text-align: center;
   border-radius: 5px;
+  padding: 5px;
 }

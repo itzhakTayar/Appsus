@@ -7,6 +7,7 @@ export const noteService = {
   createNote,
   togglePin,
   duplicateNote,
+  editNote,
 };
 const STORAGE_KEY = 'noteDB';
 var gNotes = [];
@@ -31,22 +32,21 @@ function _createNotes() {
         id: 'n102',
         type: 'img',
         info: {
-          url: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/2019-honda-civic-sedan-1558453497.jpg?crop=1xw:0.9997727789138833xh;center,top&resize=480:*',
           title: 'React Is The Best!',
-          txt: 'React JS',
+          txt: '',
         },
         style: {
-          backgroundColor: '#00d',
+          backgroundColor: 'green',
         },
         isPinned: false,
         lable: [],
       },
       {
         id: 'n103',
-        txt: 'todo',
         type: 'todo',
         info: {
           title: 'Get my stuff together',
+          txt: '',
           url: '',
           todos: [
             { txt: 'Driving liscence', doneAt: null, id: 1 },
@@ -132,9 +132,8 @@ function _loadNotesFromStorage() {
 }
 
 function createNote(reciveNote) {
-  console.log(reciveNote);
   const { title, type, txt, url, todos } = reciveNote;
-  console.log(todos);
+
   const note = {
     id: utilsService.makeId(),
     type,
@@ -143,7 +142,7 @@ function createNote(reciveNote) {
       txt,
     },
     isPinned: false,
-    lable: [],
+    lable: reciveNote.labels,
     style: {
       backgroundColor: 'red',
     },
@@ -158,7 +157,7 @@ function createNote(reciveNote) {
   // getType(type, note);
 
   gNotes.unshift(note);
-
+  console.log(gNotes);
   _saveNotesToStorage();
 
   return Promise.resolve();
@@ -202,4 +201,11 @@ function duplicateNote(noteId) {
   notes.splice(noteIdx, 0, note);
   _saveNotesToStorage();
   return Promise.resolve();
+}
+
+function editNote(noteId) {
+  let notes = gNotes;
+  const note = notes.find((note) => note.id === noteId);
+  console.log('hiiiiiiii');
+  return note;
 }

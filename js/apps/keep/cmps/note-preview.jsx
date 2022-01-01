@@ -1,5 +1,5 @@
-import { DynamicCmp } from "./DynamicCmp.jsx";
-import { EditNote } from "./EditNote.jsx";
+import { DynamicCmp } from './DynamicCmp.jsx';
+import { EditNote } from './EditNote.jsx';
 
 export class NotesPreview extends React.Component {
   state = {
@@ -20,9 +20,12 @@ export class NotesPreview extends React.Component {
         <div className="note-content">
           <DynamicCmp note={this.state.note} />
         </div>
-        {isHover && (
-          <EditNote note={this.props.note} renderNote={this.props.renderNote} />
-        )}
+        <EditNote
+          isShown={isHover}
+          note={this.props.note}
+          renderNote={this.props.renderNote}
+          onToggleNoteModal={this.props.onToggleNoteModal}
+        />
       </div>
     );
   }

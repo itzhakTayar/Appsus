@@ -1,17 +1,13 @@
 export class LableModal extends React.Component {
   state = {};
 
-  setLable = (lable) => {
-    console.log(lable);
-  };
-
   render() {
     return (
       <div className="lable-modadl">
         <div
           className="critical"
           onClick={() => {
-            this.setLable('critical');
+            this.props.setLable('critical');
           }}
         >
           critical
@@ -19,7 +15,7 @@ export class LableModal extends React.Component {
         <div
           className="spam"
           onClick={() => {
-            this.setLable('spam');
+            this.props.setLable('spam');
           }}
         >
           spam
@@ -27,7 +23,7 @@ export class LableModal extends React.Component {
         <div
           className="work"
           onClick={() => {
-            this.setLable('work');
+            this.props.setLable('work');
           }}
         >
           work
@@ -35,7 +31,7 @@ export class LableModal extends React.Component {
         <div
           className="friend"
           onClick={() => {
-            this.setLable('friend');
+            this.props.setLable('friend');
           }}
         >
           friend

@@ -1,4 +1,4 @@
-import { NotesPreview } from "./note-preview.jsx";
+import { NotesPreview } from './note-preview.jsx';
 
 export class NotesList extends React.Component {
   state = {};
@@ -12,6 +12,7 @@ export class NotesList extends React.Component {
             key={note.id}
             note={note}
             renderNote={this.props.onAdd}
+            onToggleNoteModal={this.props.onToggleNoteModal}
           />
         ))}
       </section>

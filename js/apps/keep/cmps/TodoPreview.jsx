@@ -10,9 +10,9 @@ export function TodoPreview(props) {
       <ul>
         {todos.map((todo) => {
           return (
-            <li key={todo.id}>
-              {todo.txt}
-              <button>X</button>
+            <li key={todo.id} className="todo-item flex">
+              <p>{todo.txt}</p>
+              <button className="mark-todo">X</button>
             </li>
           );
         })}
