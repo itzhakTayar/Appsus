@@ -7,7 +7,9 @@ export const noteService = {
   createNote,
   togglePin,
   duplicateNote,
-  editNote,
+
+  setNoteTodos,
+  sortTodos,
 };
 const STORAGE_KEY = 'noteDB';
 var gNotes = [];
@@ -25,18 +27,20 @@ function _createNotes() {
           txt: 'Fullstack Me Baby!',
         },
         style: {
-          backgroundColor: 'green',
+          backgroundColor: '#B4F8C8',
         },
+        lable: [],
       },
       {
         id: 'n102',
         type: 'img',
         info: {
+          url: 'https://d585tldpucybw.cloudfront.net/sfimages/default-source/blogs/templates/social/reactt-light_1200x628.png?sfvrsn=43eb5f2a_2',
           title: 'React Is The Best!',
-          txt: '',
+          txt: 'React JS',
         },
         style: {
-          backgroundColor: 'green',
+          backgroundColor: '#FFAEBC',
         },
         isPinned: false,
         lable: [],
@@ -49,12 +53,20 @@ function _createNotes() {
           txt: '',
           url: '',
           todos: [
-            { txt: 'Driving liscence', doneAt: null, id: 1 },
-            { txt: 'Coding power', doneAt: 187111111, id: 2 },
+            {
+              txt: 'Driving liscence',
+              doneAt: null,
+              id: utilsService.makeId(),
+            },
+            {
+              txt: 'Coding power',
+              doneAt: 187111111,
+              id: utilsService.makeId(),
+            },
           ],
         },
         style: {
-          backgroundColor: 'green',
+          backgroundColor: '#B4F8C8',
         },
         isPinned: false,
         lable: [],
@@ -68,7 +80,7 @@ function _createNotes() {
           txt: 'Muppets!',
         },
         style: {
-          backgroundColor: '#00d',
+          backgroundColor: '#FFAEBC',
         },
         isPinned: false,
         lable: [],
@@ -79,31 +91,19 @@ function _createNotes() {
     return;
   }
   gNotes = notes;
-  // console.log(gNotes);
 }
 
-// function query(filterBy = null) {
-//   // console.log(gNotes);
-//   if (!filterBy) return Promise.resolve(gNotes);
-//   const filteredNotes = _getFilteredNotes(gNotes, filterBy);
-//   return Promise.resolve(filteredNotes);
-// }
 function query(filterBy = null) {
   const notes = gNotes;
   if (!filterBy) return Promise.resolve(notes);
   const filteredNotes = _getFilteredNotes(notes, filterBy);
-  console.log(filteredNotes);
   return Promise.resolve(filteredNotes);
 }
 
 function _getFilteredNotes(notes, filterBy) {
-  console.log(filterBy, 'filterby');
-
   let { title, type } = filterBy;
-  console.log(title);
 
   return notes.filter((note) => {
-    // console.log(note, 'kkk');
     return (
       note.info.title.toUpperCase().includes(title.toUpperCase()) &&
       note.type.toUpperCase().includes(type.toUpperCase())
@@ -123,17 +123,14 @@ function removeNote(noteId) {
 //   return Promise.resolve(note);
 // }
 
-function _saveNotesToStorage() {
-  storageService.saveToStorage(STORAGE_KEY, gNotes);
-}
-
-function _loadNotesFromStorage() {
-  return storageService.loadFromStorage(STORAGE_KEY);
+function setNoteTodos(currTodo) {
+  currTodo.doneAt = new Date();
+  _saveNotesToStorage();
+  return Promise.resolve();
 }
 
 function createNote(reciveNote) {
   const { title, type, txt, url, todos } = reciveNote;
-
   const note = {
     id: utilsService.makeId(),
     type,
@@ -144,7 +141,7 @@ function createNote(reciveNote) {
     isPinned: false,
     lable: reciveNote.labels,
     style: {
-      backgroundColor: 'red',
+      backgroundColor: 'white',
     },
   };
   if (url) {
@@ -153,13 +150,8 @@ function createNote(reciveNote) {
   if (todos) {
     note.info.todos = todos;
   }
-
-  // getType(type, note);
-
   gNotes.unshift(note);
-  console.log(gNotes);
   _saveNotesToStorage();
-
   return Promise.resolve();
 }
 
@@ -184,12 +176,7 @@ function togglePin(noteId) {
     note.isPinned = false;
     notes.push(note);
   }
-
   gNotes = notes;
-
-  // if (!note.isPinned) notes = [noteToMove, ...notes];
-  // else notes = [...notes, noteToMove];
-  // noteToMove.isPinned = !noteToMove.isPinned;
   _saveNotesToStorage();
   return Promise.resolve(noteToMove);
 }
@@ -203,9 +190,27 @@ function duplicateNote(noteId) {
   return Promise.resolve();
 }
 
-function editNote(noteId) {
-  let notes = gNotes;
-  const note = notes.find((note) => note.id === noteId);
-  console.log('hiiiiiiii');
-  return note;
+function sortTodos(todos, note) {
+  todos.sort((t1, t2) => {
+    if (t1.doneAt && !t2.doneAt) {
+      return 1;
+    } else if (!t1.doneAt && t2.doneAt) {
+      return -1;
+    }
+    return 0;
+  });
+  if (note) {
+    note.todos = todos;
+    _saveNotesToStorage();
+    return Promise.resolve();
+  }
+  return todos;
+}
+
+function _saveNotesToStorage() {
+  storageService.saveToStorage(STORAGE_KEY, gNotes);
+}
+
+function _loadNotesFromStorage() {
+  return storageService.loadFromStorage(STORAGE_KEY);
 }

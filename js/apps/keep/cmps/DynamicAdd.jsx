@@ -1,39 +1,47 @@
-import { utilsService } from '../../../services/util.service.js';
-import { TodoPreview } from './TodoPreview.jsx';
+import { utilsService } from "../../../services/util.service.js";
+import { noteService } from "../services/note.service.js";
+import { TodoPreview } from "./TodoPreview.jsx";
 
 export class DynamicAdd extends React.Component {
   state = {
-    url: '',
+    url: "",
     todos: null,
-    todosTxt: '',
+    todo: {
+      txt: "",
+      id: utilsService.makeId(),
+      doneAt: null,
+    },
   };
   handleChange = ({ target }) => {
     const field = target.name;
     const value = target.value;
-
-    this.props.changeValue(field, value);
-    this.setState((prevState) => ({
-      ...prevState,
-      [field]: value,
-    }));
+    if (field !== "txt") {
+      this.props.changeValue(field, value);
+      this.setState((prevState) => ({ ...prevState, [field]: value }));
+    } else {
+      this.setState((prevState) => ({
+        todo: { ...prevState.todo, [field]: value },
+      }));
+    }
   };
   createTodo = () => {
     let { todos } = this.state;
-    var txt = this.state.todosTxt;
+    let { todo } = this.state;
     if (!todos) todos = [];
-    todos.unshift({ txt, id: utilsService.makeId() });
-    this.props.changeValue('todos', todos);
+    todos.unshift(todo);
+    this.props.changeValue("todos", todos);
     this.setState({ todos });
+    todo = { txt: "", id: utilsService.makeId(), doneAt: null };
+    this.setState({ todo });
   };
   render() {
     let isUrl = false;
     let isTodo = false;
 
-    if (this.props.note.type === 'img' || this.props.note.type === 'video') {
+    if (this.props.note.type === "img" || this.props.note.type === "video") {
       isUrl = true;
-    } else if (this.props.note.type === 'todo') isTodo = true;
+    } else if (this.props.note.type === "todo") isTodo = true;
     let { todos } = this.state;
-    // console.log('todos', todos);
     return (
       <div>
         {isUrl && (
@@ -50,10 +58,10 @@ export class DynamicAdd extends React.Component {
           <div className="todo">
             <input
               placeholder="Enter todo"
-              name="todosTxt"
+              name="txt"
               type="text"
               id="todo"
-              value={this.state.todosTxt}
+              value={this.state.todo.txt}
               onChange={this.handleChange}
             ></input>
             <button
@@ -70,6 +78,4 @@ export class DynamicAdd extends React.Component {
       </div>
     );
   }
-
-  
 }

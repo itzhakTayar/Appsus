@@ -10,6 +10,7 @@ export class AddNote extends React.Component {
       type: 'txt',
       labels: [],
       txt: '',
+      info: null,
     },
     isShowLableModal: false,
   };
@@ -18,15 +19,17 @@ export class AddNote extends React.Component {
 
   componentDidMount() {
     var note = this.props.note;
+
     if (note) {
-      console.log(note);
       var newNote = {
         title: note.info.title,
         type: note.type,
-        labels: note.labels,
+        labels: note.lable,
         txt: note.info.txt,
+        id: note.id,
+        info: note.info,
       };
-      console.log(newNote);
+
       this.setState({ note: newNote });
     }
 
@@ -40,7 +43,8 @@ export class AddNote extends React.Component {
   };
   onSaveNote = (ev) => {
     ev.preventDefault();
-    noteService.createNote(this.state.note).then(() => {
+    var { note } = this.state;
+    noteService.createNote(note).then(() => {
       eventBusService.emit('user-msg', {
         txt: 'Note Added!',
         type: 'success',
@@ -60,7 +64,6 @@ export class AddNote extends React.Component {
   handleChange = ({ target }) => {
     const field = target.name;
     const value = target.value;
-
     this.setState((prevState) => ({
       note: { ...prevState.note, [field]: value },
     }));
@@ -112,6 +115,7 @@ export class AddNote extends React.Component {
               <option value="todo">todo</option>
             </select>
             <DynamicAdd
+              isEdit={this.props.isEdit}
               changeValue={this.addDynamicAdd}
               url={url}
               note={this.state.note}

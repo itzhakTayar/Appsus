@@ -47,6 +47,14 @@ export class EmailAdd extends React.Component {
   onSendEmail = (event) => {
     event.preventDefault();
     var { email } = this.state;
+    if (email.toInput === "" || !email.toInput) {
+      clearInterval(this.gSaveInterval);
+      eventBusService.emit("user-msg", {
+        txt: "Please Insert Email Reciver!",
+        type: "warning",
+      });
+      return;
+    }
     emailService.addEmail(email).then(() => {
       clearInterval(this.gSaveInterval);
       eventBusService.emit("user-msg", {

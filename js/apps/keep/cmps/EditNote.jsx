@@ -28,8 +28,7 @@ export class EditNote extends React.Component {
 
   onChangeBgc = (noteId, color) => {
     noteService.changeBgc(noteId, color).then((note) => {
-      this.setState({ note });
-      this.onToggleColorMenu();
+      this.props.renderNote();
     });
   };
   onToggleColorMenu = () => {
@@ -80,6 +79,7 @@ export class EditNote extends React.Component {
         <button>send</button>
         {this.state.isShowEditModal && (
           <AddNote
+            isEdit={true}
             note={this.state.note}
             onToggleNoteModal={this.props.onToggleNoteModal}
           />

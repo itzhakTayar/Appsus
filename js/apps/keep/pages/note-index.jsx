@@ -1,7 +1,7 @@
-import { NotesList } from '../cmps/note-list.jsx';
-import { NotesHeader } from '../cmps/notes-header.jsx';
-import { noteService } from '../services/note.service.js';
-import { AddNote } from '../cmps/AddNote.jsx';
+import { NotesList } from "../cmps/note-list.jsx";
+import { NotesHeader } from "../cmps/notes-header.jsx";
+import { noteService } from "../services/note.service.js";
+import { AddNote } from "../cmps/AddNote.jsx";
 
 export class NoteApp extends React.Component {
   state = {
