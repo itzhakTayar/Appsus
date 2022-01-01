@@ -4,13 +4,17 @@ export function VideoPreview({ note }) {
   };
 
   return (
-    <iframe
-      src={`https://www.youtube.com/embed/${embedUrl(note.info.url)}`}
-      frameBorder="0"
-      allow="autoplay; encrypted-media"
-      allowFullScreen
-      title="video"
-      className="video-iframe"
-    />
+    <section>
+      {note.info.title && <h1>{note.info.title}</h1>}
+      {note.info.txt && <p>{note.info.txt}</p>}
+      <iframe
+        src={`https://www.youtube.com/embed/${embedUrl(note.info.url)}`}
+        frameBorder="0"
+        allow="autoplay; encrypted-media"
+        allowFullScreen
+        title="video"
+        className="video-iframe"
+      />
+    </section>
   );
 }

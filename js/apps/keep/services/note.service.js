@@ -29,7 +29,7 @@ function _createNotes() {
         style: {
           backgroundColor: '#B4F8C8',
         },
-        lable: [],
+        labels: [],
       },
 
       {
@@ -44,7 +44,7 @@ function _createNotes() {
           backgroundColor: '#FFAEBC',
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
       {
         id: utilsService.makeId(),
@@ -58,7 +58,7 @@ function _createNotes() {
           backgroundColor: '#FFAEBC',
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
 
       {
@@ -73,7 +73,7 @@ function _createNotes() {
           backgroundColor: '#FFAEBC',
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
       {
         id: utilsService.makeId(),
@@ -87,7 +87,7 @@ function _createNotes() {
           backgroundColor: '#FFAEBC',
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
       {
         id: utilsService.makeId(),
@@ -101,7 +101,7 @@ function _createNotes() {
           backgroundColor: '#FFAEBC',
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
       {
         id: utilsService.makeId(),
@@ -127,7 +127,7 @@ function _createNotes() {
           backgroundColor: '#B4F8C8',
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
       {
         id: utilsService.makeId(),
@@ -141,7 +141,7 @@ function _createNotes() {
           backgroundColor: '#FFAEBC',
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
       {
         id: utilsService.makeId(),
@@ -155,7 +155,7 @@ function _createNotes() {
           backgroundColor: '#FFAEBC',
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
       {
         id: utilsService.makeId(),
@@ -169,7 +169,7 @@ function _createNotes() {
           backgroundColor: '#FFAEBC',
         },
         isPinned: false,
-        lable: [],
+        labels: [],
       },
     ];
     gNotes = notes;
@@ -203,11 +203,10 @@ function removeNote(noteId) {
   _saveNotesToStorage();
   return Promise.resolve();
 }
-// function getNoteById(noteId) {
-//   const notes = _loadnotesFromStorage();
-//   const note = notes.find((note) => note.id === noteId);
-//   return Promise.resolve(note);
-// }
+function _getNoteById(noteId) {
+  const note = gNotes.find((note) => note.id === noteId);
+  return note;
+}
 
 function setNoteTodos(currTodo) {
   currTodo.doneAt = new Date();
@@ -215,8 +214,19 @@ function setNoteTodos(currTodo) {
   return Promise.resolve();
 }
 
+function _getNoteIdx(id) {
+  var idx = gNotes.findIndex((note) => note.id === id);
+  return idx;
+}
+
 function createNote(reciveNote) {
-  const { title, type, txt, url, todos } = reciveNote;
+  var oldNote = _getNoteById(reciveNote.id);
+  console.log(reciveNote);
+  const { title, type, txt, todos } = reciveNote;
+  var { url } = reciveNote;
+  if (reciveNote.info.url) {
+    url = reciveNote.info.url;
+  }
   const note = {
     id: utilsService.makeId(),
     type,
@@ -224,19 +234,29 @@ function createNote(reciveNote) {
       title,
       txt,
     },
-    isPinned: false,
-    lable: reciveNote.labels,
-    style: {
-      backgroundColor: 'white',
-    },
+    labels: reciveNote.labels,
   };
+  if (!oldNote) {
+    (note.style = {
+      backgroundColor: '#FFAEBC',
+    }),
+      (note.isPinned = false);
+  }
   if (url) {
     note.info.url = url;
   }
   if (todos) {
     note.info.todos = todos;
   }
-  gNotes.unshift(note);
+  if (oldNote) {
+    oldNote.info = note.info;
+    oldNote.type = note.type;
+    oldNote.labels = note.labels;
+    var idx = _getNoteIdx(oldNote.id);
+    gNotes[idx] = oldNote;
+  } else {
+    gNotes.unshift(note);
+  }
   _saveNotesToStorage();
   return Promise.resolve();
 }

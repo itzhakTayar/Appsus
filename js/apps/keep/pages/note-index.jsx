@@ -3,11 +3,14 @@ import { NotesHeader } from "../cmps/notes-header.jsx";
 import { noteService } from "../services/note.service.js";
 import { AddNote } from "../cmps/AddNote.jsx";
 
+const { NavLink } = ReactRouterDOM;
+
 export class NoteApp extends React.Component {
   state = {
     notes: [],
     filterBy: null,
     isShowNoteModal: false,
+    noteToEdit: null,
   };
 
   componentDidMount() {
@@ -24,26 +27,55 @@ export class NoteApp extends React.Component {
     this.setState({ filterBy }, this.loadNotes);
   };
 
-  onToggleNoteModal = () => {
-    this.setState({ isShowNoteModal: !this.state.isShowNoteModal });
+  componentDidUpdate(prevProps, prevState) {
+    var notesUrl = this.props.location.pathname;
+    if (prevProps.location.pathname !== notesUrl) {
+      if (notesUrl.includes("create")) {
+        this.setState({ isShowNoteModal: true });
+        return;
+      } else if (prevProps.location.pathname.includes("create")) {
+        this.setState({ isShowNoteModal: false });
+        return;
+      }
+    }
+  }
+
+  toggleNoteModalWithParms = (noteToEdit = null) => {
+    var isModalOpen = !this.state.isShowNoteModal;
+    if (noteToEdit && isModalOpen) this.setState({ noteToEdit });
+    else {
+      noteToEdit = null;
+      this.setState({ noteToEdit });
+    }
+    var str = isModalOpen ? "/create" : "";
+    this.props.history.push(`/notes${str}`);
   };
 
   render() {
     const { notes } = this.state;
+    var { noteToEdit } = this.state;
     return (
       <section className="note-app">
         <NotesHeader setFilter={this.onSetFilter} />
-        <button onClick={this.onToggleNoteModal}>Add note</button>
+        <NavLink
+          to="/notes/create"
+          className="add-note-btn clean-link"
+          onClick={() => {}}
+        >
+          {" "}
+          Add Note
+        </NavLink>
 
         <NotesList
           notes={notes}
           onAdd={this.loadNotes}
-          onToggleNoteModal={this.onToggleNoteModal}
+          openAdd={this.toggleNoteModalWithParms}
         />
         {this.state.isShowNoteModal && (
           <AddNote
             onAdd={this.loadNotes}
-            onToggleNoteModal={this.onToggleNoteModal}
+            closeNoteModal={this.toggleNoteModalWithParms}
+            noteToEdit={noteToEdit}
           />
         )}
       </section>

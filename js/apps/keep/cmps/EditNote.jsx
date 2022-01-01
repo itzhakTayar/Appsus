@@ -1,20 +1,19 @@
-import { eventBusService } from '../../../services/event-bus.service.js';
-import { noteService } from '../services/note.service.js';
-import { AddNote } from './AddNote.jsx';
-import { ChangeColor } from './NoteColor.jsx';
+import { eventBusService } from "../../../services/event-bus.service.js";
+import { noteService } from "../services/note.service.js";
+import { AddNote } from "./AddNote.jsx";
+import { ChangeColor } from "./NoteColor.jsx";
 
 export class EditNote extends React.Component {
   state = {
     isColorMenuOn: false,
     note: this.props.note,
-    isShowEditModal: false,
   };
   onRemoveNote = () => {
     var noteId = this.state.note.id;
     noteService.removeNote(noteId).then(() => {
-      eventBusService.emit('user-msg', {
-        txt: 'Note Deleted!',
-        type: 'warning',
+      eventBusService.emit("user-msg", {
+        txt: "Note Deleted!",
+        type: "warning",
       });
       this.props.renderNote();
     });
@@ -36,12 +35,12 @@ export class EditNote extends React.Component {
   };
 
   onEditNote = () => {
-    this.setState({ isShowEditModal: !this.state.isShowEditModal });
+    this.props.openAdd(this.state.note);
   };
   render() {
     var { note } = this.state;
     if (!note) return <React.Fragment></React.Fragment>;
-    var classNameEdit = this.props.isShown ? 'shown' : 'closed';
+    var classNameEdit = this.props.isShown ? "shown" : "closed";
     return (
       <div className={`note-edit ${classNameEdit} `}>
         <button onClick={this.onRemoveNote}>delete</button>
@@ -67,7 +66,7 @@ export class EditNote extends React.Component {
             this.onDuplicateNote(note.id);
           }}
         >
-          duplicate{' '}
+          duplicate{" "}
         </button>
         <button
           onClick={() => {
@@ -76,15 +75,7 @@ export class EditNote extends React.Component {
         >
           edit
         </button>
-        <button>send</button>
-        {this.state.isShowEditModal && (
-          <AddNote
-            isEdit={true}
-            note={this.state.note}
-            onToggleNoteModal={this.props.onToggleNoteModal}
-          />
-        )}
-        ;
+        <button>send</button>;
       </div>
     );
   }

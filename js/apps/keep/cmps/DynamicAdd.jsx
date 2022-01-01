@@ -11,7 +11,27 @@ export class DynamicAdd extends React.Component {
       id: utilsService.makeId(),
       doneAt: null,
     },
+    open: false,
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state.open) {
+      if (this.props.note.info) {
+        if (this.props.note.info.todos) {
+          var { todos } = this.props.note.info;
+          this.setState({ todos });
+          this.setState({ open: true });
+        }
+         else if (this.props.note.info.url) {
+          var { url } = this.props.note.info;
+          console.log(url);
+          this.setState({ url });
+          this.setState({ open: true });
+        }
+      }
+    }
+  }
+
   handleChange = ({ target }) => {
     const field = target.name;
     const value = target.value;

@@ -18,21 +18,17 @@ export class AddNote extends React.Component {
   inputRef = React.createRef();
 
   componentDidMount() {
-    var note = this.props.note;
-
-    if (note) {
-      var newNote = {
-        title: note.info.title,
-        type: note.type,
-        labels: note.lable,
-        txt: note.info.txt,
-        id: note.id,
-        info: note.info,
-      };
-
+    var { noteToEdit } = this.props;
+    if (noteToEdit) {
+      var newNote = {};
+      newNote.title = noteToEdit.info.title;
+      newNote.type = noteToEdit.type;
+      newNote.labels = noteToEdit.labels;
+      newNote.txt = noteToEdit.info.txt;
+      newNote.id = noteToEdit.id;
+      newNote.info = noteToEdit.info;
       this.setState({ note: newNote });
     }
-
     this.inputRef.current.focus();
   }
   setLables = (lable) => {
@@ -44,21 +40,22 @@ export class AddNote extends React.Component {
   onSaveNote = (ev) => {
     ev.preventDefault();
     var { note } = this.state;
-    let isBlank = this.preventBlankNote(note);
+    // console.log(note);
+    // let isBlank = this.preventBlankNote(note);
 
-    if (isBlank) {
-      eventBusService.emit('user-msg', {
-        txt: 'cant add blank note',
-        type: 'warning',
-      });
-      return;
-    }
+    // if (isBlank) {
+    //   eventBusService.emit('user-msg', {
+    //     txt: 'cant add blank note',
+    //     type: 'warning',
+    //   });
+    //   return;
+    // }
     noteService.createNote(note).then(() => {
       eventBusService.emit('user-msg', {
         txt: 'Note Added!',
         type: 'success',
       });
-      this.props.onToggleNoteModal();
+      this.props.closeNoteModal();
       this.props.onAdd();
     });
   };
@@ -92,7 +89,6 @@ export class AddNote extends React.Component {
   };
   render() {
     const { title, type, txt, url } = this.state.note;
-    console.log(this.state.note);
     return (
       <section className="note-add">
         <div className="note-modal">
@@ -113,7 +109,7 @@ export class AddNote extends React.Component {
           <button
             className="btn-toggle-modal"
             onClick={() => {
-              this.props.onToggleNoteModal();
+              this.props.closeNoteModal();
             }}
           >
             ×
