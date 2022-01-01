@@ -14,15 +14,19 @@ export class EmailPreview extends React.Component {
     if (!email) return <React.Fragment></React.Fragment>;
     var { isFullDispay } = this.props;
     var sectionClass = isFullDispay ? "email-details-preview" : "email-preview";
+    var navScreen = isFullDispay ? "/email/" : `/email/:emailAt/${email.id}`;
     return (
       <section className={sectionClass}>
         <div className="preview-header flex">
           <h1>{email.subject}!</h1>
           <div className="preview-header-btns">
-            <NavLink className="clean-link" to={`/email/:emailAt/${email.id}`}>
+            <NavLink className="clean-link" to={navScreen}>
               ⏍
             </NavLink>
-            <NavLink className="clean-link" to="/book">
+            <NavLink
+              className="clean-link"
+              to={`/notes/create/?title=${email.subject}&txt=${email.body}`}
+            >
               ⌲
             </NavLink>
           </div>
