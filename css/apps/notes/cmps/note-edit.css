@@ -4,9 +4,12 @@
   cursor: pointer;
 }
 .color-input {
+  background-color: whitesmoke;
   position: absolute;
   display: flex;
   align-items: center;
+  border-radius: 5px;
+  padding: 3px;
   gap: 2px;
 }
 .color-value {

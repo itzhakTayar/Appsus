@@ -1,0 +1,15 @@
+
+
+.main-layout{
+    max-width: 95%;
+    margin: auto;
+}
+
+@media (min-width:450)
+{
+    .main-layout{
+        max-width: 450;
+        margin: auto;
+    }
+   
+}

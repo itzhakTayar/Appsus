@@ -21,8 +21,7 @@ export class DynamicAdd extends React.Component {
           var { todos } = this.props.note.info;
           this.setState({ todos });
           this.setState({ open: true });
-        }
-         else if (this.props.note.info.url) {
+        } else if (this.props.note.info.url) {
           var { url } = this.props.note.info;
           console.log(url);
           this.setState({ url });
@@ -85,12 +84,13 @@ export class DynamicAdd extends React.Component {
               onChange={this.handleChange}
             ></input>
             <button
+              className="add-todo-btn"
               type="button"
               onClick={() => {
                 this.createTodo();
               }}
             >
-              add
+              Add
             </button>
             {todos && <TodoPreview todos={todos} />}
           </div>

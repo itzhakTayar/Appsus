@@ -75,15 +75,6 @@ export class NoteApp extends React.Component {
     return (
       <section className="note-app">
         <NotesHeader setFilter={this.onSetFilter} />
-        <NavLink
-          to="/notes/create"
-          className="add-note-btn clean-link"
-          onClick={() => {}}
-        >
-          {" "}
-          Add Note
-        </NavLink>
-
         <NotesList
           notes={notes}
           onAdd={this.loadNotes}

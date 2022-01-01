@@ -1,0 +1,9 @@
+
+
+.note-filter input {
+    border: 0px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px lightblue;
+    background-color: inherit;
+    outline: none;
+  }

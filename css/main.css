@@ -1,34 +1,29 @@
-@import './parts/base.css';
-@import './parts/helpers.css';
+@import "./parts/base.css";
+@import "./parts/helpers.css";
+@import "./parts/main-layouts.css";
 
 /* Email */
-@import './apps/email/emailApp.css';
-@import './apps/email/cmps/emailHeader.css';
-@import './apps/email/cmps/emailList.css';
-@import './apps/email/cmps/emailFilters.css';
-@import './apps/email/cmps/addEmail.css';
-@import './apps/email/cmps/emailPreview.css';
-@import './apps/email/emailDetails.css';
+@import "./apps/email/emailApp.css";
+@import "./apps/email/cmps/emailHeader.css";
+@import "./apps/email/cmps/emailList.css";
+@import "./apps/email/cmps/emailFilters.css";
+@import "./apps/email/cmps/addEmail.css";
+@import "./apps/email/cmps/emailPreview.css";
+@import "./apps/email/emailDetails.css";
 
 /* CMPS */
-@import './cmps/app-header.css';
-@import './cmps/user-msg.css';
+@import "./cmps/app-header.css";
+@import "./cmps/user-msg.css";
 
 /* NOTES */
-@import './apps/notes/cmps/note-add.css';
-@import './apps/notes/cmps/note-img-preview.css';
-@import './apps/notes/cmps/notes.preview.css';
-@import './apps/notes/cmps/note-list.css';
-@import './apps/notes/noteApp.css';
-@import './apps/notes/cmps/note-edit.css';
-@import './apps/notes/cmps/lable-modal.css';
-
-@import './apps/notes/cmps/todo-item.css';
-@import './apps/notes/cmps/note-video-preview.css';
-.fa-test {
-  width: 50px;
-  height: 50px;
-  /* position: fixed; */
-  /* left: 50%;
-  top: 50%; */
-}
+@import "./apps/notes/cmps/note-add.css";
+@import "./apps/notes/cmps/note-img-preview.css";
+@import "./apps/notes/cmps/notes.preview.css";
+@import "./apps/notes/cmps/note-list.css";
+@import "./apps/notes/noteApp.css";
+@import "./apps/notes/cmps/note-edit.css";
+@import "./apps/notes/cmps/lable-modal.css";
+@import "./apps/notes/cmps/note-txt-preview.css";
+@import "./apps/notes/cmps/note-filter.css";
+@import "./apps/notes/cmps/todo-item.css";
+@import "./apps/notes/cmps/note-video-preview.css";

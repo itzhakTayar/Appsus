@@ -33,7 +33,7 @@ export class NoteFilter extends React.Component {
     } = this.state;
 
     return (
-      <form className="note-filter" onSubmit={this.onSubmitFilter}>
+      <form className="note-filter flex" onSubmit={this.onSubmitFilter}>
         <label htmlFor="by-title">By Title:</label>
         <input
           type="text"

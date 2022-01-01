@@ -95,13 +95,24 @@ export class AddNote extends React.Component {
     return (
       <section className="note-add">
         <div className="note-modal">
-          <h1>Add Note</h1>
+          <div className="note-modal-header">
+            <h1>Add Note</h1>
+            <button
+              className="btn-toggle-modal"
+              onClick={() => {
+                this.props.closeNoteModal();
+              }}
+            >
+              ❌
+            </button>
+          </div>
+
           <button
             onClick={() => {
               this.onToggleLableModal();
             }}
           >
-            add lable
+            Add lable
           </button>
           {this.state.isShowLableModal && (
             <LableModal
@@ -109,19 +120,11 @@ export class AddNote extends React.Component {
               setLable={this.setLables}
             />
           )}
-          <button
-            className="btn-toggle-modal"
-            onClick={() => {
-              this.props.closeNoteModal();
-            }}
-          >
-            ×
-          </button>
           <form onSubmit={this.onSaveNote} className="note-form">
-            <label htmlFor="title">title:</label>
+            <label htmlFor="title">Title:</label>
             <input
               ref={this.inputRef}
-              placeholder="Enter title"
+              placeholder="Enter Title"
               name="title"
               type="text"
               id="title"
@@ -130,10 +133,10 @@ export class AddNote extends React.Component {
               autoComplete="off"
             />
             <select name="type" onChange={this.handleChange} value={type}>
-              <option value="txt">text</option>
-              <option value="img">image</option>
-              <option value="video">video</option>
-              <option value="todo">todo</option>
+              <option value="txt">Text</option>
+              <option value="img">Image</option>
+              <option value="video">Video</option>
+              <option value="todo">Todo</option>
             </select>
             <DynamicAdd
               isEdit={this.props.isEdit}
@@ -143,12 +146,11 @@ export class AddNote extends React.Component {
             />
             <textarea
               name="txt"
-              cols="30"
-              rows="10"
+      
               value={txt}
               onChange={this.handleChange}
             ></textarea>
-            <button onClick={this.click}>Add Note</button>
+            <button onClick={this.click} className="add-btn-modal">Add Note</button>
           </form>
         </div>
       </section>

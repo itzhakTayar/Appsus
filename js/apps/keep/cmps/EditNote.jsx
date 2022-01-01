@@ -75,9 +75,7 @@ export class EditNote extends React.Component {
           onClick={() => {
             this.onEditNote();
           }}
-        >
-          edit
-        </button>
+        ></button>
 
         <NavLink
           className="clean-link"

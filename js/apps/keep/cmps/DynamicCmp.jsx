@@ -13,7 +13,6 @@ export function DynamicCmp(props) {
     case 'video':
       return <VideoPreview note={props.note} />;
     case 'todo':
-      // console.log('note check undefind', props.note);
       return (
         <TodoPreview
           note={props.note}

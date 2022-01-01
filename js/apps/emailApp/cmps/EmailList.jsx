@@ -73,7 +73,7 @@ export class EmailList extends React.Component {
           var showStar = isHovered || email.isStar;
           var isDraft = email.isDraft;
           var emailColor = email.isRead ? "grey" : "white";
-          var isSent = (emailService.checkIfSent(email))
+          var isSent = emailService.checkIfSent(email);
           return (
             <div className={`div-email-item ${emailColor}`} key={email.id}>
               <div
@@ -88,8 +88,12 @@ export class EmailList extends React.Component {
                 }}
               >
                 <div className="email-start flex">
-                 {!isSent&&<h1 className="email-senderName">{email.fromName}</h1>}
-                 {isSent&&<h1 className="email-senderName">{"To: "+email.to}</h1>}
+                  {!isSent && (
+                    <h1 className="email-senderName">{email.fromName}</h1>
+                  )}
+                  {isSent && (
+                    <h1 className="email-senderName">{"To: " + email.to}</h1>
+                  )}
                   {showStar && (
                     <p
                       onClick={() => this.onToggleStar(email)}

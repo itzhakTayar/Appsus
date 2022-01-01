@@ -14,8 +14,8 @@ export class TodoPreview extends React.Component {
       <section>
         {note && (
           <div className="todo-note-header">
-            <h1 className="note-preview-title">{note.info.title}</h1>
-            <h2>{note.info.txt}</h2>
+            <h1 className="noteText-title">{note.info.title}</h1>
+            <h2 className="noteText-txt">{note.info.txt}</h2>
           </div>
         )}
         <ul>
