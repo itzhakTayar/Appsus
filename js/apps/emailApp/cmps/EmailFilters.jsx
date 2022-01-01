@@ -23,15 +23,15 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            if (!isFullDispay) props.setFilter("sent", false);
+            if (!isFullDispay) props.setFilter('sent', false);
             else {
-              props.navigateToEmail("inbox");
+              props.navigateToEmail('inbox');
             }
           }}
         >
           inbox
           {unReadEmails > 0 && (
-            <p className="unread-diplay">{"(" + unReadEmails + ")"}</p>
+            <p className="unread-diplay">{'(' + unReadEmails + ')'}</p>
           )}
         </NavLink>
         <NavLink
@@ -39,9 +39,9 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            if (!isFullDispay) props.setFilter("sent", true);
+            if (!isFullDispay) props.setFilter('sent', true);
             else {
-              props.navigateToEmail("sent");
+              props.navigateToEmail('sent');
             }
           }}
         >
@@ -52,9 +52,9 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            if (!isFullDispay) props.setFilter("trash", true);
+            if (!isFullDispay) props.setFilter('trash', true);
             else {
-              props.navigateToEmail("trash");
+              props.navigateToEmail('trash');
             }
           }}
         >
@@ -65,9 +65,9 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            if (!isFullDispay) props.setFilter("star", true);
+            if (!isFullDispay) props.setFilter('star', true);
             else {
-              props.navigateToEmail("star");
+              props.navigateToEmail('star');
             }
           }}
         >
@@ -78,9 +78,9 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            if (!isFullDispay) props.setFilter("draft", true);
+            if (!isFullDispay) props.setFilter('draft', true);
             else {
-              props.navigateToEmail("draft");
+              props.navigateToEmail('draft');
             }
           }}
         >
@@ -91,9 +91,9 @@ export function EmailFilters(props) {
           className="email-filter-item clean-link"
           activeClassName="my-active-filter"
           onClick={() => {
-            if (!isFullDispay) props.setFilter("spam", true);
+            if (!isFullDispay) props.setFilter('spam', true);
             else {
-              props.navigateToEmail("draft");
+              props.navigateToEmail('draft');
             }
           }}
         >

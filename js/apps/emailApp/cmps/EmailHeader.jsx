@@ -12,6 +12,9 @@ export function EmailHeader({ onSearch, onSetRead, onSetSort }) {
               onSetSort(ev.target.value);
             }}
           >
+            <option disabled selected value>
+              Sort
+            </option>
             <option value="Date">Date</option>
             <option value="Title">Title</option>
           </select>

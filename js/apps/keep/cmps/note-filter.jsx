@@ -44,6 +44,7 @@ export class NoteFilter extends React.Component {
         />
         <label htmlFor="by-type">type:</label>
         <select id="by-type" name="type" onChange={this.handleChange}>
+          <option value="">all</option>
           <option value="img">image</option>
           <option value="todo">todo</option>
           <option value="txt">text</option>
