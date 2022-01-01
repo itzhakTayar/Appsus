@@ -15,6 +15,10 @@ export class NoteApp extends React.Component {
 
   componentDidMount() {
     this.loadNotes();
+    if (this.props.location.pathname.includes("create/?")) {
+      this.setState({ isShowNoteModal: true });
+      return;
+    }
   }
 
   loadNotes = () => {
@@ -38,6 +42,7 @@ export class NoteApp extends React.Component {
         return;
       }
     }
+   
   }
 
   toggleNoteModalWithParms = (noteToEdit = null) => {

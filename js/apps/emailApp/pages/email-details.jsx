@@ -33,8 +33,12 @@ export class EmailDetails extends React.Component {
             unReadEmails={unReadEmails}
             isFullDispay={true}
           />
-          <div className="email-details-Fullpreview">
+          <div className="email-details-Fullpreview flex">
             <EmailPreview email={email} isFullDispay={true} />
+            <div className="email-details-btns flex">
+              <button>1</button>
+              <button>2</button>
+            </div>
           </div>
         </div>
       </section>
