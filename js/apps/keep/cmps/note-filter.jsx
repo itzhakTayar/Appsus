@@ -1,8 +1,8 @@
 export class NoteFilter extends React.Component {
   state = {
     filterBy: {
-      title: '',
-      type: '',
+      title: "",
+      type: "",
     },
   };
 
@@ -24,7 +24,7 @@ export class NoteFilter extends React.Component {
   };
 
   cleanForm = () => {
-    this.setState({ filterBy: { title: '', type: '' } });
+    this.setState({ filterBy: { title: "", type: "" } });
   };
 
   render() {
@@ -34,22 +34,27 @@ export class NoteFilter extends React.Component {
 
     return (
       <form className="note-filter flex" onSubmit={this.onSubmitFilter}>
-        <label htmlFor="by-title">By Title:</label>
-        <input
-          type="text"
-          id="by-title"
-          name="title"
-          value={title}
-          onChange={this.handleChange}
-        />
-        <label htmlFor="by-type">type:</label>
-        <select id="by-type" name="type" onChange={this.handleChange}>
-          <option value="">all</option>
-          <option value="img">image</option>
-          <option value="todo">todo</option>
-          <option value="txt">text</option>
-          <option value="video">video</option>
-        </select>
+        <label htmlFor="by-title">
+          By Title:{" "}
+          <input
+            type="text"
+            id="by-title"
+            name="title"
+            value={title}
+            onChange={this.handleChange}
+          />
+        </label>
+
+        <label htmlFor="by-type">
+          Type:{" "}
+          <select id="by-type" name="type" onChange={this.handleChange}>
+            <option value="">All</option>
+            <option value="img">Image</option>
+            <option value="todo">To-Do</option>
+            <option value="txt">Text</option>
+            <option value="video">Video</option>
+          </select>
+        </label>
       </form>
     );
   }

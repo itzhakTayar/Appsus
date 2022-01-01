@@ -107,13 +107,13 @@ export class AddNote extends React.Component {
             </button>
           </div>
 
-          <button
+          {/* <button
             onClick={() => {
               this.onToggleLableModal();
             }}
           >
             Add lable
-          </button>
+          </button> */}
           {this.state.isShowLableModal && (
             <LableModal
               onToggleLableModal={this.onToggleLableModal}
@@ -146,11 +146,12 @@ export class AddNote extends React.Component {
             />
             <textarea
               name="txt"
-      
               value={txt}
               onChange={this.handleChange}
             ></textarea>
-            <button onClick={this.click} className="add-btn-modal">Add Note</button>
+            <button onClick={this.click} className="add-btn-modal">
+              Add Note
+            </button>
           </form>
         </div>
       </section>

@@ -68,3 +68,10 @@
   font-weight: 500;
   font-size: 1.4rem;
 }
+
+.email-details-btns button{
+  background-color: inherit;
+  border: 0;
+  font-size: 3rem;
+  cursor: pointer;
+}

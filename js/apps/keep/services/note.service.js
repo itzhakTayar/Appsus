@@ -27,7 +27,7 @@ function _createNotes() {
           txt: "Fullstack Me Baby!",
         },
         style: {
-          backgroundColor: "#B4F8C8",
+          backgroundColor: utilsService.getRandomColor(),
         },
         labels: [],
       },
@@ -55,7 +55,7 @@ function _createNotes() {
           txt: "",
         },
         style: {
-          backgroundColor: "#FFAEBC",
+          backgroundColor: utilsService.getRandomColor(),
         },
         isPinned: false,
         labels: [],
@@ -70,7 +70,7 @@ function _createNotes() {
           txt: "",
         },
         style: {
-          backgroundColor: "#FFAEBC",
+          backgroundColor: utilsService.getRandomColor(),
         },
         isPinned: false,
         labels: [],
@@ -84,7 +84,7 @@ function _createNotes() {
           txt: "",
         },
         style: {
-          backgroundColor: "#FFAEBC",
+          backgroundColor: utilsService.getRandomColor(),
         },
         isPinned: false,
         labels: [],
@@ -98,7 +98,7 @@ function _createNotes() {
           txt: "",
         },
         style: {
-          backgroundColor: "#FFAEBC",
+          backgroundColor: utilsService.getRandomColor(),
         },
         isPinned: false,
         labels: [],
@@ -124,7 +124,7 @@ function _createNotes() {
           ],
         },
         style: {
-          backgroundColor: "#B4F8C8",
+          backgroundColor: utilsService.getRandomColor(),
         },
         isPinned: false,
         labels: [],
@@ -138,7 +138,7 @@ function _createNotes() {
           txt: "Muppets!",
         },
         style: {
-          backgroundColor: "#FFAEBC",
+          backgroundColor: utilsService.getRandomColor(),
         },
         isPinned: false,
         labels: [],
@@ -152,7 +152,7 @@ function _createNotes() {
           txt: "Great Time!",
         },
         style: {
-          backgroundColor: "#FFAEBC",
+          backgroundColor: utilsService.getRandomColor(),
         },
         isPinned: false,
         labels: [],
@@ -166,7 +166,7 @@ function _createNotes() {
           txt: "Let Work!",
         },
         style: {
-          backgroundColor: "#FFAEBC",
+          backgroundColor: utilsService.getRandomColor(),
         },
         isPinned: false,
         labels: [],

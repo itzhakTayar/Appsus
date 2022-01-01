@@ -1,7 +1,7 @@
 
 .app-header{
-    height: 15%;
-    background-color: whitesmoke;
+    height: 150px;
+    background-color: rgb(247, 143, 7);
     justify-content: space-between;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .main-nav .my-active {
-    color: darkgoldenrod;
+    color: rgb(8, 129, 243);
 }  
 .header-link-item
 {

@@ -2,10 +2,11 @@ export function EmailHeader({ onSearch, onSetRead, onSetSort }) {
   return (
     <header className="email-header">
       <div className="header-content">
-        <h1>Email Header</h1>
+        <h1 className="email-logo">Mister Email</h1>
 
         <div className="email-head-filters">
           <select
+            className="sortBy"
             name="sortBy"
             id="sortSelect"
             onChange={(ev) => {

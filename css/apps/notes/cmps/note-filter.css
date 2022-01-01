@@ -1,5 +1,9 @@
 .note-filter{
   height: 50%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .note-filter input {
@@ -8,4 +12,5 @@
     box-shadow: 1px 1px 1px 1px lightblue;
     background-color: inherit;
     outline: none;
+    width: 60%;
   }
