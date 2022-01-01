@@ -7,6 +7,7 @@ export class AddNote extends React.Component {
       title: "",
       type: "txt",
       txt: "",
+      info: null,
     },
   };
 
@@ -18,7 +19,8 @@ export class AddNote extends React.Component {
 
   onSaveNote = (ev) => {
     ev.preventDefault();
-    noteService.createNote(this.state.note).then(() => {
+    var { note } = this.state;
+    noteService.createNote(note).then(() => {
       eventBusService.emit("user-msg", {
         txt: "Note Added!",
         type: "success",
@@ -35,7 +37,6 @@ export class AddNote extends React.Component {
   handleChange = ({ target }) => {
     const field = target.name;
     const value = target.value;
-
     this.setState((prevState) => ({
       note: { ...prevState.note, [field]: value },
     }));

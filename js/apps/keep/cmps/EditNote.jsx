@@ -25,16 +25,12 @@ export class EditNote extends React.Component {
 
   onChangeBgc = (noteId, color) => {
     noteService.changeBgc(noteId, color).then((note) => {
-      this.setState({ note });
-      this.onToggleColorMenu();
+      this.props.renderNote();
     });
   };
   onToggleColorMenu = () => {
     this.setState({ isColorMenuOn: !this.state.isColorMenuOn });
   };
-  onSetPin() {
-    console.log("pin seted..");
-  }
   render() {
     var { note } = this.state;
     if (!note) return <React.Fragment></React.Fragment>;

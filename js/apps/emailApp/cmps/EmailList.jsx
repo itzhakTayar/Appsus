@@ -72,8 +72,9 @@ export class EmailList extends React.Component {
           var trashIcon = isTrash ? "❌" : "🗑";
           var showStar = isHovered || email.isStar;
           var isDraft = email.isDraft;
+          var emailColor = email.isRead ? "grey" : "white";
           return (
-            <div className="div-email-item" key={email.id}>
+            <div className={`div-email-item ${emailColor}`} key={email.id}>
               <div
                 key={email.id}
                 className="email-item"

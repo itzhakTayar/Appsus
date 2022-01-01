@@ -4,10 +4,9 @@
   cursor: pointer;
 }
 .color-input {
+  position: absolute;
   display: flex;
-  width: 100px;
-  height: 100px;
-  border: black 1px solid;
+  align-items: center;
   gap: 2px;
 }
 .color-value {
