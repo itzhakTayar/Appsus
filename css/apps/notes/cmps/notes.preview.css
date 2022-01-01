@@ -11,3 +11,20 @@
   padding: 5px;
   font-family: monospace;
 }
+.show {
+  opacity: 1;
+}
+.hide {
+  opacity: 0;
+}
+.note-content {
+  position: relative;
+}
+.note-content .fa-thumbtack {
+  position: absolute;
+  top: 0%;
+  right: -8px;
+  background-color: inherit;
+  border: none;
+  font-size: 20px;
+}

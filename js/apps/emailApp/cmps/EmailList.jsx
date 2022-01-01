@@ -1,6 +1,6 @@
-import { utilsService } from "../../../services/util.service.js";
-import { emailService } from "../services/email.service.js";
-import { EmailPreview } from "./EmailPreview.jsx";
+import { utilsService } from '../../../services/util.service.js';
+import { emailService } from '../services/email.service.js';
+import { EmailPreview } from './EmailPreview.jsx';
 
 export class EmailList extends React.Component {
   state = {
@@ -14,11 +14,11 @@ export class EmailList extends React.Component {
 
   onDivClick = ({ target }, email, starClass) => {
     if (
-      target.classList.value !== "mark-btn" &&
-      target.classList.value !== "trash-btn" &&
+      target.classList.value !== 'mark-btn' &&
+      target.classList.value !== 'trash-btn' &&
       target.classList.value !== starClass &&
-      target.classList.value != "edit-btn" &&
-      target.classList.value != "send-draft-btn"
+      target.classList.value != 'edit-btn' &&
+      target.classList.value != 'send-draft-btn'
     ) {
       this.toggleReadState(email, true);
       var id = this.state.click.id === email.id ? null : email.id;
@@ -56,26 +56,23 @@ export class EmailList extends React.Component {
           var { id } = email;
           var isHovered = false;
           var isClicked = false;
-          var starClassName = email.isStar ? "on" : "off";
+          var starClassName = email.isStar ? 'on' : 'off';
           if (id === hoverId) {
             isHovered = true;
-            var readIconClass = email.isRead
-              ? "fas fa-envelope-open"
-              : "<fas fa-envelope";
+            var readIcon = email.isRead ? '📭' : '✉️';
           }
           if (id === clickId) {
             isClicked = true;
           }
           var body =
             email.body.length > 50
-              ? email.body.substr(0, 50) + "..."
+              ? email.body.substr(0, 50) + '...'
               : email.body;
           var isTrash = email.deletedAt;
-          var trashIcon = isTrash ? "fas fa-times" : "fas fa-trash-alt";
+          var trashIcon = isTrash ? '❌' : '🗑';
           var showStar = isHovered || email.isStar;
           var isDraft = email.isDraft;
-          var emailColor = email.isRead ? "grey" : "white";
-          var isSent = emailService.checkIfSent(email);
+          var emailColor = email.isRead ? 'grey' : 'white';
           return (
             <div className={`div-email-item ${emailColor}`} key={email.id}>
               <div
@@ -90,12 +87,7 @@ export class EmailList extends React.Component {
                 }}
               >
                 <div className="email-start flex">
-                  {!isSent && (
-                    <h1 className="email-senderName">{email.fromName}</h1>
-                  )}
-                  {isSent && (
-                    <h1 className="email-senderName">{"To: " + email.to}</h1>
-                  )}
+                  <h1 className="email-senderName">{email.fromName}</h1>
                   {showStar && (
                     <p
                       onClick={() => this.onToggleStar(email)}
@@ -111,21 +103,23 @@ export class EmailList extends React.Component {
                 </div>
                 {!isHovered && <p>{sentAtTime}</p>}
                 {isHovered && !isDraft && (
-                  <div className="hover-btns ">
+                  <div className="hover-btns">
                     <button
-                      className={`mark-btn ${readIconClass}`}
+                      className="mark-btn"
                       onClick={() => {
                         this.toggleReadState(email);
                       }}
-                    ></button>
+                    >
+                      {readIcon}
+                    </button>
                     <button
-                      className={`trash-btn ${trashIcon}`}
+                      className="trash-btn"
                       onClick={() => {
                         if (!isTrash) this.onRecycleBin(email);
                         if (isTrash) this.onDeleteEmail(email);
                       }}
                     >
-                      {/* {trashIcon} */}
+                      {trashIcon}
                     </button>
                   </div>
                 )}
