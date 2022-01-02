@@ -2,6 +2,7 @@
   border: 0;
   background-color: inherit;
   cursor: pointer;
+  font-size: 1.2rem;
 }
 .color-input {
   background-color: whitesmoke;
