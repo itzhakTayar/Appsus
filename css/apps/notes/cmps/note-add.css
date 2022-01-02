@@ -11,7 +11,7 @@
 
 .note-add .note-modal {
   position: fixed;
-  width: 60%;
+  width: 40%;
   background-color: aliceblue;
   left: 50%;
   top: 50%;
@@ -29,7 +29,7 @@
   position: relative;
 }
 
-.note-modal form{
+.note-modal form {
   margin-top: 10px;
   padding: 5px;
 }
@@ -66,12 +66,12 @@
   cursor: pointer;
 }
 
-.note-form textarea{
+.note-form textarea {
   width: 200px;
   height: 100px;
 }
 
-.add-btn-modal{
+.add-btn-modal {
   box-shadow: 3px 4px 0px 0px #50b024;
   background: linear-gradient(to bottom, #3fe80b 5%, #3bf40c 100%);
   background-color: #3cd70c;
@@ -86,7 +86,7 @@
   cursor: pointer;
 }
 
-.add-todo-btn{
+.add-todo-btn {
   box-shadow: 3px 4px 0px 0px #06a3e7;
   background: linear-gradient(to bottom, #0880f1 5%, #0895e7 100%);
   background-color: #0880f1;

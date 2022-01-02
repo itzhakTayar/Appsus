@@ -5,7 +5,7 @@ import { EmailList } from "../cmps/EmailList.jsx";
 import { EmailAdd } from "../cmps/EmailAdd.jsx";
 import { eventBusService } from "../../../services/event-bus.service.js";
 
-export class EmailIndex extends React.Component {
+export class Emailindex extends React.Component {
   state = {
     emails: [],
     sortBy: null,

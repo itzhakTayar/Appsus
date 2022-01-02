@@ -1,4 +1,4 @@
-.note-filter{
+.note-filter {
   height: 50%;
   width: 50%;
   display: flex;
@@ -7,10 +7,18 @@
 }
 
 .note-filter input {
-    border: 0px;
-    border-radius: 5px;
-    box-shadow: 1px 1px 1px 1px lightblue;
-    background-color: inherit;
-    outline: none;
-    width: 60%;
-  }
+  border: 0px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px lightblue;
+  background-color: inherit;
+  outline: none;
+  width: 60%;
+}
+
+.note-filter select {
+  border: 0;
+  box-shadow: 1px 1px 1px 1px lightblue;
+  background-color: inherit;
+  border-radius: 5px;
+  outline: none;
+}

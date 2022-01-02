@@ -35,18 +35,19 @@ export class NoteFilter extends React.Component {
     return (
       <form className="note-filter flex" onSubmit={this.onSubmitFilter}>
         <label htmlFor="by-title">
-          By Title:{" "}
+          By Title:
           <input
             type="text"
             id="by-title"
             name="title"
             value={title}
             onChange={this.handleChange}
+            placeholder="Search"
           />
         </label>
 
         <label htmlFor="by-type">
-          Type:{" "}
+          Type:
           <select id="by-type" name="type" onChange={this.handleChange}>
             <option value="">All</option>
             <option value="img">Image</option>

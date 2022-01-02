@@ -17,7 +17,7 @@ export class AppHeader extends React.Component {
     return (
       <header className="app-header">
         <div className="page-header-content main-layout flex">
-          <h1>Appsus</h1>
+          <h1>AppSus</h1>
           <nav className={`main-nav`}>
             <NavLink
               activeClassName="my-active"
