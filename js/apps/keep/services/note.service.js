@@ -37,7 +37,7 @@ function _createNotes() {
         type: "img",
         info: {
           url: "https://www.thecoderpedia.com/wp-content/uploads/2020/06/Programming-Memes-Programmer-while-sleeping.jpg?x34900",
-          title: "those nigths",
+          title: "Evrey Night",
           txt: "",
         },
         style: {
@@ -51,7 +51,7 @@ function _createNotes() {
         type: "img",
         info: {
           url: "https://i.pinimg.com/736x/ac/b7/f9/acb7f99ba0ef473e03ee81e91a6281ee.jpg",
-          title: "small moments of happiness",
+          title: "Small moments of joy",
           txt: "",
         },
         style: {
@@ -66,7 +66,7 @@ function _createNotes() {
         type: "img",
         info: {
           url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6XzV0RV7_v0XMjgbXsvJB8s6jIb0EpFVHxA&usqp=CAU",
-          title: "momy is Proud ",
+          title: "Mommy is Proud ",
           txt: "",
         },
         style: {
@@ -80,7 +80,7 @@ function _createNotes() {
         type: "img",
         info: {
           url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSD9_mzPUcJcCzB3jCGNL81VRHICgiVcwcHwg&usqp=CAU",
-          title: "debugging is fun",
+          title: "Debugging is fun",
           txt: "",
         },
         style: {
@@ -162,7 +162,7 @@ function _createNotes() {
         type: "video",
         info: {
           url: "https://www.youtube.com/watch?v=PA7SmSR1dLo",
-          title: "The job inerview",
+          title: "The job interview",
           txt: "Let Work!",
         },
         style: {

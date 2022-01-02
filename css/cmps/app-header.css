@@ -1,46 +1,52 @@
-
-.app-header{
-    height: 150px;
-    background-color: rgb(247, 143, 7);
-    justify-content: space-between;
+.app-header {
+  height: 150px;
+  background-color: rgb(4, 243, 243);
+  justify-content: space-between;
 }
 
-.page-header-content{
-    justify-content: space-between;
-    height: 100%;
-    max-width: 1280px;
-    margin: auto;
+.page-header-content {
+  justify-content: space-between;
+  height: 100%;
 }
 
 .app-header h1 {
-    align-self: center;
-    text-align: center;
-    font-size: 1.8rem;
-    font-family: fantasy;
-    margin-left: 5px;
-  }
+  align-self: center;
+  text-align: center;
+  font-size: 1.8rem;
+  font-family: fantasy;
+}
 
-.main-nav{
-    align-self: center;
-    display: flex;
-    width: 30%;
-    justify-content: space-between;
+.main-nav {
+  align-self: center;
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
 }
 
 .main-nav a{
-    text-decoration: none;
-    font-size: 1.2rem;
-    color: rgb(8, 8, 17);
+  text-decoration: none;
+  font-size: 2rem;
+  color: rgb(8, 8, 17);
 }
 
 .main-nav .my-active {
-    color: rgb(8, 129, 243);
-}  
-.header-link-item
-{
-    transition: 0.3s ease-in-out;
+  color: rgb(253, 177, 0);
 }
-.header-link-item:hover
-{
-    transform: scale(1.1);
+.header-link-item {
+  transition: 0.3s ease-in-out;
 }
+.header-link-item:hover {
+  transform: scale(1.1);
+}
+
+.hamburger-btn {
+  height: 50px;
+  align-self: center;
+  background-color: inherit;
+  font-size: 2rem;
+  border: 0;
+  cursor: pointer;
+  display: none;
+}
+
+

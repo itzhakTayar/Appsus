@@ -23,7 +23,6 @@ export class DynamicAdd extends React.Component {
           this.setState({ open: true });
         } else if (this.props.note.info.url) {
           var { url } = this.props.note.info;
-          console.log(url);
           this.setState({ url });
           this.setState({ open: true });
         }

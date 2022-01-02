@@ -9,14 +9,14 @@ export function EmailFilters(props) {
         <NavLink
           to="/email/create"
           activeClassName="my-active-filter"
-          className="email-filter-item active clean-link"
+          className="email-filter-item  active clean-link"
           onClick={() => {
             if (!isFullDispay) props.onAddEmail();
             else {
             }
           }}
         >
-          Create
+          <button className="fas fa-plus"></button>
         </NavLink>
         <NavLink
           to="/email/inbox"
@@ -29,7 +29,7 @@ export function EmailFilters(props) {
             }
           }}
         >
-          inbox
+          <button className="fas fa-inbox"></button>
           {unReadEmails > 0 && (
             <p className="unread-diplay">{"(" + unReadEmails + ")"}</p>
           )}
@@ -45,7 +45,7 @@ export function EmailFilters(props) {
             }
           }}
         >
-          sent
+          <button className="far fa-share-square"></button>
         </NavLink>
         <NavLink
           to="/email/trash"
@@ -58,7 +58,7 @@ export function EmailFilters(props) {
             }
           }}
         >
-          trash
+          <button className="fas fa-trash"></button>
         </NavLink>
         <NavLink
           to="/email/star"
@@ -84,7 +84,7 @@ export function EmailFilters(props) {
             }
           }}
         >
-          Draft
+          <button className="fab fa-firstdraft"></button>
         </NavLink>
       </ul>
     </section>

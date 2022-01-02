@@ -1,7 +1,7 @@
 export function EmailHeader({ onSearch, onSetRead, onSetSort }) {
   return (
     <header className="email-header">
-      <div className="header-content">
+      <div className="header-content main-layout">
         <h1 className="email-logo">Mister Email</h1>
 
         <div className="email-head-filters">

@@ -8,7 +8,7 @@ import { eventBusService } from "../../../services/event-bus.service.js";
 export class EmailIndex extends React.Component {
   state = {
     emails: [],
-    sortBy: null,
+    sortBy: "Date",
     isModalOpen: false,
     filterBy: {
       sent: false,
@@ -149,7 +149,7 @@ export class EmailIndex extends React.Component {
     var unReadEmails = this.getAllInboxEmails();
     var searchUrl = this.props.location.search;
     return (
-      <section className="email-app">
+      <section className="email-app main-layout">
         {this.state.isModalOpen && <div className="screen open"></div>}
         <EmailHeader
           onSearch={this.onSetSearch}

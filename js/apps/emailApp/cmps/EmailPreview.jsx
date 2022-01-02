@@ -19,16 +19,15 @@ export class EmailPreview extends React.Component {
       <section className={sectionClass}>
         <div className="preview-header flex">
           <h1>{email.subject}!</h1>
-          <div className="preview-header-btns">
-            <NavLink className="clean-link" to={navScreen}>
-              ⏍
-            </NavLink>
+          <div className="preview-header-btns flex">
             <NavLink
-              className="clean-link"
+              className="clean-link fas fa-expand"
+              to={navScreen}
+            ></NavLink>
+            <NavLink
+              className="clean-link fas fa-paper-plane"
               to={`/notes/create/?title=${email.subject}&txt=${email.body}`}
-            >
-              ⌲
-            </NavLink>
+            ></NavLink>
           </div>
         </div>
         <div className="sender-info flex">

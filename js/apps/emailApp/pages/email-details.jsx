@@ -51,6 +51,7 @@ export class EmailDetails extends React.Component {
     var unReadEmails = emailService.getUnreadInboxCount();
     if (!email) return <React.Fragment></React.Fragment>;
     var starClassName = email.isStar ? "on" : "off";
+    var trashClass = email.deletedAt ? "fas fa-trash-alt" : "fas fa-trash";
     return (
       <section className="email-details">
         <div className="email-details-header"></div>
@@ -72,7 +73,7 @@ export class EmailDetails extends React.Component {
                 &#9733;
               </button>
               <button
-                className="fas fa-trash"
+                className={trashClass}
                 onClick={() => {
                   if (email.deletedAt) this.onDeleteEmail(email);
                   else {

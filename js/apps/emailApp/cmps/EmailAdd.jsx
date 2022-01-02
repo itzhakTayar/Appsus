@@ -60,7 +60,7 @@ export class EmailAdd extends React.Component {
     emailService.addEmail(email).then(() => {
       clearInterval(this.gSaveInterval);
       eventBusService.emit("user-msg", {
-        txt: "Email-Added!",
+        txt: "Email-Sent!",
         type: "success",
       });
       this.props.renderEmails();

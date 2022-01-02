@@ -1,5 +1,5 @@
-import { DynamicCmp } from './DynamicCmp.jsx';
-import { EditNote } from './EditNote.jsx';
+import { DynamicCmp } from "./DynamicCmp.jsx";
+import { EditNote } from "./EditNote.jsx";
 
 export class NotesPreview extends React.Component {
   state = {
@@ -12,7 +12,7 @@ export class NotesPreview extends React.Component {
     var { note } = this.state;
     var color = note.style.backgroundColor;
 
-    var pinClass = note.isPinned ? 'show' : 'hide';
+    var pinClass = note.isPinned ? "show" : "hide";
     return (
       <div
         className="note-item"
@@ -34,6 +34,7 @@ export class NotesPreview extends React.Component {
           note={this.props.note}
           renderNote={this.props.renderNote}
           onToggleNoteModal={this.props.onToggleNoteModal}
+          openAdd={this.props.openAdd}
         />
       </div>
     );

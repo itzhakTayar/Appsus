@@ -1,6 +1,7 @@
 @import "./parts/base.css";
 @import "./parts/helpers.css";
 @import "./parts/main-layouts.css";
+@import "./parts/fonts.css";
 
 /* Email */
 @import "./apps/email/emailApp.css";
